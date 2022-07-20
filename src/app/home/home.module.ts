@@ -7,8 +7,8 @@ import { SharedModule } from '../@shared/shared.module';
 
 @NgModule({
   imports: [
-    HomePageRoutingModule,
-    SharedModule
+    SharedModule,
+    HomePageRoutingModule
   ],
   declarations: [HomePage]
 })
