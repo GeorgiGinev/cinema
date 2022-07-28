@@ -3,7 +3,7 @@ import { PredefinedColors } from '@ionic/core';
 import { Sizes } from '../../../types/sizes';
 
 @Component({
-  selector: 'ca-button',
+  selector: 'ci-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

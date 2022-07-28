@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/page/header/header.component';
 import { TabsComponent } from './components/navigation/tabs/tabs.component';
 import { MenuComponent } from './components/navigation/menu/menu.component';
 import { NavigationService } from './services/navigation/navigation.service';
+import { TabsService } from './services/tabs/tabs.service';
+import { StorageService } from './services/storage/storage.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,7 @@ import { NavigationService } from './services/navigation/navigation.service';
     MenuComponent,
   ],
   imports: [CommonModule, FormsModule, IonicModule],
-  providers: [SessionService, NavigationService],
+  providers: [SessionService, NavigationService, TabsService, StorageService],
   exports: [
     //Modules
     CommonModule,

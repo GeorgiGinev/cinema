@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SessionService {
+  constructor() {}
 
-  constructor() { }
+  public session(): boolean {
+    return false;
+  }
 }

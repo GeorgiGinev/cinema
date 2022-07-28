@@ -16,6 +16,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { SharedModule } from './shared/shared.module';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { SharedModule } from './shared/shared.module';
     AngularFireFunctionsModule,
     AngularFireMessagingModule,
     SharedModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
-import { NavigationService } from 'src/app/shared/services/navigation/navigation.service';
+import { TabItem } from 'src/app/shared/interfaces/tab-item';
+import { TabsService } from 'src/app/shared/services/tabs/tabs.service';
 
 @Component({
   selector: 'ci-tabs',
@@ -9,12 +9,9 @@ import { NavigationService } from 'src/app/shared/services/navigation/navigation
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
-  constructor(
-    private menu: MenuController,
-    private navigationService: NavigationService
-  ) {}
-
-  openMenu() {
-    this.menu.open(this.navigationService.contentId);
+  public get tabs(): TabItem[] {
+    return this.tabsService.tabItems;
   }
+
+  constructor(private tabsService: TabsService) {}
 }
