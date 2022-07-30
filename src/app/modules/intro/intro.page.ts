@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageKeysEnum } from 'src/app/shared/enums/storage-keys';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
@@ -8,24 +8,18 @@ import { StorageService } from 'src/app/shared/services/storage/storage.service'
   templateUrl: './intro.page.html',
   styleUrls: ['./intro.page.scss'],
 })
-export class IntroPage implements OnInit {
+export class IntroPage {
   private readonly storageKeysEnum = StorageKeysEnum;
 
   constructor(private storageService: StorageService, private router: Router) {}
-
-  ngOnInit() {
-    if (this.storageService.get(this.storageKeysEnum.SkipIntro) !== undefined) {
-      this.goToLogin();
-    }
-  }
 
   /**
    * Skip intro
    */
   public skipIntro() {
-    this.storageService.set(this.storageKeysEnum.SkipIntro, true);
-
-    this.goToLogin();
+    this.storageService.set(this.storageKeysEnum.SkipIntro, true).then(() => {
+      this.goToLogin();
+    }, () => {});
   }
 
   /**

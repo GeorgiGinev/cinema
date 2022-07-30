@@ -16,28 +16,30 @@ export class StorageService {
    * @param key identificator
    * @returns
    */
-  public get(key: string): any {
+  public get(key: string): Promise<any> {
     if (this._storage) {
       return this._storage.get(key);
     }
 
-    return undefined;
+    return Promise.reject();
   }
 
   /**
    * Set storage key
    */
-  public set(key: string, value: any) {
+  public async set(key: string, value: any): Promise<any> {
     if (this._storage) {
-      console.log('set storage');
-      this._storage.set(key, value);
+      return this._storage.set(key, value);
     }
+
+    return Promise.reject();
   }
 
   /**
    * Init storage
    */
   private async init() {
-    this._storage = await this.storage.create();
+    const storage = await this.storage.create();
+    this._storage = storage;
   }
 }

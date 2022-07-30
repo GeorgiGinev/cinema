@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationService } from './shared/services/navigation/navigation.service';
+import { StorageService } from './shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,8 @@ export class AppComponent {
     return this.navigationService.contentId;
   }
 
-  constructor(private navigationService: NavigationService) {}
+  constructor(
+    private navigationService: NavigationService,
+    private readonly storageService: StorageService
+    ) {}
 }
