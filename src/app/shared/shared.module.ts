@@ -10,6 +10,7 @@ import { MenuComponent } from './components/navigation/menu/menu.component';
 import { NavigationService } from './services/navigation/navigation.service';
 import { TabsService } from './services/tabs/tabs.service';
 import { StorageService } from './services/storage/storage.service';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,13 @@ import { StorageService } from './services/storage/storage.service';
     MenuComponent,
   ],
   imports: [CommonModule, FormsModule, IonicModule],
-  providers: [SessionService, NavigationService, TabsService, StorageService],
+  providers: [
+    SessionService, 
+    NavigationService,
+    TabsService, 
+    StorageService,
+    AuthService
+  ],
   exports: [
     //Modules
     CommonModule,
