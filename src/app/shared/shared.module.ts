@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from './components/boxes/button/button.component';
 import { SessionService } from './services/session/session.service';
@@ -19,19 +19,20 @@ import { AuthService } from './services/auth/auth.service';
     TabsComponent,
     MenuComponent,
   ],
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
   providers: [
-    SessionService, 
+    SessionService,
     NavigationService,
-    TabsService, 
+    TabsService,
     StorageService,
-    AuthService
+    AuthService,
   ],
   exports: [
     //Modules
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     //Components
     ButtonComponent,
     HeaderComponent,

@@ -2,7 +2,28 @@
   Login
 </ci-header>
 <ion-content>
-  <p>
-    login works!
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4" offset-md="4">
+        <form [formGroup]="formGroup">
+          <ion-item>
+            <ion-label position="stacked">Enter email</ion-label>
+            <ion-input placeholder="Enter email" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="stacked">Enter password</ion-label>
+            <ion-input placeholder="Enter password" type="password" formControlName="email"></ion-input>
+          </ion-item>
+
+          <div class="ion-text-center ion-margin-top">
+            <ci-button color="primary" (click)="signIn()">
+              Login
+            </ci-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
