@@ -1,8 +1,11 @@
 
 <ci-header>
-  Register
+  Sign Up
 </ci-header>
 <ion-content>
+  <div class="ion-margin-vertical">
+    Sign Up
+  </div>
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="4" offset-md="4">
@@ -10,6 +13,11 @@
           <ion-item>
             <ion-label position="stacked">Enter email</ion-label>
             <ion-input placeholder="Enter email" type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Name</ion-label>
+            <ion-input placeholder="Enter name" type="test" formControlName="name"></ion-input>
           </ion-item>
           
           <ion-item>
@@ -19,7 +27,7 @@
 
           <div class="ion-text-center ion-margin-top">
             <ci-button color="primary" (click)="signUp()">
-              Login
+              Sign Up
             </ci-button>
           </div>
         </form>

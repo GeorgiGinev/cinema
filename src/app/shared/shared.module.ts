@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -11,6 +11,10 @@ import { NavigationService } from './services/navigation/navigation.service';
 import { TabsService } from './services/tabs/tabs.service';
 import { StorageService } from './services/storage/storage.service';
 import { AuthService } from './services/auth/auth.service';
+import { ToastService } from './services/toast/toast.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpXsrfInterceptor } from './classes/http-xsrf-interceptor/http-xsrf-interceptor';
+import { CsrfService } from './services/csrf/csrf.service';
 
 @NgModule({
   declarations: [
@@ -19,13 +23,27 @@ import { AuthService } from './services/auth/auth.service';
     TabsComponent,
     MenuComponent,
   ],
-  imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [
+    CsrfService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (csrfService: CsrfService) => () => csrfService.load(),
+      deps: [CsrfService],
+      multi: true,
+    },
     SessionService,
     NavigationService,
     TabsService,
     StorageService,
     AuthService,
+    ToastService,
   ],
   exports: [
     //Modules
@@ -33,6 +51,7 @@ import { AuthService } from './services/auth/auth.service';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    HttpClientModule,
     //Components
     ButtonComponent,
     HeaderComponent,
