@@ -32,13 +32,11 @@ export class AuthService {
   public signUp(email: string, name: string, password: string): Promise<any> {
     return this.httpClient
       .post(
-        environment.api + '/auth/create-user',
+        environment.api + '/api/register',
         JSON.stringify({
-          data: {
             email: email,
             name: name,
             password: password,
-          },
         }),
         { headers: this.headers }
       )

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -6,6 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CsrfService {
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
+  
   public csrf: string | undefined;
 
   constructor(private httpClient: HttpClient) {}
@@ -15,7 +19,7 @@ export class CsrfService {
    */
   public load() {
     this.httpClient
-      .get('http://127.0.0.1:8000/sanctum/csrf-cookie')
+      .get(environment.api + '/sanctum/csrf-cookie')
       .toPromise()
       .then(
         (token: any) => {
