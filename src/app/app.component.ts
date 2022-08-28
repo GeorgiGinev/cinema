@@ -14,6 +14,6 @@ export class AppComponent {
 
   constructor(
     private navigationService: NavigationService,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
     ) {}
 }

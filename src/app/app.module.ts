@@ -17,7 +17,9 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { SharedModule } from './shared/shared.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpInterceptorService} from './shared/services/http-interceptor/http-interceptor.service';
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,8 +38,26 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    LoggerModule.forRoot({
+      serverLoggingUrl: '/api/logs',
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR
+    }),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+  }
+}

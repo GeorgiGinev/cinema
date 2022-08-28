@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import {User, UserService} from '../../../shared/resources/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -24,17 +26,11 @@ export class RegisterComponent implements OnInit {
    */
   public signUp() {
     if (this.formGroup.valid) {
-      const email: string = this.formGroup.get('email').value;
-      const name: string = this.formGroup.get('name').value;
-      const password: string = this.formGroup.get('password').value;
-
-      this.authService
-        .signUp(email, name, password)
+      this.userService.create(this.formGroup.value)
         .then(
           () => {},
           () => {}
-        )
-        .catch(() => {});
+        );
     }
   }
 
@@ -46,6 +42,7 @@ export class RegisterComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       name: [null, [Validators.required, Validators.minLength(2)]],
       password: [null, [Validators.required, Validators.minLength(8)]],
+      password_confirmation: [null, [Validators.required, Validators.minLength(8)]]
     });
   }
 }

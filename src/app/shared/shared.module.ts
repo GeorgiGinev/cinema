@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -12,10 +12,7 @@ import { TabsService } from './services/tabs/tabs.service';
 import { StorageService } from './services/storage/storage.service';
 import { AuthService } from './services/auth/auth.service';
 import { ToastService } from './services/toast/toast.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpXsrfInterceptor } from './classes/http-xsrf-interceptor/http-xsrf-interceptor';
-import { CsrfService } from './services/csrf/csrf.service';
-
+import {UserService} from './resources/user/user.service';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -27,23 +24,16 @@ import { CsrfService } from './services/csrf/csrf.service';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    CsrfService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (csrfService: CsrfService) => () => csrfService.load(),
-      deps: [CsrfService],
-      multi: true,
-    },
     SessionService,
     NavigationService,
     TabsService,
     StorageService,
     AuthService,
     ToastService,
+    UserService
   ],
   exports: [
     //Modules
@@ -51,7 +41,6 @@ import { CsrfService } from './services/csrf/csrf.service';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    HttpClientModule,
     //Components
     ButtonComponent,
     HeaderComponent,
