@@ -2,9 +2,14 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
+      <a [routerLink]="['/']" title="Logo">
+        <img src="assets/logos/logo1.png" />
+      </a>
     </ion-buttons>
     <ion-title>
-      <ng-content></ng-content>
+      <ci-page-title>
+        <ng-content></ng-content>
+      </ci-page-title>
     </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>

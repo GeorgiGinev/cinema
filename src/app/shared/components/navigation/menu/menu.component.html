@@ -1,13 +1,14 @@
 <ion-menu side="end" [contentId]="navigationContentId" [menuId]="navigationId">
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="secondary">
       <ion-title>{{navigationTitle}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let item of items" (click)="item.action">
-        {{item.label}}
+      <ion-item *ngFor="let item of items" (click)="item.action()" [button]="true">
+        <ion-icon *ngIf="item.icon" [name]="item.icon" slot="start"></ion-icon>
+        <ion-label>{{item.label}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>

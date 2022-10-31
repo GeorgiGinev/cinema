@@ -4,15 +4,17 @@ import { IntroGuard } from './shared/guards/intro/intro.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./modules/home/home.module').then((m) => m.HomePageModule),
+    canActivate: [IntroGuard],
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomePageModule),
     canActivate: [IntroGuard]
-  },
-  {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
   },
   {
     path: 'auth',

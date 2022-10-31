@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonIcons } from '../../enums/ion-icons';
 import { NavigationItem } from '../../interfaces/navigation-item';
 
 @Injectable({
@@ -11,20 +13,31 @@ export class NavigationService {
   private readonly _title: string = 'Navigation';
   private _navigationItems: NavigationItem[] = [
     {
-      label: 'Item',
-      action: () => {},
+      label: 'Home',
+      icon: IonIcons.home,
+      action: () => {
+        this.router.navigate(['/home']);
+      },
     },
     {
-      label: 'Item',
-      action: () => {},
+      label: 'Sign In',
+      icon: IonIcons.login,
+      action: () => {
+        this.router.navigate(['/auth/login']);
+      },
     },
     {
-      label: 'Item',
-      action: () => {},
+      label: 'Sign Up',
+      icon: IonIcons.register,
+      action: () => {
+        this.router.navigate(['/auth/register']);
+      },
     },
   ];
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
   public get items(): NavigationItem[] {
     return this._navigationItems;
