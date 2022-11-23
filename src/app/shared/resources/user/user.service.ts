@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {JsonResource} from '../resource/resource';
 import {HttpClient} from '@angular/common/http';
 import {ToastService} from '../../services/toast/toast.service';
+import { LoginResponse } from '../../interfaces/login-response';
+import { SessionService } from '../../services/session/session.service';
 
 interface UserInterface {
   name: string;
@@ -25,7 +27,8 @@ export class User extends JsonResource {
 export class UserService {
   constructor(
     private httpClient: HttpClient,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private sessionService: SessionService
   ) {}
 
   /**
@@ -36,7 +39,7 @@ export class UserService {
     user.fillAttributes(data);
 
     return this.httpClient.post('/register', JSON.stringify(user.data))
-      .toPromise().then(() => {
+      .toPromise().then((response: any) => {
         this.toastService.success({
           message: 'The account was created successfully'
         });
@@ -53,13 +56,14 @@ export class UserService {
     user.fillAttributes(data);
 
     return this.httpClient.post('/login', JSON.stringify(user.data))
-      .toPromise().then(() => {
-        console.log('login success');
-        /*this.toastService.success({
+      .toPromise().then((data: any) => {
+        this.toastService.success({
           message: 'You were logged.'
-        });*/
-      }, () => {
-        console.log('login fail');
-      });
+        });
+
+        this.sessionService.createSession(data, user);
+
+        return data;
+      }, () => {});
   }
 }

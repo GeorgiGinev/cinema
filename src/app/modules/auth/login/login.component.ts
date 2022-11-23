@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginResponse } from 'src/app/shared/interfaces/login-response';
 import {UserService} from '../../../shared/resources/user/user.service';
 
 @Component({
@@ -9,6 +10,7 @@ import {UserService} from '../../../shared/resources/user/user.service';
 })
 export class LoginComponent implements OnInit {
   public formGroup: FormGroup;
+  public promise: Promise<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,9 +24,11 @@ export class LoginComponent implements OnInit {
   /**
    * Sign in request
    */
-  public async signIn() {
+  public signIn() {
     if (this.formGroup.valid) {
-      await this.userService.login(this.formGroup.value);
+      this.promise = this.userService.login(this.formGroup.value).then((data: LoginResponse) => {
+        console.log('data :', data);
+      }, () => {});
     }
   }
 

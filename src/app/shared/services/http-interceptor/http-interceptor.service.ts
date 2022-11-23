@@ -30,12 +30,15 @@ export class HttpInterceptorService implements HttpInterceptor {
        * Show returned error from server
        */
       map((result: HttpResponse<any>) => {
+        console.log('httpRepsonse : ', result);
         if(result?.body?.error) {
           this.toastService.error({
             message: result.body.error[Object.keys(result.body.error)[0]]
           }).then(() => {}, () => {});
           return throwError(result.body.error[Object.keys(result.body.error)[0]]);
         }
+
+        return result;
       }),
       /**
        * Request error
