@@ -10,6 +10,7 @@ import {User, UserService} from '../../../shared/resources/user/user.service';
 })
 export class RegisterComponent implements OnInit {
   public formGroup: FormGroup;
+  public signUpButton: Promise<any>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
    */
   public signUp() {
     if (this.formGroup.valid) {
-      this.userService.create(this.formGroup.value)
+      this.signUpButton = this.userService.create(this.formGroup.value)
         .then(
           () => {},
           () => {}

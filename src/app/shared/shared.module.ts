@@ -15,6 +15,7 @@ import { ToastService } from './services/toast/toast.service';
 import {UserService} from './resources/user/user.service';
 import { PageTitleComponent } from './components/typography/page-title/page-title.component';
 import { ContentComponent } from './components/page/content/content.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -41,6 +42,7 @@ import { ContentComponent } from './components/page/content/content.component';
   ],
   exports: [
     //Modules
+    RouterModule,
     CommonModule,
     FormsModule,
     IonicModule,
