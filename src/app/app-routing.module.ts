@@ -1,31 +1,37 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { IntroGuard } from './shared/guards/intro/intro.guard';
+import { AuthGuard } from './shared/guards/auth/auth.guard';
+import { GuestGuard } from './shared/guards/guest/guest.guard';
+import { SessionResolver } from './shared/resolvers/session.resolver';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomePageModule),
-    canActivate: [IntroGuard],
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomePageModule),
-    canActivate: [IntroGuard]
   },
   {
     path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthPageModule),
-    canActivate: [IntroGuard]
+    canActivate: [GuestGuard]
   },
+  // {
+  //   path: 'intro',
+  //   loadChildren: () =>
+  //     import('./modules/intro/intro.module').then((m) => m.IntroPageModule),
+  //     canActivate: [AuthGuard],
+  // },
   {
-    path: 'intro',
-    loadChildren: () =>
-      import('./modules/intro/intro.module').then((m) => m.IntroPageModule),
+    path: 'dashboard',
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+    canActivate: [AuthGuard],
   },
 ];
 
@@ -35,4 +41,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

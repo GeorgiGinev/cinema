@@ -17,9 +17,7 @@ export class AppComponent implements OnInit {
     private navigationService: NavigationService,
     private readonly storageService: StorageService,
     private readonly sessionService: SessionService
-    ) {}
+  ) { }
 
-  ngOnInit(): void {
-    this.sessionService.loadSession(); 
-  }
+  ngOnInit(): void {}
 }

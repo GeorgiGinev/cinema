@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginResponse } from '../../interfaces/login-response';
 import { User } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SessionService {
@@ -12,17 +13,23 @@ export class SessionService {
     this._user = user;
   }
 
-  public get isActiveSession(): boolean {
-    return this._isActiveSession;
+  public get token(): string {
+    return this._token;
   }
-  public set isActiveSession(isActiveSession: boolean) {
-    this._isActiveSession = isActiveSession;
+  public set token(token: string) {
+    this._token = token;
   }
 
   private _user: User;
-  private _isActiveSession: boolean;
+  private _token: string;
 
-  constructor() {}
+  constructor(
+    private httpClient: HttpClient
+  ) {}
+
+  public logout() {
+
+  }
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
@@ -35,13 +42,36 @@ export class SessionService {
     return true;
   }
 
+  /**
+   * Load session if a token is in storage if it is not loaded
+   * @returns 
+   */
   public async loadSession(): Promise<boolean> {
-    const loginResponse = await Preferences.get({key: 'credentials'});
+    await this.getToken();
 
-    if(loginResponse.value) {
-      this.isActiveSession = Boolean(loginResponse);
+    if(this.token) {
+      await this.loadUser();
+
+      return true;
     }
 
-    return true;
+    return false;
+  }
+
+  public loadUser(): Promise<any> {
+    return this.httpClient.get('/user').toPromise().then((user: User) => {
+      this.user = user;
+    }, () => {})
+  }
+
+  public async getToken(): Promise<string> {
+    if(this.token) {
+      return this.token;
+    }
+    
+    const loginResponse = await Preferences.get({key: 'credentials'});
+
+    this.token = (JSON.parse(loginResponse.value) as LoginResponse).token_type + ' ' + (JSON.parse(loginResponse.value) as LoginResponse).access_token;
+    return this.token;
   }
 }

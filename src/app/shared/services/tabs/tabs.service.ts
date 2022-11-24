@@ -8,7 +8,7 @@ import { SessionService } from '../session/session.service';
 @Injectable()
 export class TabsService {
   public get tabItems(): TabItem[] {
-    if (this.sessionService.isActiveSession) {
+    if (this.sessionService.token) {
       return this._authTabs;
     }
 

@@ -32,6 +32,7 @@ import { PageContainerService } from './services/page-container/page-container.s
     CommonModule,
     FormsModule,
     IonicModule,
+    RouterModule,
     ReactiveFormsModule
   ],
   providers: [

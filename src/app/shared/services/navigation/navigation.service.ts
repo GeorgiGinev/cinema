@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonIcons } from '../../enums/ion-icons';
 import { NavigationItem } from '../../interfaces/navigation-item';
+import { SessionService } from '../session/session.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,22 @@ export class NavigationService {
   private readonly _id: string = 'main-navigation';
 
   private readonly _title: string = 'Navigation';
+  private _authNavigationItems: NavigationItem[] = [
+    {
+      label: 'Dashboard',
+      icon: IonIcons.dashboard,
+      action: () => {
+        this.router.navigate(['/dashboard']);
+      },
+    },
+    {
+      label: 'Sign Out',
+      icon: IonIcons.logout,
+      action: () => {
+        this.sessionService.logout();
+      },
+    },
+  ];
   private _navigationItems: NavigationItem[] = [
     {
       label: 'Home',
@@ -36,10 +53,15 @@ export class NavigationService {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {}
 
   public get items(): NavigationItem[] {
+    if(this.sessionService.getToken()) {
+      return this._authNavigationItems;
+    }
+
     return this._navigationItems;
   }
 

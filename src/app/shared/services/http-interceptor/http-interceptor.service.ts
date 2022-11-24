@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {
   HttpErrorResponse,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest, HttpResponse,
 } from '@angular/common/http';
@@ -10,27 +11,38 @@ import {environment} from '../../../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {ToastService} from '../toast/toast.service';
+import { SessionService } from '../session/session.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
   constructor(
     private logger: NGXLogger,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private sessionService: SessionService
   ) {
   }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): any {
+    let headers: HttpHeaders;
+
+    if(!this.sessionService.token) {
+      headers = req.headers.set('Content-Type', 'application/json')
+      .set('Accept', 'application/json');
+    } else {
+      headers = req.headers.set('Content-Type', 'application/json')
+      .set('Authorization', this.sessionService.token)
+      .set('Accept', 'application/json') 
+    }
+    
     req = req.clone({
       url: environment.api.url + req.url,
-      headers: req.headers.set('Content-Type', 'application/json')
-        .set('Accept', 'application/json'),
+      headers: headers
     });
     return next.handle(req).pipe(
       /**
        * Show returned error from server
        */
       map((result: HttpResponse<any>) => {
-        console.log('httpRepsonse : ', result);
         if(result?.body?.error) {
           this.toastService.error({
             message: result.body.error[Object.keys(result.body.error)[0]]
