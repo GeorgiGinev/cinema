@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginResponse } from 'src/app/shared/interfaces/login-response';
 import { PageContainerService } from 'src/app/shared/services/page-container/page-container.service';
 import {UserService} from '../../../shared/resources/user/user.service';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private pageContainerService: PageContainerService
+    private pageContainerService: PageContainerService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit {
   public signIn() {
     if (this.formGroup.valid) {
       this.promise = this.userService.login(this.formGroup.value).then((data: LoginResponse) => {
-        console.log('data :', data);
+        this.router.navigate(['/dashboard']);
       }, () => {});
     }
   }

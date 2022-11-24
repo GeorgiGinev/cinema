@@ -68,10 +68,17 @@ export class SessionService {
     if(this.token) {
       return this.token;
     }
-    
+
     const loginResponse = await Preferences.get({key: 'credentials'});
 
-    this.token = (JSON.parse(loginResponse.value) as LoginResponse).token_type + ' ' + (JSON.parse(loginResponse.value) as LoginResponse).access_token;
+    /**
+     * If user is not logged in
+     */
+    if(!loginResponse.value) {
+      return null;
+    }
+
+    this.token = (JSON.parse(loginResponse.value) as LoginResponse)?.token_type + ' ' + (JSON.parse(loginResponse.value) as LoginResponse)?.access_token;
     return this.token;
   }
 }
