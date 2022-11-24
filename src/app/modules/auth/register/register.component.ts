@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { PageContainerService } from 'src/app/shared/services/page-container/page-container.service';
 import {User, UserService} from '../../../shared/resources/user/user.service';
 
 @Component({
@@ -15,10 +16,13 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private pageContainerService: PageContainerService
   ) {}
 
   ngOnInit() {
+    this.pageContainerService.headerTitle = 'Sign Up';
+    
     this.createForm();
   }
 

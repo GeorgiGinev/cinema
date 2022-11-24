@@ -17,9 +17,9 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { SharedModule } from './shared/shared.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {HttpInterceptorService} from './shared/services/http-interceptor/http-interceptor.service';
-import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorService } from './shared/services/http-interceptor/http-interceptor.service';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [AppComponent],

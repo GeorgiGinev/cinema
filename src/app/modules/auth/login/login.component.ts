@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginResponse } from 'src/app/shared/interfaces/login-response';
+import { PageContainerService } from 'src/app/shared/services/page-container/page-container.service';
 import {UserService} from '../../../shared/resources/user/user.service';
 
 @Component({
@@ -14,10 +15,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private pageContainerService: PageContainerService
   ) {}
 
   ngOnInit() {
+    this.pageContainerService.headerTitle = 'Sign In';
+    
     this.createForm();
   }
 

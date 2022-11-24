@@ -38,10 +38,10 @@ export class SessionService {
   public async loadSession(): Promise<boolean> {
     const loginResponse = await Preferences.get({key: 'credentials'});
 
-    if(loginResponse) {
+    if(loginResponse.value) {
       this.isActiveSession = Boolean(loginResponse);
     }
-    
+
     return true;
   }
 }
