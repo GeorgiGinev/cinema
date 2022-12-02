@@ -5,8 +5,7 @@ import { NavigationService } from 'src/app/shared/services/navigation/navigation
 @Component({
   selector: 'ci-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
   public get navigationId(): string {

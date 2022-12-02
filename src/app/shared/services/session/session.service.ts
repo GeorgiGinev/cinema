@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../../interfaces/login-response';
-import { User } from '../../resources/user/user.service';
+import { User, UserService } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
 
@@ -27,10 +27,6 @@ export class SessionService {
     private httpClient: HttpClient
   ) {}
 
-  public logout() {
-
-  }
-
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
 
@@ -42,6 +38,12 @@ export class SessionService {
     return true;
   }
 
+  public async clearSession(): Promise<void> {
+    await Preferences.remove({key: 'credentials'});
+
+    this.token = '';
+  }
+  
   /**
    * Load session if a token is in storage if it is not loaded
    * @returns 

@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {ToastService} from '../../services/toast/toast.service';
 import { LoginResponse } from '../../interfaces/login-response';
 import { SessionService } from '../../services/session/session.service';
+import { Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 
 interface UserInterface {
   name: string;
@@ -28,7 +30,8 @@ export class UserService {
   constructor(
     private httpClient: HttpClient,
     private toastService: ToastService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) {}
 
   /**
@@ -65,5 +68,21 @@ export class UserService {
 
         return data;
       }, () => {});
+  }
+
+  public logout(): Promise<any> {
+    const user = this.sessionService.user;
+
+    return this.httpClient.post('/logout', JSON.stringify(user))
+      .toPromise().then(async (data: any) => {
+        this.router.navigate(['/home']);
+
+        await this.sessionService.clearSession();
+
+        this.toastService.success({
+          message: 'You have successfully logged out.'
+        });
+        return data;
+      }, () => {})
   }
 }

@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { IonIcons } from '../../enums/ion-icons';
 import { NavigationItem } from '../../interfaces/navigation-item';
+import { UserService } from '../../resources/user/user.service';
 import { SessionService } from '../session/session.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NavigationService {
+  public get items(): NavigationItem[] {
+    if(this.sessionService.token) {
+      return this._authNavigationItems;
+    }
+
+    return this._navigationItems;
+  }
+
   private readonly _contentId: string = 'main-navigation';
   private readonly _id: string = 'main-navigation';
 
@@ -24,7 +34,8 @@ export class NavigationService {
       label: 'Sign Out',
       icon: IonIcons.logout,
       action: () => {
-        this.sessionService.logout();
+        this.userService.logout();
+        this.menuController.close();
       },
     },
   ];
@@ -54,16 +65,10 @@ export class NavigationService {
 
   constructor(
     private router: Router,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private userService: UserService,
+    private menuController: MenuController
   ) {}
-
-  public get items(): NavigationItem[] {
-    if(this.sessionService.getToken()) {
-      return this._authNavigationItems;
-    }
-
-    return this._navigationItems;
-  }
 
   public get id(): string {
     return this._id;

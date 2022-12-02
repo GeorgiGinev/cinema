@@ -5,8 +5,7 @@ import { TabsService } from 'src/app/shared/services/tabs/tabs.service';
 @Component({
   selector: 'ci-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
   public get tabs(): TabItem[] {
