@@ -19,5 +19,7 @@ export class AppComponent implements OnInit {
     private readonly sessionService: SessionService
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('sessionService : ', this.sessionService.token);
+  }
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnChanges } from '@angular/core';
 import { PredefinedColors } from '@ionic/core';
+import { Shapes } from 'src/app/shared/types/shapes';
 import { Sizes } from '../../../types/sizes';
 
 @Component({
@@ -12,6 +13,7 @@ export class ButtonComponent implements OnChanges {
   @Input() color: PredefinedColors;
   @Input() size: Sizes;
   @Input() promise: Promise<any>;
+  @Input() shape: Shapes;
 
   private showLoadingEffect = false;
 

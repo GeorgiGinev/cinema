@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../../interfaces/login-response';
-import { User, UserService } from '../../resources/user/user.service';
+import { User } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
 
@@ -33,15 +33,16 @@ export class SessionService {
     await Preferences.set({
       key: 'credentials',
       value: JSON.stringify(data),
-    });
+    }); 
 
     return true;
   }
 
   public async clearSession(): Promise<void> {
     await Preferences.remove({key: 'credentials'});
-
+    
     this.token = '';
+    this.user = undefined;
   }
   
   /**
@@ -51,13 +52,16 @@ export class SessionService {
   public async loadSession(): Promise<boolean> {
     await this.getToken();
 
+    console.log('load session : ', this.token)
+
     if(this.token) {
+      console.log('token exists');
       await this.loadUser();
 
-      return true;
+      return Promise.resolve(true);
     }
 
-    return false;
+    return Promise.reject(false);
   }
 
   public loadUser(): Promise<any> {
@@ -68,7 +72,7 @@ export class SessionService {
 
   public async getToken(): Promise<string> {
     if(this.token) {
-      return this.token;
+      return Promise.resolve(this.token);
     }
 
     const loginResponse = await Preferences.get({key: 'credentials'});

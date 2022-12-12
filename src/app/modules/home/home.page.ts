@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/shared/services/session/session.service';
 import { Sizes } from '../../shared/types/sizes';
 
 @Component({
@@ -6,8 +7,12 @@ import { Sizes } from '../../shared/types/sizes';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   public buttonSizes = Sizes;
 
-  constructor() {}
+  constructor(
+    private sessionService: SessionService
+  ) {}
+
+  ngOnInit(): void {}
 }

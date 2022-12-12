@@ -11,8 +11,26 @@
         <ng-content></ng-content>
       </ci-page-title>
     </ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    </ion-buttons> -->
+    <div slot="end">
+      <ng-container *ngIf="!isLoggedIn">
+        <ci-button [routerLink]="['/auth/login']" [size]="sizes.small" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.login"></ion-icon>
+          Sign In
+        </ci-button>
+        <ci-button [routerLink]="['/auth/register']" [size]="sizes.small" color="medium" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.register"></ion-icon>
+          Sign Up
+        </ci-button>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <ci-button [promise]="logoutPromise" (click)="logout()" [size]="sizes.small" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.logout"></ion-icon>
+          Sign Out
+        </ci-button>
+      </ng-container>
+    </div>
   </ion-toolbar>
 </ion-header>

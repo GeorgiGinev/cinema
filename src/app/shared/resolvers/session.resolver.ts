@@ -14,7 +14,12 @@ export class SessionResolver implements Resolve<boolean> {
   constructor(
     private readonly sessionService: SessionService
   ) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return this.sessionService.loadSession();
+
+  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    if (!this.sessionService.user) {
+      await this.sessionService.loadSession().then(() => {}, () => {});
+    }
+
+    return Promise.resolve(true);
   }
 }

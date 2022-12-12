@@ -7,37 +7,46 @@ import { SessionResolver } from './shared/resolvers/session.resolver';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomePageModule),
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomePageModule),
-  },
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthPageModule),
-    canActivate: [GuestGuard]
-  },
-  // {
-  //   path: 'intro',
-  //   loadChildren: () =>
-  //     import('./modules/intro/intro.module').then((m) => m.IntroPageModule),
-  //     canActivate: [AuthGuard],
-  // },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
-    canActivate: [AuthGuard],
+    resolve: [SessionResolver],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomePageModule),
+      },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomePageModule),
+      },
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./modules/auth/auth.module').then((m) => m.AuthPageModule),
+        canActivate: [GuestGuard],
+      },
+      // {
+      //   path: 'intro',
+      //   loadChildren: () =>
+      //     import('./modules/intro/intro.module').then((m) => m.IntroPageModule),
+      //     canActivate: [AuthGuard],
+      // },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+        canActivate: [AuthGuard]
+      },
+    ]
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(
+      routes, 
+      { preloadingStrategy: PreloadAllModules,
+       }),
   ],
   exports: [RouterModule],
 })

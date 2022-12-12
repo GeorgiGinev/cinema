@@ -20,6 +20,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './shared/services/http-interceptor/http-interceptor.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { SessionService } from './shared/services/session/session.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     BrowserModule,
     IonicModule.forRoot({
       mode: 'md',
+      animated: false
     }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -54,6 +56,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
       useClass: HttpInterceptorService,
       multi: true
     },
+    SessionService
   ],
   bootstrap: [AppComponent],
 })

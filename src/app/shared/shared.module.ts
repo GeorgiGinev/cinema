@@ -18,6 +18,7 @@ import { ContentComponent } from './components/page-container/content/content.co
 import { RouterModule } from '@angular/router';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageContainerService } from './services/page-container/page-container.service';
+import { GuestGuard } from './guards/guest/guest.guard';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -36,7 +37,6 @@ import { PageContainerService } from './services/page-container/page-container.s
     ReactiveFormsModule
   ],
   providers: [
-    SessionService,
     NavigationService,
     TabsService,
     StorageService,
