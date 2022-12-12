@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {JsonResource} from '../resource/resource';
 import {HttpClient} from '@angular/common/http';
 import {ToastService} from '../../services/toast/toast.service';
-import { LoginResponse } from '../../interfaces/login-response';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
-import { Preferences } from '@capacitor/preferences';
 
 interface UserInterface {
   name: string;
