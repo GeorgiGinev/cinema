@@ -1,4 +1,5 @@
 export enum Shapes {
-    round ='round',
+    round = 'round',
+    circle = 'circle',
     default = 'default'
 }

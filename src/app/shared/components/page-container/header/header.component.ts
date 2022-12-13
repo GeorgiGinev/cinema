@@ -10,13 +10,15 @@ import { Sizes } from 'src/app/shared/types/sizes';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public user: User;
   public icons = IonIcons;
   public sizes = Sizes;
   public shapes = Shapes;
 
-  public isLoggedIn: boolean;
+  public get isLoggedIn(): boolean {
+    return Boolean(this.sessionService.token);
+  }
 
   public logoutPromise: Promise<any>;
 
@@ -25,10 +27,6 @@ export class HeaderComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private sessionService: SessionService
   ) {}
-
-  ngOnInit(): void {
-    this.isLoggedIn = Boolean(this.sessionService.token);
-  }
 
   /**
    * Trigger logout method from userService

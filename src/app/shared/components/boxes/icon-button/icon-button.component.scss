@@ -1,0 +1,41 @@
+$shapes: ("round", 12px), ("circle", 50%), ("default", 0);
+
+$sizes: ("small", 24px), ("default", 32px), ("medium", 36px), ("large", 42px);
+
+:host {
+    display: block;
+
+    @each $type, $shape in $shapes {
+        &[ng-reflect-shape="#{$type}"] {
+            border-radius: #{$shape};
+            overflow: hidden;
+        }   
+    }
+
+    ci-button {
+        margin: 0;
+        display: block;
+
+        ::ng-deep ion-button {
+            height: 32px;
+            width: 32px;
+            --padding-start: 0;
+            --padding-end: 0;
+        }
+    }
+
+    @each $type, $size in $sizes {
+        &[ng-reflect-size="#{$type}"] {
+            ci-button {
+                ::ng-deep ion-button {
+                    height: $size;
+                    width: $size;
+                }
+            }
+        } 
+    }
+
+    ::ng-deep ci-icon {
+        display: inherit;
+    }
+}

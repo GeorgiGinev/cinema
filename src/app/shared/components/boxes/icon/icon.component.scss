@@ -1,0 +1,9 @@
+$sizes: ("small", 12px), ("default", 14px), ("medium", 18px), ("large", 24px);
+
+:host {
+    @each $type, $size in $sizes {
+        &[ng-reflect-size="#{$type}"] {
+            font-size: $size;
+        }
+    }
+}

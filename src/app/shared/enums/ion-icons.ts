@@ -3,5 +3,6 @@ export enum IonIcons {
     login = 'log-in',
     register = 'download-outline',
     logout = 'log-out-outline',
-    dashboard = 'stats-chart-outline'
+    dashboard = 'stats-chart-outline',
+    more = 'ellipsis-vertical'
 }

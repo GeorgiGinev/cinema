@@ -20,12 +20,16 @@
           <ion-icon slot="start" [name]="icons.login"></ion-icon>
           Sign In
         </ci-button>
-        <ci-button [routerLink]="['/auth/register']" [size]="sizes.small" color="medium" [shape]="shapes.round">
+        <ci-button [routerLink]="['/auth/register']" [size]="sizes.small" color="tertiary" [shape]="shapes.round">
           <ion-icon slot="start" [name]="icons.register"></ion-icon>
           Sign Up
         </ci-button>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
+        <ci-button [routerLink]="['/dashboard']" [size]="sizes.small" color="dark" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.dashboard"></ion-icon>
+          Dashboard
+        </ci-button>
         <ci-button [promise]="logoutPromise" (click)="logout()" [size]="sizes.small" [shape]="shapes.round">
           <ion-icon slot="start" [name]="icons.logout"></ion-icon>
           Sign Out

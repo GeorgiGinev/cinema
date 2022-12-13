@@ -6,6 +6,8 @@ import { ButtonComponent } from './components/boxes/button/button.component';
 import { SessionService } from './services/session/session.service';
 import { HeaderComponent } from './components/page-container/header/header.component';
 import { TabsComponent } from './components/navigation/tabs/tabs.component';
+import { MenuComponent as PanelMenuComponent } from './components/panel-container/menu/menu.component';
+import { HeaderComponent as PanelHeaderComponent } from './components/panel-container/header/header.component';
 import { MenuComponent } from './components/navigation/menu/menu.component';
 import { NavigationService } from './services/navigation/navigation.service';
 import { TabsService } from './services/tabs/tabs.service';
@@ -18,7 +20,11 @@ import { ContentComponent } from './components/page-container/content/content.co
 import { RouterModule } from '@angular/router';
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PageContainerService } from './services/page-container/page-container.service';
-import { GuestGuard } from './guards/guest/guest.guard';
+import { PanelContainerComponent } from './components/panel-container/panel-container.component';
+import { PanelContainerService } from './components/panel-container/panel-container.service';
+import { IconComponent } from './components/boxes/icon/icon.component';
+import { IconButtonComponent } from './components/boxes/icon-button/icon-button.component';
+
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -27,7 +33,12 @@ import { GuestGuard } from './guards/guest/guest.guard';
     MenuComponent,
     PageTitleComponent,
     ContentComponent,
-    PageContainerComponent
+    PageContainerComponent,
+    PanelContainerComponent,
+    PanelMenuComponent,
+    IconComponent,
+    PanelHeaderComponent,
+    IconButtonComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +54,8 @@ import { GuestGuard } from './guards/guest/guest.guard';
     AuthService,
     ToastService,
     UserService,
-    PageContainerService
+    PageContainerService,
+    PanelContainerService
   ],
   exports: [
     //Modules
@@ -59,7 +71,11 @@ import { GuestGuard } from './guards/guest/guest.guard';
     MenuComponent,
     PageTitleComponent,
     ContentComponent,
-    PageContainerComponent
+    PageContainerComponent,
+    PanelContainerComponent,
+    IconComponent,
+    PanelHeaderComponent,
+    IconButtonComponent
   ],
 })
 export class SharedModule { }
