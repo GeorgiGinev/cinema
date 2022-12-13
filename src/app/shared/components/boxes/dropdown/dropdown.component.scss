@@ -1,0 +1,9 @@
+:host {
+    .options-container {
+        display: none;
+    }
+}
+
+::ng-deep .panel-logout-select-option {
+    --color: var(--ion-color-danger);
+}

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   public signIn() {
     if (this.formGroup.valid) {
       this.promise = this.userService.login(this.formGroup.value).then((data: LoginResponse) => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/panel/dashboard']);
       }, () => {});
     }
   }

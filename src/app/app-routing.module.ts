@@ -33,9 +33,21 @@ const routes: Routes = [
       //     canActivate: [AuthGuard],
       // },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
-        canActivate: [AuthGuard]
+        path: 'panel',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+            canActivate: [AuthGuard],
+            pathMatch: 'full'
+          },
+          {
+            path: 'dashboard',
+            loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardPageModule),
+            canActivate: [AuthGuard]
+          },
+        ]
       },
     ]
   },

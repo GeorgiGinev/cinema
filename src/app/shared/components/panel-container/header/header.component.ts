@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   public sizeEnum = Sizes;
   public shapeEnum = Shapes;
 
-  public selectedOption: string;
   public navItems: SelectItem[] = [
     {
       label: 'Profile',
@@ -49,8 +48,6 @@ export class HeaderComponent implements OnInit {
     }
   ]
 
-  @ViewChild('selectOption', { static: false }) selectOption: IonSelect;
-
   constructor(
     private panelContainerService: PanelContainerService,
     private userService: UserService,
@@ -63,24 +60,5 @@ export class HeaderComponent implements OnInit {
      */
     this.pageName = this.panelContainerService.headerName;
     this.pageNameIcon = this.panelContainerService.headerNameIcon;
-  }
-
-  /**
-   * Open selector when button is clicked
-   * @param event mouse event
-   */
-  public openOptions(event: MouseEvent){
-    this.selectOption.interface = 'popover';
-    this.selectOption.open(event);
-  }
-
-  /**
-   * Trigger event when option is selected and clear its value
-   */
-  public handleSelectChange(event: Event) {
-    let selectedItem: SelectItem = this.navItems.find((item: SelectItem) => item.value === (event as any).detail.value);
-
-    this.selectOption.selectedText = null
-    selectedItem.action();
   }
 }

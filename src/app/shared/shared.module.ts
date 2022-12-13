@@ -24,6 +24,8 @@ import { PanelContainerComponent } from './components/panel-container/panel-cont
 import { PanelContainerService } from './components/panel-container/panel-container.service';
 import { IconComponent } from './components/boxes/icon/icon.component';
 import { IconButtonComponent } from './components/boxes/icon-button/icon-button.component';
+import { DropdownComponent } from './components/boxes/dropdown/dropdown.component';
+import { DropdownService } from './components/boxes/dropdown/dropdown.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { IconButtonComponent } from './components/boxes/icon-button/icon-button.
     PanelMenuComponent,
     IconComponent,
     PanelHeaderComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    DropdownComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +58,8 @@ import { IconButtonComponent } from './components/boxes/icon-button/icon-button.
     ToastService,
     UserService,
     PageContainerService,
-    PanelContainerService
+    PanelContainerService,
+    DropdownService
   ],
   exports: [
     //Modules
@@ -75,7 +79,8 @@ import { IconButtonComponent } from './components/boxes/icon-button/icon-button.
     PanelContainerComponent,
     IconComponent,
     PanelHeaderComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    DropdownComponent
   ],
 })
 export class SharedModule { }

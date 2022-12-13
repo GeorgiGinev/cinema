@@ -7,18 +7,11 @@
       {{pageName}}
     </ion-title>
     <div slot="end" class="header-end-container">
-      <ci-icon-button [shape]="shapeEnum.circle" [size]="sizeEnum.medium" color="tertiary"
-        (click)="openOptions($event)">
-        <ci-icon [name]="iconsEnum.more" [size]="sizeEnum.large" slot="icon-only"></ci-icon>
-      </ci-icon-button>
-
-      <div class="options-container">
-        <ion-select interface="popover" [(ngModel)]="selectedOption" placeholder="Select fruit" (ionChange)="handleSelectChange($event)" #selectOption>
-          <ng-container *ngFor="let item of navItems">
-            <ion-select-option [disabled]="item.disabled" class="{{item.class}}" [value]="item.value">{{item.label}}</ion-select-option>
-          </ng-container>
-        </ion-select>
-      </div>
+      <ci-dropdown [navItems]="navItems">
+        <ci-icon-button [shape]="shapeEnum.circle" [size]="sizeEnum.medium" color="tertiary">
+          <ci-icon [name]="iconsEnum.more" [size]="sizeEnum.large" slot="icon-only"></ci-icon>
+        </ci-icon-button>
+      </ci-dropdown>
     </div>
   </ion-toolbar>
 </ion-header>

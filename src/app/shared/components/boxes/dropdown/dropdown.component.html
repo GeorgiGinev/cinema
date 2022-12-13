@@ -1,0 +1,10 @@
+<div (click)="openOptions($event)">
+  <ng-content></ng-content>
+</div>
+<div class="options-container">
+  <ion-select interface="popover" [(ngModel)]="selectedOption" placeholder="Select fruit" (ionChange)="handleSelectChange($event)" #selectOption>
+    <ng-container *ngFor="let item of navItems">
+      <ion-select-option [disabled]="item.disabled" class="{{item.class}}" [value]="item.value">{{item.label}}</ion-select-option>
+    </ng-container>
+  </ion-select>
+</div>
