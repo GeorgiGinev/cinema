@@ -1,0 +1,11 @@
+:host {
+    .avatar-container {
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        
+        &.ion-activatable {
+            cursor: pointer;
+        }
+    }
+}

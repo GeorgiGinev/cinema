@@ -12,6 +12,11 @@ $sizes: ("small", 24px), ("default", 32px), ("medium", 36px), ("large", 42px);
         }   
     }
 
+    .ripple-parent {
+        position: relative;
+        overflow: hidden;
+    }
+
     ci-button {
         margin: 0;
         display: block;

@@ -1,3 +1,6 @@
-<ci-button [color]="color">
-  <ng-content select="ci-icon"></ng-content>
-</ci-button>
+<div class="ripple-parent ion-activatable">
+  <ci-button [color]="color">
+    <ng-content select="ci-icon"></ng-content>
+  </ci-button>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>

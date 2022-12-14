@@ -27,8 +27,7 @@ import { SessionService } from './shared/services/session/session.service';
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: 'md',
-      animated: false
+      mode: 'md'
     }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),

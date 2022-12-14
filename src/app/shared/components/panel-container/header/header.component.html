@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="primary">
     <ion-title>
       <ng-container *ngIf="pageNameIcon">
         <ci-icon [name]="pageNameIcon"></ci-icon>
@@ -8,7 +8,7 @@
     </ion-title>
     <div slot="end" class="header-end-container">
       <ci-dropdown [navItems]="navItems">
-        <ci-icon-button [shape]="shapeEnum.circle" [size]="sizeEnum.medium" color="tertiary">
+        <ci-icon-button [shape]="shapeEnum.circle" [size]="sizeEnum.medium" color="secondary">
           <ci-icon [name]="iconsEnum.more" [size]="sizeEnum.large" slot="icon-only"></ci-icon>
         </ci-icon-button>
       </ci-dropdown>

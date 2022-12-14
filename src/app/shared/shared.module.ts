@@ -26,6 +26,8 @@ import { IconComponent } from './components/boxes/icon/icon.component';
 import { IconButtonComponent } from './components/boxes/icon-button/icon-button.component';
 import { DropdownComponent } from './components/boxes/dropdown/dropdown.component';
 import { DropdownService } from './components/boxes/dropdown/dropdown.service';
+import { SubtitleComponent } from './components/typography/subtitle/subtitle.component';
+import { AvatarComponent } from './components/boxes/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { DropdownService } from './components/boxes/dropdown/dropdown.service';
     IconComponent,
     PanelHeaderComponent,
     IconButtonComponent,
-    DropdownComponent
+    DropdownComponent,
+    SubtitleComponent,
+    AvatarComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +84,9 @@ import { DropdownService } from './components/boxes/dropdown/dropdown.service';
     IconComponent,
     PanelHeaderComponent,
     IconButtonComponent,
-    DropdownComponent
+    DropdownComponent,
+    SubtitleComponent,
+    AvatarComponent
   ],
 })
 export class SharedModule { }
