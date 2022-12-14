@@ -1,0 +1,61 @@
+<ion-split-pane when="xs" contentId="main">
+  <div class="panel-nav-container">
+    <div class="avatar-container">
+      <ci-avatar [clickable]="true"></ci-avatar>
+      <ion-chip>
+        <ion-text color="primary">{{user?.name}}</ion-text>
+        <br>
+        <ci-subtitle>
+          <ion-text color="secondary">{{user?.email}}</ion-text>
+        </ci-subtitle>
+      </ion-chip>
+    </div>
+    <ion-content>
+      <ion-list>
+        <ng-container *ngFor="let navItem of navigationItems">
+          <ion-item-group>
+            <ng-container *ngIf="navItem.children.length > 0">
+              <ion-item-divider>{{navItem.label}}</ion-item-divider>
+              <ng-container *ngFor="let subNavItem of navItem.children">
+                <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{navItem:subNavItem}"></ng-container>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="navItem.children.length === 0">
+              <ng-container [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{navItem:navItem}"></ng-container>
+            </ng-container>
+          </ion-item-group>
+        </ng-container>
+      </ion-list>
+    </ion-content>
+
+    <ng-template #item let-navItem="navItem">
+      <ion-item [routerLink]="navItem.routerLink" [routerLinkActive]="['is-active']" button>
+        <ci-icon *ngIf="navItem.icon" [size]="sizesEnum.medium" [name]="navItem.icon" color="secondary" slot="start">
+        </ci-icon>
+        <ion-label color="primary">{{navItem.label}}</ion-label>
+      </ion-item>
+    </ng-template>
+  </div>
+  <div id="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>
+          <ng-container *ngIf="pageNameIcon">
+            <ci-icon [name]="pageNameIcon"></ci-icon>
+          </ng-container>
+          {{pageName}}
+        </ion-title>
+        <div slot="end" class="header-end-container">
+          <ci-dropdown [navItems]="navItems">
+            <ci-icon-button [shape]="shapeEnum.circle" [size]="sizesEnum.medium" color="secondary">
+              <ci-icon [name]="iconsEnum.more" [size]="sizesEnum.large" slot="icon-only"></ci-icon>
+            </ci-icon-button>
+          </ci-dropdown>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <router-outlet></router-outlet>
+    </ion-content>
+  </div>
+</ion-split-pane>

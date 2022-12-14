@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IonIcons } from '../../enums/ion-icons';
+import { IonIcons } from 'src/app/shared/enums/ion-icons';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PanelContainerService {
+export class PanelPageService {
   public headerName: string;
   public headerNameIcon: IonIcons;
-
+  
   constructor() { }
 }
