@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from './components/boxes/button/button.component';
-import { SessionService } from './services/session/session.service';
 import { HeaderComponent } from './components/page-container/header/header.component';
 import { TabsComponent } from './components/navigation/tabs/tabs.component';
 import { MenuComponent } from './components/navigation/menu/menu.component';
@@ -24,7 +23,7 @@ import { DropdownComponent } from './components/boxes/dropdown/dropdown.componen
 import { DropdownService } from './components/boxes/dropdown/dropdown.service';
 import { SubtitleComponent } from './components/typography/subtitle/subtitle.component';
 import { AvatarComponent } from './components/boxes/avatar/avatar.component';
-import { PanelPageService } from '../modules/panel/panel-page.service';
+import { PanelPageService } from './services/panel-page/panel-page.service';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { NavigationItem } from 'src/app/shared/interfaces/navigation-item';
@@ -7,7 +7,7 @@ import { User, UserService } from 'src/app/shared/resources/user/user.service';
 import { SessionService } from 'src/app/shared/services/session/session.service';
 import { Shapes } from 'src/app/shared/types/shapes';
 import { Sizes } from 'src/app/shared/types/sizes';
-import { PanelPageService } from './panel-page.service';
+import { PanelPageService } from '../../shared/services/panel-page/panel-page.service';
 
 @Component({
   selector: 'app-panel',
@@ -16,7 +16,6 @@ import { PanelPageService } from './panel-page.service';
 })
 export class PanelPage implements OnInit {
   public get pageName(): string {
-    console.log('page name : ', this.panelPageService.headerName);
     return this.panelPageService.headerName;
   }
   public get pageNameIcon(): IonIcons {
