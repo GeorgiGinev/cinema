@@ -3,6 +3,7 @@ import { LoginResponse } from '../../interfaces/login-response';
 import { User } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable()
 export class SessionService {
@@ -24,13 +25,12 @@ export class SessionService {
   private _token: string;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private loadingCtrl: LoadingController
   ) {}
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
-
-    console.log('Logged in: ', this.user);
 
     await Preferences.set({
       key: 'credentials',
@@ -52,13 +52,23 @@ export class SessionService {
    * @returns 
    */
   public async loadSession(): Promise<boolean> {
-    await this.getToken();
+    /**
+     * Show loading animation
+     */
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      spinner: 'circles',
+    });
 
-    console.log('load session : ', this.token)
+    loading.present();
+
+    await this.getToken();
 
     if(this.token) {
       console.log('token exists');
       await this.loadUser();
+
+      this.loadingCtrl.dismiss();
 
       return Promise.resolve(true);
     }

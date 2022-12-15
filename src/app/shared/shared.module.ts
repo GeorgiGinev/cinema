@@ -58,7 +58,7 @@ import { AlertService } from './services/alert/alert.service';
     PageContainerService,
     DropdownService,
     PanelPageService,
-    AlertService
+    AlertService,
   ],
   exports: [
     //Modules
