@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonSelect } from '@ionic/angular';
 import { SelectItem } from 'src/app/shared/interfaces/select-item';
 
@@ -15,7 +15,9 @@ export class DropdownComponent {
 
   @ViewChild('selectOption', { static: false }) selectOption: IonSelect;
   
-  constructor() { }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   /**
    * Open selector when button is clicked
@@ -30,9 +32,21 @@ export class DropdownComponent {
    * Trigger event when option is selected and clear its value
    */
   public handleSelectChange(event: Event) {
-    let selectedItem: SelectItem = this.navItems.find((item: SelectItem) => item.value === (event as any).detail.value);
+    if(!this.selectedOption) {
+      return;
+    }
 
-    this.selectOption.selectedText = null
-    selectedItem.action();
+    let selectedItem: SelectItem = this.navItems.find((item: SelectItem) => item.value === this.selectedOption);
+
+    if(selectedItem) {
+      /**
+       * Must be in timeout or its is going to trigger double click on an option
+       */
+      setTimeout(() => {
+        this.selectedOption = null;
+      })
+      
+      selectedItem.action();
+    }
   }
 }

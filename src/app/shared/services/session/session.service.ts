@@ -30,6 +30,8 @@ export class SessionService {
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
 
+    console.log('Logged in: ', this.user);
+
     await Preferences.set({
       key: 'credentials',
       value: JSON.stringify(data),

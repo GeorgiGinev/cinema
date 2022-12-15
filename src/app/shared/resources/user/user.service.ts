@@ -64,6 +64,7 @@ export class UserService {
           message: 'You were logged.'
         });
 
+        console.log('http client login : ', data);
         this.sessionService.createSession(data, user);
 
         return data;
@@ -73,6 +74,7 @@ export class UserService {
   public logout(): Promise<any> {
     const user = this.sessionService.user;
 
+    console.log('logout service');
     return this.alertService.create('Are you sure?', 'Are you sure you want to logout?', [
       {
         text: 'Yes',
