@@ -54,7 +54,9 @@ export class PanelPage implements OnInit {
         {
           label: 'Logout',
           icon: this.iconsEnum.logout,
-          action: () => {}
+          action: () => {
+            return this.logout();
+          }
         },
       ]
     }
@@ -80,8 +82,7 @@ export class PanelPage implements OnInit {
       disabled: false,
       class: 'panel-logout-select-option',
       action: async (event: MouseEvent) => {
-        await this.userService.logout();
-        return Promise.resolve();
+        return this.logout();
       },
       value: 'logout'
     }
@@ -96,5 +97,13 @@ export class PanelPage implements OnInit {
 
   ngOnInit(): void {
     this.user = this.sessionService.user;
+  }
+
+  /**
+   * Logout user
+   */
+  private async logout(): Promise<any> {
+    await this.userService.logout();
+    return Promise.resolve();
   }
 }
