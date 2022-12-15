@@ -1,7 +1,9 @@
 :host {
     height: 100%;
     width: 100%;
-    max-width: var(--content-max-width);
+    max-width: 100%;
+    padding: 0 calc((100% - var(--content-max-width)) / 2) 0 calc((100% - var(--content-max-width)) / 2); 
     margin: auto;
     display: block;
+    background-color: white;
 }

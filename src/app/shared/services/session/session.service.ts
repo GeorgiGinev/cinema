@@ -3,13 +3,12 @@ import { LoginResponse } from '../../interfaces/login-response';
 import { User } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
 
 @Injectable()
 export class SessionService {
   public get user(): User {
     return this._user;
-  } 
+  }
   public set user(user: User) {
     this._user = user;
   }
@@ -25,9 +24,8 @@ export class SessionService {
   private _token: string;
 
   constructor(
-    private httpClient: HttpClient,
-    private loadingCtrl: LoadingController
-  ) {}
+    private httpClient: HttpClient
+  ) { }
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
@@ -35,40 +33,27 @@ export class SessionService {
     await Preferences.set({
       key: 'credentials',
       value: JSON.stringify(data),
-    }); 
+    });
 
     return true;
   }
 
   public async clearSession(): Promise<void> {
-    await Preferences.remove({key: 'credentials'});
-    
+    await Preferences.remove({ key: 'credentials' });
+
     this.token = '';
     this.user = undefined;
   }
-  
+
   /**
    * Load session if a token is in storage if it is not loaded
    * @returns 
    */
   public async loadSession(): Promise<boolean> {
-    /**
-     * Show loading animation
-     */
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
-      spinner: 'circles',
-    });
-
-    loading.present();
-
     await this.getToken();
 
-    if(this.token) {
-      console.log('token exists');
+    if (this.token) {
       await this.loadUser();
-
-      this.loadingCtrl.dismiss();
 
       return Promise.resolve(true);
     }
@@ -79,20 +64,20 @@ export class SessionService {
   public loadUser(): Promise<any> {
     return this.httpClient.get('/user').toPromise().then((user: User) => {
       this.user = user;
-    }, () => {})
+    }, () => { })
   }
 
   public async getToken(): Promise<string> {
-    if(this.token) {
+    if (this.token) {
       return Promise.resolve(this.token);
     }
 
-    const loginResponse = await Preferences.get({key: 'credentials'});
+    const loginResponse = await Preferences.get({ key: 'credentials' });
 
     /**
      * If user is not logged in
      */
-    if(!loginResponse.value) {
+    if (!loginResponse.value) {
       return null;
     }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { SessionService } from '../../services/session/session.service';
 
@@ -11,7 +12,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private loadingCtrl: LoadingController
   ) { }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
@@ -20,7 +22,18 @@ export class AuthGuard implements CanActivate {
        * If session is not loaded, load it
        */
       if (!this.sessionService.user) {
-        await this.sessionService.loadSession();
+        const loading = await this.loadingCtrl.create({
+          message: 'Loading...',
+          spinner: 'circles',
+        });
+    
+        loading.present();
+
+        await this.sessionService.loadSession().then(() => {
+          this.loadingCtrl.dismiss();
+        }, () => {
+          this.loadingCtrl.dismiss();
+        });
       }
       return true;
     }
