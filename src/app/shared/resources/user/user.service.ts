@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {JsonResource} from '../resource/resource';
-import {HttpClient} from '@angular/common/http';
-import {ToastService} from '../../services/toast/toast.service';
+import { JsonResource } from '../resource/resource';
+import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../../services/toast/toast.service';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../services/alert/alert.service';
 
 interface UserInterface {
   name: string;
@@ -29,8 +30,9 @@ export class UserService {
     private httpClient: HttpClient,
     private toastService: ToastService,
     private sessionService: SessionService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private alertService: AlertService
+  ) { }
 
   /**
    * Create user
@@ -44,7 +46,7 @@ export class UserService {
         this.toastService.success({
           message: 'The account was created successfully'
         });
-      }, () => {});
+      }, () => { });
   }
 
   /**
@@ -65,22 +67,34 @@ export class UserService {
         this.sessionService.createSession(data, user);
 
         return data;
-      }, () => {});
+      }, () => { });
   }
 
   public logout(): Promise<any> {
     const user = this.sessionService.user;
 
-    return this.httpClient.post('/logout', JSON.stringify(user))
-      .toPromise().then(async (data: any) => {
-        this.router.navigate(['/home']);
+    return this.alertService.create('Are you sure?', 'Are you sure you want to logout?', [
+      {
+        text: 'Yes',
+        role: 'confirm',
+        handler: () => {
+          return this.httpClient.post('/logout', JSON.stringify(user))
+            .toPromise().then(async (data: any) => {
+              this.router.navigate(['/home']);
 
-        await this.sessionService.clearSession();
+              await this.sessionService.clearSession();
 
-        this.toastService.success({
-          message: 'You have successfully logged out.'
-        });
-        return data;
-      }, () => {})
+              this.toastService.success({
+                message: 'You have successfully logged out.'
+              });
+              return data;
+            }, () => { })
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      }
+    ])
   }
 }

@@ -24,6 +24,7 @@ import { DropdownService } from './components/boxes/dropdown/dropdown.service';
 import { SubtitleComponent } from './components/typography/subtitle/subtitle.component';
 import { AvatarComponent } from './components/boxes/avatar/avatar.component';
 import { PanelPageService } from './services/panel-page/panel-page.service';
+import { AlertService } from './services/alert/alert.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { PanelPageService } from './services/panel-page/panel-page.service';
     UserService,
     PageContainerService,
     DropdownService,
-    PanelPageService
+    PanelPageService,
+    AlertService
   ],
   exports: [
     //Modules

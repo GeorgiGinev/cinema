@@ -36,7 +36,6 @@ import { SessionService } from './shared/services/session/session.service';
     AngularFireAuthModule,
     AngularFireFunctionsModule,
     AngularFireMessagingModule,
-    SharedModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
     LoggerModule.forRoot({
