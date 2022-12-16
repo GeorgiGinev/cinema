@@ -16,7 +16,23 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardPageModule)
       },
+      {
+        path: 'movies',
+        loadChildren: () => import('./movie/movie.module').then(m => m.MoviePageModule)
+      },
+      {
+        path: 'cinemas',
+        loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaPageModule)
+      },
     ]
+  },
+  {
+    path: 'cinema',
+    loadChildren: () => import('./cinema/cinema.module').then( m => m.CinemaPageModule)
+  },
+  {
+    path: 'movie',
+    loadChildren: () => import('./movie/movie.module').then( m => m.MoviePageModule)
   },
 ];
 

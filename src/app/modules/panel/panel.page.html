@@ -1,5 +1,5 @@
-<ion-split-pane when="xs" contentId="main">
-  <div class="panel-nav-container">
+<ion-split-pane contentId="main">
+  <ion-menu class="panel-nav-container" contentId="main">
     <div class="avatar-container">
       <ci-avatar [clickable]="true"></ci-avatar>
       <ion-chip>
@@ -35,10 +35,13 @@
         <ion-label color="primary">{{navItem.label}}</ion-label>
       </ion-item>
     </ng-template>
-  </div>
-  <div id="main">
+  </ion-menu>
+  <div class="panel-main-container" id="main">
     <ion-header>
       <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
         <ion-title>
           <ng-container *ngIf="pageNameIcon">
             <ci-icon [name]="pageNameIcon"></ci-icon>

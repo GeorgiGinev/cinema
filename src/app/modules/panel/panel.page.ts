@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { NavigationItem } from 'src/app/shared/interfaces/navigation-item';
+import { PanelPageHeaderInterface } from 'src/app/shared/interfaces/panel-page-header';
 import { SelectItem } from 'src/app/shared/interfaces/select-item';
 import { User, UserService } from 'src/app/shared/resources/user/user.service';
 import { SessionService } from 'src/app/shared/services/session/session.service';
@@ -9,18 +11,17 @@ import { Shapes } from 'src/app/shared/types/shapes';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { PanelPageService } from '../../shared/services/panel-page/panel-page.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.page.html',
   styleUrls: ['./panel.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PanelPage implements OnInit {
-  public get pageName(): string {
-    return this.panelPageService.headerName;
-  }
-  public get pageNameIcon(): IonIcons {
-    return this.panelPageService.headerNameIcon;
-  }
+  public pageName: string;
+  public pageNameIcon: string;
+
   public iconsEnum = IonIcons;
   public sizesEnum = Sizes;
   public shapeEnum = Shapes;
@@ -30,26 +31,31 @@ export class PanelPage implements OnInit {
   public navigationItems: NavigationItem[] = [
     {
       label: 'Pages',
+      action: () => {},
       children: [
         {
           label: 'Dashboard',
           icon: this.iconsEnum.dashboard,
-          routerLink: '/panel/dashboard'
+          routerLink: '/panel/dashboard',
+          action: () => {}
         },
         {
           label: 'Cinemas',
           icon: this.iconsEnum.dashboard,
-          routerLink: '/panel/cinemas'
+          routerLink: '/panel/cinemas',
+          action: () => {}
         },
         {
           label: 'Movies',
           icon: this.iconsEnum.dashboard,
-          routerLink: '/panel/movies'
+          routerLink: '/panel/movies',
+          action: () => {}
         }
       ]
     },
     {
       label: 'Support',
+      action: () => {},
       children: [
         {
           label: 'Logout',
@@ -93,10 +99,23 @@ export class PanelPage implements OnInit {
     private userService: UserService,
     private router: Router,
     private sessionService: SessionService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.user = this.sessionService.user;
+
+    /**
+     * Create subscriber to listen if panel header information is updated
+     */
+    this.panelPageService.headerObservable.subscribe((data: PanelPageHeaderInterface) => {
+      this.pageName = data.title;
+      if(data.icon) {
+        this.pageNameIcon = data.icon;
+      }
+
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   /**

@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Subject } from 'rxjs';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 
+@UntilDestroy()
 @Injectable()
 export class PanelPageService {
+  public headerObservable = new Subject();
+  
   public get headerName(): string {
     return this._headerName;
   }
@@ -21,4 +26,8 @@ export class PanelPageService {
   private _headerNameIcon: IonIcons;
 
   constructor() { }
+
+  public updateHeader(title: string, icon: IonIcons) {
+    this.headerObservable.next({title, icon});
+  }
 }
