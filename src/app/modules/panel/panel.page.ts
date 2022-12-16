@@ -20,7 +20,7 @@ import { PanelPageService } from '../../shared/services/panel-page/panel-page.se
 })
 export class PanelPage implements OnInit {
   public pageName: string;
-  public pageNameIcon: string;
+  public pageNameIcon: IonIcons;
 
   public iconsEnum = IonIcons;
   public sizesEnum = Sizes;

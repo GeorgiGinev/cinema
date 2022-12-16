@@ -15,7 +15,7 @@ export class ButtonComponent implements OnChanges {
   @Input() promise: Promise<any>;
   @Input() shape: Shapes;
 
-  private showLoadingEffect = false;
+  public showLoadingEffect = false;
 
   @HostBinding('class.has-promise') get promiseWrapper() {
     return this.showLoadingEffect;
