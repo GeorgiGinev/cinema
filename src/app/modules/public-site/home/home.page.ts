@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/shared/services/session/session.service';
-import { Sizes } from '../../shared/types/sizes';
+import { Sizes } from '../../../shared/types/sizes';
+import SwiperCore, { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-home',

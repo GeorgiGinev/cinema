@@ -1,0 +1,12 @@
+:host {
+    background-color: white;
+
+    ion-toolbar {
+        max-width: var(--content-max-width);
+        margin: auto;
+    }
+
+    .content-container {
+        padding: 0 calc((100% - var(--content-max-width)) / 2) 0 calc((100% - var(--content-max-width)) / 2);
+    }
+}

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <a [routerLink]="['/']" title="Logo">
+        <img src="assets/logos/logo1.png" />
+      </a>
+    </ion-buttons>
+    <ion-title>
+      <ci-page-title>
+        <ng-content></ng-content>
+      </ci-page-title>
+    </ion-title>
+    <!-- <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons> -->
+    <div slot="end">
+      <ng-container *ngIf="!isLoggedIn">
+        <ci-button [routerLink]="['/auth/login']" [size]="sizes.small" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.login"></ion-icon>
+          Sign In
+        </ci-button>
+        <ci-button [routerLink]="['/auth/register']" [size]="sizes.small" color="tertiary" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.register"></ion-icon>
+          Sign Up
+        </ci-button>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <ci-button [routerLink]="['/panel/dashboard']" [size]="sizes.small" color="dark" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.dashboard"></ion-icon>
+          Dashboard
+        </ci-button>
+        <ci-button [promise]="logoutPromise" (click)="logout()" [size]="sizes.small" [shape]="shapes.round">
+          <ion-icon slot="start" [name]="icons.logout"></ion-icon>
+          Sign Out
+        </ci-button>
+      </ng-container>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>
+        Footer
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

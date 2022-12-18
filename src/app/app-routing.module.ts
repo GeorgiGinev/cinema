@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { PanelPage } from './modules/panel/panel.page';
 import { AuthGuard } from './shared/guards/auth/auth.guard';
 import { GuestGuard } from './shared/guards/guest/guest.guard';
 import { SessionResolver } from './shared/resolvers/session.resolver';
@@ -12,20 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
-        loadChildren: () =>
-          import('./modules/home/home.module').then((m) => m.HomePageModule),
-      },
-      {
-        path: 'home',
-        loadChildren: () =>
-          import('./modules/home/home.module').then((m) => m.HomePageModule),
-      },
-      {
-        path: 'auth',
-        loadChildren: () =>
-          import('./modules/auth/auth.module').then((m) => m.AuthPageModule),
-        canActivate: [GuestGuard],
+        loadChildren: () => import('./modules/public-site/public-site.module').then(m => m.PublicSitePageModule)
       },
       // {
       //   path: 'intro',
@@ -40,7 +26,6 @@ const routes: Routes = [
       },
     ]
   },
-
 ];
 
 @NgModule({
