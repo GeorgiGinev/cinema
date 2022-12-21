@@ -5,5 +5,6 @@ export enum IonIcons {
     logout = 'log-out-outline',
     dashboard = 'stats-chart',
     more = 'ellipsis-vertical',
-    user = 'person'
+    user = 'person',
+    forward = 'arrow-forward'
 }

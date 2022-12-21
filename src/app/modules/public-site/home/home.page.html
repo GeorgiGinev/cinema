@@ -1,154 +1,31 @@
-<swiper [slidesPerView]="2">
-  <ng-template swiperSlide>
-    <div class="slide-container" [ngStyle]="{'background-image': 'url(assets/cinema-home/1.jpg)'}">
-      Slide 1
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 2
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 3
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 4
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 5
-    </div>
-  </ng-template>
+<swiper [slidesPerView]="1" [config]="swiperConfig">
+  <ng-container *ngFor="let slider of slidersData">
+    <ng-template swiperSlide>
+      <div class="slide-container" [ngStyle]="{'background-image': 'url('+slider.image+')'}"></div>
+    </ng-template>
+  </ng-container>
 </swiper>
-<swiper [slidesPerView]="2">
-  <ng-template swiperSlide>
-    <div class="slide-container" [ngStyle]="{'background-image': 'url(assets/cinema-home/1.jpg)'}">
-      Slide 1
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 2
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 3
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 4
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 5
-    </div>
-  </ng-template>
-</swiper>
-<swiper [slidesPerView]="2">
-  <ng-template swiperSlide>
-    <div class="slide-container" [ngStyle]="{'background-image': 'url(assets/cinema-home/1.jpg)'}">
-      Slide 1
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 2
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 3
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 4
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 5
-    </div>
-  </ng-template>
-</swiper>
-<swiper [slidesPerView]="2">
-  <ng-template swiperSlide>
-    <div class="slide-container" [ngStyle]="{'background-image': 'url(assets/cinema-home/1.jpg)'}">
-      Slide 1
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 2
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 3
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 4
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 5
-    </div>
-  </ng-template>
-</swiper>
-<swiper [slidesPerView]="2">
-  <ng-template swiperSlide>
-    <div class="slide-container" [ngStyle]="{'background-image': 'url(assets/cinema-home/1.jpg)'}">
-      Slide 1
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 2
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 3
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 4
-    </div>
-  </ng-template>
-  <ng-template swiperSlide>
-    <div class="slide-container">
-      Slide 5
-    </div>
-  </ng-template>
-</swiper>
-<!-- 
-<h1>Home</h1>
-<ion-list>
-  <ion-item routerLink="/auth">
-    <ion-label>Pokémon Yellow</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Mega Man X</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>The Legend of Zelda</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Pac-Man</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Super Mario World</ion-label>
-  </ion-item>
-</ion-list> -->
+<div class="ion-margin-vertical">
+  <ci-page-title [underline]="true">Top watched movies</ci-page-title>
+</div>
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="4" *ngFor="let movie of topMovies">
+      <ci-card class="movie-container">
+        <ion-card-header>
+          <div class="movie-thumbnail" [ngStyle]="{'background-image': 'url('+movie.data.image+')'}">
+          </div>
+          <ion-card-title>{{movie.data.name}}</ion-card-title>
+          <ion-card-subtitle><div class="movie-description" [innerHTML]="movie.data.description"></div></ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content class="ion-text-right">
+          <ci-button color="tertiary" [size]="buttonSizes.small">
+            Where to watch?
+            <ci-icon class="ion-horizontal-padding" slot="end" [name]="iconsEnum.forward"></ci-icon>
+          </ci-button>
+        </ion-card-content>
+      </ci-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

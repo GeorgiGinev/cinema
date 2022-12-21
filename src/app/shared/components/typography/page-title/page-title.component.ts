@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ci-page-title',
@@ -7,7 +7,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageTitleComponent implements OnInit {
+  @Input() underline: boolean;
 
+  @HostBinding('class.with-underline') get withUnderline() {
+    return this.underline;
+  }
   constructor() { }
 
   ngOnInit() {}

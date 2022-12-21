@@ -1,8 +1,8 @@
 $sizes: ("small", 12px), ("default", 14px), ("medium", 18px), ("large", 24px);
 
 :host {
-    display: inline-block;
-    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
     
     @each $type, $size in $sizes {
         &[ng-reflect-size="#{$type}"] {

@@ -25,6 +25,8 @@ import { SubtitleComponent } from './components/typography/subtitle/subtitle.com
 import { AvatarComponent } from './components/boxes/avatar/avatar.component';
 import { PanelPageService } from './services/panel-page/panel-page.service';
 import { AlertService } from './services/alert/alert.service';
+import { CardComponent } from './components/boxes/card/card.component';
+import { MovieService } from './resources/movies/movie.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { AlertService } from './services/alert/alert.service';
     IconButtonComponent,
     DropdownComponent,
     SubtitleComponent,
-    AvatarComponent
+    AvatarComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { AlertService } from './services/alert/alert.service';
     AuthService,
     ToastService,
     UserService,
+    MovieService,
     PageContainerService,
     DropdownService,
     PanelPageService,
@@ -79,7 +83,8 @@ import { AlertService } from './services/alert/alert.service';
     IconButtonComponent,
     DropdownComponent,
     SubtitleComponent,
-    AvatarComponent
+    AvatarComponent,
+    CardComponent
   ],
 })
 export class SharedModule { }
