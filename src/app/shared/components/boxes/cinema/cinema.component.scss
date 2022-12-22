@@ -1,0 +1,53 @@
+:host {
+    .cinema-container {
+        cursor: pointer;
+
+        .forward-container {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(var(--ion-color-dark-rgb), .8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(var(--ion-color-dark-contrast-rgb), .7);
+            transition: opacity 200ms ease;
+
+            ::ng-deep ion-icon {
+                font-size: 48px;
+            }
+        }
+
+        ion-card-header {
+            padding: 0;
+            position: relative;
+
+            ion-card-title {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: rgba(var(--ion-color-dark-rgb), .6);
+                padding: 4px;
+                border-radius: 4px;
+                color: rgba(var(--ion-color-dark-contrast-rgb), .8);
+            }
+        }
+
+        .cinema-thumbnail {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position-y: center;
+            border-radius: 4px;
+        }
+
+        &:hover {
+            .forward-container {
+                opacity: 1;   
+            }
+        }
+    }
+}

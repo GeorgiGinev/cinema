@@ -27,6 +27,9 @@ import { PanelPageService } from './services/panel-page/panel-page.service';
 import { AlertService } from './services/alert/alert.service';
 import { CardComponent } from './components/boxes/card/card.component';
 import { MovieService } from './resources/movies/movie.service';
+import { CinemaService } from './resources/cinema/cinema.service';
+import { CinemaComponent } from './components/boxes/cinema/cinema.component';
+import { MovieComponent } from './components/boxes/movie/movie.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { MovieService } from './resources/movies/movie.service';
     DropdownComponent,
     SubtitleComponent,
     AvatarComponent,
-    CardComponent
+    CardComponent,
+    CinemaComponent,
+    MovieComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +64,7 @@ import { MovieService } from './resources/movies/movie.service';
     ToastService,
     UserService,
     MovieService,
+    CinemaService,
     PageContainerService,
     DropdownService,
     PanelPageService,
@@ -84,7 +90,9 @@ import { MovieService } from './resources/movies/movie.service';
     DropdownComponent,
     SubtitleComponent,
     AvatarComponent,
-    CardComponent
+    CardComponent,
+    CinemaComponent,
+    MovieComponent
   ],
 })
 export class SharedModule { }

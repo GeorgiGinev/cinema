@@ -6,5 +6,6 @@ export enum IonIcons {
     dashboard = 'stats-chart',
     more = 'ellipsis-vertical',
     user = 'person',
-    forward = 'arrow-forward'
+    forward = 'arrow-forward',
+    circle_forward = 'arrow-forward-circle-outline'
 }

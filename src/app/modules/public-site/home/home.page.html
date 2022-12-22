@@ -1,31 +1,54 @@
-<swiper [slidesPerView]="1" [config]="swiperConfig">
-  <ng-container *ngFor="let slider of slidersData">
-    <ng-template swiperSlide>
-      <div class="slide-container" [ngStyle]="{'background-image': 'url('+slider.image+')'}"></div>
-    </ng-template>
-  </ng-container>
-</swiper>
+<div class="outside-swiper-container">
+  <swiper [slidesPerView]="1" [config]="swiperConfig">
+    <ng-container *ngFor="let slider of slidersData">
+      <ng-template swiperSlide>
+        <div class="slide-container" [ngStyle]="{'background-image': 'url('+slider.image+')'}"></div>
+      </ng-template>
+    </ng-container>
+  </swiper>
+  <div class="swiper-cinemas-container">
+    <div class="swiper-cinemas-title">
+      <ion-text color="primary">
+        Welcom to CinemaCity
+      </ion-text>
+    </div>
+    <div class="swiper-cinemas-buttons">
+      <ci-button color="secondary" [size]="buttonSizes.small">List of cinemas</ci-button>
+      <ci-button color="secondary" [size]="buttonSizes.small">List of movies</ci-button>
+    </div>
+  </div>
+</div>
 <div class="ion-margin-vertical">
   <ci-page-title [underline]="true">Top watched movies</ci-page-title>
 </div>
 <ion-grid class="ion-no-padding">
   <ion-row>
     <ion-col size="4" *ngFor="let movie of topMovies">
-      <ci-card class="movie-container">
-        <ion-card-header>
-          <div class="movie-thumbnail" [ngStyle]="{'background-image': 'url('+movie.data.image+')'}">
-          </div>
-          <ion-card-title>{{movie.data.name}}</ion-card-title>
-          <ion-card-subtitle><div class="movie-description" [innerHTML]="movie.data.description"></div></ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content class="ion-text-right">
-          <ci-button color="tertiary" [size]="buttonSizes.small">
-            Where to watch?
-            <ci-icon class="ion-horizontal-padding" slot="end" [name]="iconsEnum.forward"></ci-icon>
-          </ci-button>
-        </ion-card-content>
-      </ci-card>
+      <ci-movie [movie]="movie"></ci-movie>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2" offset="5">
+      <div class="ion-text-center ion-margin-vertical">
+        <ci-button color="secondary" [size]="buttonSizes.large">See more</ci-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<div class="ion-margin-vertical">
+  <ci-page-title [underline]="true">Top cinemas</ci-page-title>
+</div>
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="4" *ngFor="let cinema of topCinemas">
+      <ci-cinema [cinema]="cinema"></ci-cinema>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2" offset="5">
+      <div class="ion-text-center ion-margin-vertical">
+        <ci-button color="secondary" [size]="buttonSizes.large">See more</ci-button>
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>
