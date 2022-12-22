@@ -25,8 +25,12 @@ const routes: Routes = [
           import('../auth/auth.module').then((m) => m.AuthPageModule),
         canActivate: [GuestGuard],
       },
+      {
+        path: 'cinema',
+        loadChildren: () => import('./cinema/cinema.module').then( m => m.CinemaPageModule)
+      },
     ]
-  }
+  },
 ];
 
 @NgModule({
