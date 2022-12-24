@@ -22,4 +22,11 @@ export class JsonCollection {
   constructor(pagination?: JsonCollectionPaginationInterface) {
     this.pagination = pagination;
   }
+
+  /**
+   * Push to data array
+   */
+  public push(resource: JsonResource) {
+    this.data.push(resource);
+  }
 }

@@ -1,0 +1,17 @@
+<ci-breadcrumbs></ci-breadcrumbs>
+<ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center">
+        <ion-col size="6">
+            <ion-searchbar placeholder="Search a movie" mode="ios"></ion-searchbar>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+<ci-pagination>
+    <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-col size="4" *ngFor="let movie of movies.data | paginate: { itemsPerPage: movies.pagination.items_per_page, currentPage: movies.pagination.current_page, totalItems: movies.pagination.total_items }">
+                <ci-movie [movie]="movie"></ci-movie>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ci-pagination>

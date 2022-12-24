@@ -14,7 +14,7 @@
     </div>
     <div class="swiper-cinemas-buttons">
       <ci-button [routerLink]="'/cinema'" color="secondary" [size]="buttonSizes.small">List of cinemas</ci-button>
-      <ci-button color="secondary" [size]="buttonSizes.small">List of movies</ci-button>
+      <ci-button [routerLink]="'/movie'" color="secondary" [size]="buttonSizes.small">List of movies</ci-button>
     </div>
   </div>
 </div>
@@ -30,7 +30,7 @@
   <ion-row>
     <ion-col size="2" offset="5">
       <div class="ion-text-center ion-margin-vertical">
-        <ci-button color="secondary" [size]="buttonSizes.large">See more</ci-button>
+        <ci-button color="secondary" [size]="buttonSizes.large" [routerLink]="'/movie'">See more</ci-button>
       </div>
     </ion-col>
   </ion-row>
@@ -47,7 +47,7 @@
   <ion-row>
     <ion-col size="2" offset="5">
       <div class="ion-text-center ion-margin-vertical">
-        <ci-button color="secondary" [size]="buttonSizes.large">See more</ci-button>
+        <ci-button color="secondary" [size]="buttonSizes.large" [routerLink]="'/cinema'">See more</ci-button>
       </div>
     </ion-col>
   </ion-row>
