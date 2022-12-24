@@ -1,0 +1,7 @@
+<div class="breadcrumbs-container">
+  <ion-breadcrumbs>
+    <ng-container *ngFor="let item of breadcrumbsItems">
+      <ion-breadcrumb [routerLink]="item.route">{{item.label}}</ion-breadcrumb>
+    </ng-container>
+  </ion-breadcrumbs>
+</div>

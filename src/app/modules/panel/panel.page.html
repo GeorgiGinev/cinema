@@ -29,7 +29,7 @@
     </ion-content>
 
     <ng-template #item let-navItem="navItem">
-      <ion-item [routerLink]="navItem.routerLink" (click)="navItem.action()"[routerLinkActive]="['is-active']" button>
+      <ion-item [routerLink]="navItem.routerLink" (click)="navItem.action()" [routerLinkActive]="['is-active']" button>
         <ci-icon *ngIf="navItem.icon" [size]="sizesEnum.medium" [name]="navItem.icon" color="secondary" slot="start">
         </ci-icon>
         <ion-label color="primary">{{navItem.label}}</ion-label>

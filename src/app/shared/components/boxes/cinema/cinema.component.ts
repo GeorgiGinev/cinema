@@ -17,5 +17,4 @@ export class CinemaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
 }

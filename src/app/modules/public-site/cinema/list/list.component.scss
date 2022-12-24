@@ -1,6 +1,11 @@
 :host {
-    .breadcrumbs-container {
+    .search-container {
         display: flex;
-        justify-content: flex-end;
+        align-items: center;
+
+        ci-breadcrumbs {
+            display: block;
+            flex-grow: 1;
+        }
     }
 }

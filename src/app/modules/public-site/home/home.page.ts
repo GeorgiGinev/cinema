@@ -72,7 +72,7 @@ export class HomePage implements OnInit {
       ]
     });
 
-    this.topCinemas.push(cloneDeep(cinema))
+    this.topCinemas.push(cloneDeep(cinema));
 
     const movie = new Movie();
     movie.fillAttributes({

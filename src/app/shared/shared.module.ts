@@ -30,6 +30,10 @@ import { MovieService } from './resources/movies/movie.service';
 import { CinemaService } from './resources/cinema/cinema.service';
 import { CinemaComponent } from './components/boxes/cinema/cinema.component';
 import { MovieComponent } from './components/boxes/movie/movie.component';
+import { BreadcrumbsComponent } from './components/boxes/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbsService } from './components/boxes/breadcrumbs/breadcrumbs.service';
+import { PaginationComponent } from './components/boxes/pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -47,14 +51,17 @@ import { MovieComponent } from './components/boxes/movie/movie.component';
     AvatarComponent,
     CardComponent,
     CinemaComponent,
-    MovieComponent
+    MovieComponent,
+    BreadcrumbsComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     NavigationService,
@@ -69,6 +76,7 @@ import { MovieComponent } from './components/boxes/movie/movie.component';
     DropdownService,
     PanelPageService,
     AlertService,
+    BreadcrumbsService
   ],
   exports: [
     //Modules
@@ -77,6 +85,7 @@ import { MovieComponent } from './components/boxes/movie/movie.component';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     //Components
     ButtonComponent,
     HeaderComponent,
@@ -92,7 +101,9 @@ import { MovieComponent } from './components/boxes/movie/movie.component';
     AvatarComponent,
     CardComponent,
     CinemaComponent,
-    MovieComponent
+    MovieComponent,
+    BreadcrumbsComponent,
+    PaginationComponent
   ],
 })
 export class SharedModule { }

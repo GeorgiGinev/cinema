@@ -1,5 +1,11 @@
+export interface JsonResourceInterface {
+  data: any;
+  id: string;
+}
+
 export class JsonResource {
   public data: any = {};
+  public id: string = '';
 
   /**
    * Fill attributes to data

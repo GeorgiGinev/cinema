@@ -29,6 +29,7 @@
     "firebase": "^9.9.1",
     "lodash": "^4.17.21",
     "ngx-logger": "^5.0.11",
+    "ngx-pagination": "^6.0.3",
     "rxjs": "~6.6.0",
     "swiper": "^8.4.5",
     "tslib": "^2.2.0",
