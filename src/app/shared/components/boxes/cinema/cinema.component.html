@@ -5,7 +5,7 @@
       </div>
       <ion-card-title>{{cinema.data.name}}</ion-card-title>
     </ion-card-header>
-    <div class="forward-container">
+    <div class="forward-container" [routerLink]="'/cinema/2'">
       <div class="ion-text-center">
         <ci-icon [size]="sizes.large" [name]="iconsEnum.circle_forward"></ci-icon>
         <div>Go to the cinema</div>

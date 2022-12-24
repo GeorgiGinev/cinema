@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [
   {
@@ -8,8 +9,12 @@ const routes: Routes = [
     component: ListComponent
   },
   {
-    path: 'list',
-    component: ListComponent
+    path: ':cinemaId',
+    component: ViewComponent
+  },
+  {
+    path: ':cinemaId/:movieId',
+    component: ViewComponent
   }
 ];
 

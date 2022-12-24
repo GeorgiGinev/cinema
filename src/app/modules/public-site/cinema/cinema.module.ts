@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CinemaPageRoutingModule } from './cinema-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ListComponent } from './list/list.component';
+import { ViewComponent } from './view/view.component';
 
 
 @NgModule({
@@ -10,6 +11,6 @@ import { ListComponent } from './list/list.component';
     SharedModule,
     CinemaPageRoutingModule
   ],
-  declarations: [ListComponent]
+  declarations: [ListComponent, ViewComponent]
 })
 export class CinemaPageModule {}
