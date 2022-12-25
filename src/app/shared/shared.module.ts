@@ -34,6 +34,7 @@ import { BreadcrumbsComponent } from './components/boxes/breadcrumbs/breadcrumbs
 import { BreadcrumbsService } from './components/boxes/breadcrumbs/breadcrumbs.service';
 import { PaginationComponent } from './components/boxes/pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TitleComponent } from './components/typography/title/title.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CinemaComponent,
     MovieComponent,
     BreadcrumbsComponent,
-    PaginationComponent
+    PaginationComponent,
+    TitleComponent
   ],
   imports: [
     CommonModule,
@@ -103,7 +105,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CinemaComponent,
     MovieComponent,
     BreadcrumbsComponent,
-    PaginationComponent
+    PaginationComponent,
+    TitleComponent
   ],
 })
 export class SharedModule { }

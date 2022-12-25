@@ -1,3 +1,48 @@
-<p>
-  view works!
-</p>
+<div class="outside-swiper-container">
+  <swiper [slidesPerView]="1" [config]="swiperConfig">
+    <ng-container *ngFor="let slider of cinema.data.images">
+      <ng-template swiperSlide>
+        <div class="slide-container" [ngStyle]="{'background-image': 'url('+slider+')'}"></div>
+      </ng-template>
+    </ng-container>
+  </swiper>
+  <div class="swiper-cinema-logo-container">
+    <ng-container *ngIf="cinema.data.logo">
+      <ci-avatar [img]="cinema.data.logo"></ci-avatar>
+    </ng-container>
+    <div class="cinema-title">
+      {{cinema.data.name}}
+    </div>
+  </div>
+</div>
+<div class="ion-margin-vertical">
+  <ci-page-title [underline]="true">Movies</ci-page-title>
+</div>
+<ng-container *ngFor="let movie of cinema.relationships.movies.data">
+  <ci-card>
+    <ion-card-content class="ion-no-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <img [src]="movie.data.image" alt="Movie" />
+          </ion-col>
+          <ion-col size="9">
+            <ci-title>
+              <ion-text color="primary">
+                {{movie.data.name}}
+              </ion-text>
+            </ci-title>
+            <ng-container *ngIf="movie.data.description">
+              <br>
+              <ci-subtitle>
+                <ion-text color="secondary">
+                  {{movie.data.description}}
+                </ion-text>
+              </ci-subtitle>
+            </ng-container>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ci-card>
+</ng-container>

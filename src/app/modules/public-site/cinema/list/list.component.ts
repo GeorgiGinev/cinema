@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cinema } from 'src/app/shared/resources/cinema/cinema.service';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
+import { JsonResource } from 'src/app/shared/resources/resource/resource';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +10,7 @@ import { JsonCollection } from 'src/app/shared/resources/collection/collection';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  public topCinemas: JsonCollection = new JsonCollection({
+  public topCinemas: JsonCollection<JsonResource> = new JsonCollection({
     total_items: 6,
     items_per_page: 2,
     current_page: 1

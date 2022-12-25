@@ -11,7 +11,7 @@ export interface JsonCollectionInterface {
   pagination: JsonCollectionPaginationInterface
 }
 
-export class JsonCollection {
+export class JsonCollection<JsonResource> {
   public data: JsonResource[] = [];
   public pagination: JsonCollectionPaginationInterface = {
     total_items: 0,

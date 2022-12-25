@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { Movie } from 'src/app/shared/resources/movies/movie.service';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { JsonResource } from 'src/app/shared/resources/resource/resource';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +11,7 @@ import * as cloneDeep from 'lodash/cloneDeep';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent implements OnInit {
-  public movies: JsonCollection = new JsonCollection({
+  public movies: JsonCollection<JsonResource> = new JsonCollection({
     total_items: 6,
     items_per_page: 2,
     current_page: 1

@@ -1,10 +1,8 @@
-export interface JsonResourceInterface {
-  data: any;
-  id: string;
-}
+import { JsonCollection } from "../collection/collection";
 
 export class JsonResource {
   public data: any = {};
+  public relationships: any = {};
   public id: string = '';
 
   /**
@@ -22,5 +20,24 @@ export class JsonResource {
 
       this.data[passedKey] = passedData[passedKey];
     });
+  }
+
+  /**
+   * Add a resource to relationship of the parent resource
+   * @param relationship 
+   * @param resource 
+   */
+  public addRelationship(resource: JsonResource, relationship: string) {
+    const relation: any = Object.keys(this.relationships).find((key: string) => key === relationship);
+
+    if(relation && (this.relationships[relation] instanceof JsonCollection)) {
+      this.relationships[relation].data.push(resource);
+      return;
+    }
+
+    if(relation && (this.relationships[relation] instanceof JsonResource)) {
+      this.relationships[relation] = resource;
+      return;
+    }
   }
 }
