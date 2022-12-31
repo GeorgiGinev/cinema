@@ -39,6 +39,7 @@ import { MovieSlotService } from './resources/movie-slot/movie-slot.service';
 import { DayjsService } from './services/dayjs/dayjs.service';
 import { DateFormatsPipe } from './pipes/date-formats/date-formats.pipe';
 import { InitDirective } from './directives/init/init.directive';
+import { CinemaLocationService } from './resources/cinema-location/cinema-location.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { InitDirective } from './directives/init/init.directive';
     AlertService,
     BreadcrumbsService,
     MovieSlotService,
-    DayjsService
+    DayjsService,
+    CinemaLocationService,
   ],
   exports: [
     //Modules

@@ -5,6 +5,8 @@ import { ToastService } from '../../services/toast/toast.service';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert/alert.service';
+import { JsonCollection } from '../collection/collection';
+import { Cinema } from '../cinema/cinema.service';
 
 interface UserInterface {
   name: string;
@@ -14,7 +16,7 @@ interface UserInterface {
   relationships: any;
 }
 
-export class User extends JsonResource {
+export class User extends JsonResource<User> {
   public data: UserInterface = {
     name: '',
     email: '',
@@ -22,6 +24,10 @@ export class User extends JsonResource {
     password_confirmation: '',
     relationships: {}
   };
+
+  public relationships = {
+    cinema: new JsonCollection<Cinema>()
+  }
 }
 
 @Injectable()

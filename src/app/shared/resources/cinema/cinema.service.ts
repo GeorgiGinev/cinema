@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CinemaLocation } from '../cinema-location/cinema-location.service';
 import { JsonCollection } from '../collection/collection';
 import { Movie } from '../movies/movie.service';
 import { JsonResource } from '../resource/resource';
@@ -15,7 +16,7 @@ interface CinemaInterface {
 }
 
 
-export class Cinema extends JsonResource {
+export class Cinema extends JsonResource<Cinema> {
   public data: CinemaInterface = {
     name: '',
     description: '',
@@ -29,6 +30,7 @@ export class Cinema extends JsonResource {
 
   public relationships = {
     movies: new JsonCollection<Movie>(),
+    cinemaLocation: new JsonResource<CinemaLocation>()
   }
 }
 
