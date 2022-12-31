@@ -35,6 +35,10 @@ import { BreadcrumbsService } from './components/boxes/breadcrumbs/breadcrumbs.s
 import { PaginationComponent } from './components/boxes/pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TitleComponent } from './components/typography/title/title.component';
+import { MovieSlotService } from './resources/movie-slot/movie-slot.service';
+import { DayjsService } from './services/dayjs/dayjs.service';
+import { DateFormatsPipe } from './pipes/date-formats/date-formats.pipe';
+import { InitDirective } from './directives/init/init.directive';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,9 @@ import { TitleComponent } from './components/typography/title/title.component';
     MovieComponent,
     BreadcrumbsComponent,
     PaginationComponent,
-    TitleComponent
+    TitleComponent,
+    DateFormatsPipe,
+    InitDirective
   ],
   imports: [
     CommonModule,
@@ -78,7 +84,9 @@ import { TitleComponent } from './components/typography/title/title.component';
     DropdownService,
     PanelPageService,
     AlertService,
-    BreadcrumbsService
+    BreadcrumbsService,
+    MovieSlotService,
+    DayjsService
   ],
   exports: [
     //Modules
@@ -106,7 +114,11 @@ import { TitleComponent } from './components/typography/title/title.component';
     MovieComponent,
     BreadcrumbsComponent,
     PaginationComponent,
-    TitleComponent
+    TitleComponent,
+    //Pipes
+    DateFormatsPipe,
+    //Directives
+    InitDirective
   ],
 })
 export class SharedModule { }

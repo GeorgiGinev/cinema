@@ -1,6 +1,12 @@
 $avatarVerticalPosition: 50px;
 
 :host {
+    .movie-title-route {
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
     .outside-swiper-container {
         padding-bottom: $avatarVerticalPosition;
         position: relative;

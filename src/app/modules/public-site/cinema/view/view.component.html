@@ -27,19 +27,37 @@
             <img [src]="movie.data.image" alt="Movie" />
           </ion-col>
           <ion-col size="9">
-            <ci-title>
-              <ion-text color="primary">
-                {{movie.data.name}}
-              </ion-text>
-            </ci-title>
-            <ng-container *ngIf="movie.data.description">
-              <br>
-              <ci-subtitle>
-                <ion-text color="secondary">
-                  {{movie.data.description}}
+            <div [routerLink]="'/movie/'+movie.id" class="movie-title-route">
+              <ci-title>
+                <ion-text color="primary">
+                  {{movie.data.name}}
                 </ion-text>
-              </ci-subtitle>
+              </ci-title>
+            </div>
+            <ng-container *ngIf="movie.data.description">
+              <div>
+                <ci-subtitle>
+                  <ion-text color="secondary">
+                    {{movie.data.description}}
+                  </ion-text>
+                </ci-subtitle>
+              </div>
             </ng-container>
+            <div class="ion-margin-vertical">
+              <ng-container *ngFor="let date of getDatesByMovieId(movie.id)">
+                <ion-text color="primary">
+                  <b>{{date.key | dateFormats: dateFormatsEnum.day_of_week}}</b> ({{date.key | dateFormats:
+                  dateFormatsEnum.date}})
+                </ion-text><br>
+                <ng-container *ngFor="let slot of date.slots">
+                  <ion-chip color="primary" [routerLink]="'/movie/'+movie.id" [queryParams]="{slotId: slot.id}">
+                    {{slot.data.date | dateFormats: dateFormatsEnum.time}}
+                    <ci-icon [name]="iconsEnum.forward" [size]="sizesEnum.small"></ci-icon>
+                  </ion-chip>
+                </ng-container>
+                <br>
+              </ng-container>
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>

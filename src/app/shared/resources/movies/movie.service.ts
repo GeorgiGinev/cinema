@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { JsonCollection } from '../collection/collection';
+import { MovieSlot } from '../movie-slot/movie-slot.service';
 import { JsonResource } from '../resource/resource';
 
 interface MovieInterface {
@@ -7,7 +9,6 @@ interface MovieInterface {
   release_date?: string;
   image: string;
   background_image?: string,
-  relationships: {}
 }
 
 
@@ -18,8 +19,11 @@ export class Movie extends JsonResource {
     release_date: '',
     image: '',
     background_image: '',
-    relationships: {}
   };
+
+  public relationships = {
+    slots: new JsonCollection<MovieSlot>()
+  }
 }
 
 @Injectable()

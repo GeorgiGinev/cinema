@@ -26,6 +26,7 @@
     "@ionic/angular": "^6.2.0",
     "@ionic/storage-angular": "^3.0.6",
     "@ngneat/until-destroy": "^9.2.2",
+    "dayjs": "^1.11.7",
     "firebase": "^9.9.1",
     "lodash": "^4.17.21",
     "ngx-logger": "^5.0.11",
