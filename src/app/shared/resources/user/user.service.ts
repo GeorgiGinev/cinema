@@ -16,7 +16,7 @@ interface UserInterface {
   relationships: any;
 }
 
-export class User extends JsonResource<User> {
+export class User extends JsonResource {
   public data: UserInterface = {
     name: '',
     email: '',

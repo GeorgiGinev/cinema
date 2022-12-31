@@ -7,7 +7,7 @@ interface CinemaLocationInterface {
   longitude: number
 }
 
-export class CinemaLocation extends JsonResource<CinemaLocation> {
+export class CinemaLocation extends JsonResource {
   public data: CinemaLocationInterface = {
     address: '',
     latitude: 0,

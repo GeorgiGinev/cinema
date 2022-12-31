@@ -12,7 +12,7 @@ interface MovieInterface {
 }
 
 
-export class Movie extends JsonResource<Movie> {
+export class Movie extends JsonResource {
   public data: MovieInterface = {
     name: '',
     description: '',

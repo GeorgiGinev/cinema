@@ -16,7 +16,7 @@ interface CinemaInterface {
 }
 
 
-export class Cinema extends JsonResource<Cinema> {
+export class Cinema extends JsonResource {
   public data: CinemaInterface = {
     name: '',
     description: '',
@@ -30,7 +30,7 @@ export class Cinema extends JsonResource<Cinema> {
 
   public relationships = {
     movies: new JsonCollection<Movie>(),
-    cinemaLocation: new JsonResource<CinemaLocation>()
+    cinemaLocation: new CinemaLocation()
   }
 }
 

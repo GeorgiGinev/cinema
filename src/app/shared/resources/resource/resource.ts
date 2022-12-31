@@ -1,6 +1,12 @@
 import { JsonCollection } from "../collection/collection";
 
-export class JsonResource<JsonResource> {
+interface JsonResourceInterface {
+  data: any,
+  relationships: any,
+  id: string
+}
+
+export class JsonResource implements JsonResourceInterface {
   public data: any = {};
   public relationships: any = {};
   public id: string = '';

@@ -6,7 +6,7 @@ interface MovieSlotInterface {
   date: string
 }
 
-export class MovieSlot extends JsonResource<MovieSlot> {
+export class MovieSlot extends JsonResource {
   public data: MovieSlotInterface = {
     movieId: '',
     date: ''
