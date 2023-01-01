@@ -37,6 +37,10 @@ export class BaseInput implements ControlValueAccessor {
      * @returns 
      */
     private isControlRequired(): boolean {
+        if(!this.formControl) {
+            return false;
+        }
+        
         const validator = this.formControl.validator({} as AbstractControl);
         if (validator && validator.required) {
             return true;

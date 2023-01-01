@@ -2,5 +2,7 @@
   <ion-label>Location</ion-label>
 </ion-item>
 <div class="google-maps-container">
-  <google-map></google-map>
+  <google-map [options]="options" (mapDrag)="onMapDrag()" #googleMap>
+    <map-marker [position]="markerPosition"></map-marker>
+  </google-map>
 </div>
