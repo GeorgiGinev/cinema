@@ -116,9 +116,10 @@ export class PanelPage implements OnInit {
       this.pageName = data.title;
       if (data.icon) {
         this.pageNameIcon = data.icon;
+      } else {
+        this.pageNameIcon = null;
       }
 
-      console.log('update page panel');
       this.changeDetectorRef.detectChanges();
     });
 
