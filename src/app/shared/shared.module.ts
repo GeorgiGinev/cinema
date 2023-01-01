@@ -40,6 +40,7 @@ import { DateFormatsPipe } from './pipes/date-formats/date-formats.pipe';
 import { InitDirective } from './directives/init/init.directive';
 import { CinemaLocationService } from './resources/cinema-location/cinema-location.service';
 import { InputComponent } from './components/form/input/input.component';
+import { TextareaComponent } from './components/form/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { InputComponent } from './components/form/input/input.component';
     TitleComponent,
     DateFormatsPipe,
     InitDirective,
-    InputComponent
+    InputComponent,
+    TextareaComponent
   ],
   imports: [
     CommonModule,
@@ -118,6 +120,7 @@ import { InputComponent } from './components/form/input/input.component';
     PaginationComponent,
     TitleComponent,
     InputComponent,
+    TextareaComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

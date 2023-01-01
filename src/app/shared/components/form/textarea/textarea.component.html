@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label position="floating">
+    {{label}}
+    <ng-container *ngIf="isRequired">
+      <ion-text color="danger">*</ion-text>
+    </ng-container>
+  </ion-label>
+  <ion-textarea [rows]="rows" [placeholder]="placeholder"></ion-textarea>
+</ion-item>

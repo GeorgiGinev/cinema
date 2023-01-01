@@ -1,0 +1,10 @@
+:host {
+    background-color: rgba(var(--ion-color-primary-rgb), .05);
+    padding: 4px;
+    display: block;
+    border-radius: 4px;
+
+    ::ng-deep ion-item {
+        --background: transparent;
+    }
+}
