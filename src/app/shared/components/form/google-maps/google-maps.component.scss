@@ -1,7 +1,20 @@
 :host {
+    .google-maps-wrapper {
+        position: relative;
+    }
+
     ::ng-deep ion-item {
         --padding-start: 0;
         --border-color: transparent;
+    }
+
+    .google-maps-overlay-container {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .google-maps-container {

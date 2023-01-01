@@ -1,13 +1,21 @@
-<ion-item *ngIf="label">
-  <ion-label>
-    {{label}}
-    <ng-container *ngIf="isRequired">
-      <ion-text color="danger">*</ion-text>
-    </ng-container>
-  </ion-label>
-</ion-item>
-<div class="google-maps-container">
-  <google-map [options]="options" (mapDrag)="onMapDrag()" #googleMap>
-    <map-marker [position]="markerPosition"></map-marker>
-  </google-map>
+<div class="google-maps-wrapper">
+  <ion-item *ngIf="label">
+    <ion-label>
+      {{label}}
+      <ng-container *ngIf="isRequired">
+        <ion-text color="danger">*</ion-text>
+      </ng-container>
+    </ion-label>
+  </ion-item>
+  <div class="google-maps-container">
+    <google-map [options]="options" (mapDrag)="onMapDrag()" #googleMap>
+      <map-marker [position]="markerPosition"></map-marker>
+    </google-map>
+  </div>
+  <div class="google-maps-overlay-container" *ngIf="!draggable"></div>
+</div>
+<div class="ion-margin-vertical" *ngIf="!draggable">
+  <ion-button [size]="sizeEnum.small" target="_blank" href="https://maps.google.com/?q={{markerPosition.lat}},{{markerPosition.lng}}">
+    Go to Google Maps Address
+  </ion-button>
 </div>

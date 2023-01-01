@@ -64,3 +64,14 @@
     </ion-card-content>
   </ci-card>
 </ng-container>
+
+<div class="ion-margin-vertical">
+  <ci-page-title [underline]="true">How to find us</ci-page-title>
+</div>
+
+<div [formGroup]="formGroup">
+  <ci-google-maps
+    [draggable]="false"
+    formControlName="map"
+  ></ci-google-maps>
+</div>

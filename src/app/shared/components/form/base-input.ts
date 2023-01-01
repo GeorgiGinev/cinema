@@ -1,6 +1,5 @@
 import { Injectable, Input } from "@angular/core";
 import { AbstractControl, ControlContainer, ControlValueAccessor, FormGroup, FormGroupDirective } from "@angular/forms";
-import * as cloneDeep from 'lodash/cloneDeep';
 
 @Injectable()
 export class BaseInput implements ControlValueAccessor {
@@ -15,10 +14,10 @@ export class BaseInput implements ControlValueAccessor {
         protected controlContainer: ControlContainer
     ) { }
 
-    writeValue(obj: any): void {}
-    registerOnChange(fn: any): void {}
-    registerOnTouched(fn: any): void {}
-    setDisabledState?(isDisabled: boolean): void {}
+    writeValue(obj: any): void { }
+    registerOnChange(fn: any): void { }
+    registerOnTouched(fn: any): void { }
+    setDisabledState?(isDisabled: boolean): void { }
 
     /**
      * Call method on component init to get formGroup and formControl
@@ -37,13 +36,18 @@ export class BaseInput implements ControlValueAccessor {
      * @returns 
      */
     private isControlRequired(): boolean {
-        if(!this.formControl) {
+        if (!this.formControl) {
             return false;
         }
-        
-        const validator = this.formControl.validator({} as AbstractControl);
-        if (validator && validator.required) {
-            return true;
+
+        console.log('this.formControl : ', this.formControl);
+        try {
+            const validator = this.formControl.validator({} as AbstractControl);
+            if (validator && validator.required) {
+                return true;
+            }
+        } catch {
+
         }
 
         return false

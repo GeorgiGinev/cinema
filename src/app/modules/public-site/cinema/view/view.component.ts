@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateFormatsEnum } from 'src/app/shared/enums/date-formats';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
@@ -23,6 +24,8 @@ interface DayOfWeekSlots {
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit {
+  public formGroup: FormGroup;
+
   public cinemaId: string | undefined;
   public iconsEnum = IonIcons;
   public sizesEnum = Sizes;
@@ -78,10 +81,12 @@ export class ViewComponent implements OnInit {
   ]
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dayJsService: DayjsService
-  ) { }
+    private dayJsService: DayjsService,
+    private formBuilder: FormBuilder
+  ) { 
+    this.createForm();
+  }
 
   ngOnInit() {
     this.cinemaId = (this.activatedRoute.snapshot.params as any).cinemaId;
@@ -155,6 +160,12 @@ export class ViewComponent implements OnInit {
 
         findDate.slots.push(slot);
       });
+    });
+  }
+
+  private createForm() {
+    this.formGroup = this.formBuilder.group({
+      map: [null]
     });
   }
 }

@@ -4,6 +4,7 @@ import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Sizes } from 'src/app/shared/types/sizes';
 import { environment } from 'src/environments/environment';
 import { BaseInput } from '../base-input';
 
@@ -22,7 +23,8 @@ import { BaseInput } from '../base-input';
 })
 export class GoogleMapsComponent extends BaseInput implements OnInit {
   @Input() label: string;
-  
+  @Input() draggable: boolean = true;
+
   @ViewChild('googleMap') googleMap: google.maps.Map;
 
   public apiLoaded: Observable<boolean>;
@@ -39,6 +41,8 @@ export class GoogleMapsComponent extends BaseInput implements OnInit {
     lat: 24,
     lng: 12
   };
+
+  public sizeEnum = Sizes;
 
   private env = environment;
 
