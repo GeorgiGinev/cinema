@@ -12,6 +12,8 @@ export class FormComponent implements OnInit {
   public cinema: Cinema;
   public formGroup: FormGroup;
 
+  public descriptionLength: number = 200;
+
   constructor(
     private panelService: PanelPageService,
     private formBuilder: FormBuilder,
@@ -27,13 +29,18 @@ export class FormComponent implements OnInit {
     }
   }
 
+  public create() {
+    console.log('create cinema : ', this.formGroup);
+  }
+
   /**
    * Create form group
    */
   private createForm() {
     this.formGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
-      description: [null]
+      description: [null, [Validators.maxLength(this.descriptionLength)]],
+      address: [null, [Validators.required]]
     })
   }
 }

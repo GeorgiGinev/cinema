@@ -14,7 +14,7 @@ import { BaseInput } from '../base-input';
     }
   ]
 })
-export class InputComponent extends BaseInput<string> implements OnInit {
+export class InputComponent extends BaseInput implements OnInit {
   @Input() placeholder: string; 
   @Input() label: string;
   

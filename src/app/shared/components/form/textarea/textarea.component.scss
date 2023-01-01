@@ -3,8 +3,17 @@
     padding: 4px;
     display: block;
     border-radius: 4px;
+    position: relative;
 
     ::ng-deep ion-item {
         --background: transparent;
+    }
+
+    .length-container {
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        font-size: 12px;
+        color: rgba(var(--ion-color-primary-rgb), .4);
     }
 }

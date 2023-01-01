@@ -3,23 +3,22 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, FormGroup, For
 import * as cloneDeep from 'lodash/cloneDeep';
 
 @Injectable()
-export class BaseInput<T> implements ControlValueAccessor {
+export class BaseInput implements ControlValueAccessor {
     @Input() public formControlName: string;
     public formControl: AbstractControl;
     public formGroup: FormGroup;
     public isRequired: boolean;
 
     public disabled = false;
-    /**
-     * Call when value has changed programatically
-    */
-    public onChange(newVal: T) { }
-    public onTouched(_?: any) { }
-    public value: T;
 
     constructor(
         protected controlContainer: ControlContainer
     ) { }
+
+    writeValue(obj: any): void {}
+    registerOnChange(fn: any): void {}
+    registerOnTouched(fn: any): void {}
+    setDisabledState?(isDisabled: boolean): void {}
 
     /**
      * Call method on component init to get formGroup and formControl
@@ -34,19 +33,11 @@ export class BaseInput<T> implements ControlValueAccessor {
     }
 
     /**
-     * Model -> View changes
-     */
-    public writeValue(obj: T): void { this.value = obj; }
-    public registerOnChange(fn: any): void { this.onChange = fn; }
-    public registerOnTouched(fn: any): void { this.onTouched = fn; }
-    public setDisabledState?(isDisabled: boolean): void { this.disabled = isDisabled; }
-
-    /**
      * Check if formControl is required
      * @returns 
      */
     private isControlRequired(): boolean {
-        const validator = this.formGroup.get(this.formControlName).validator({} as AbstractControl);
+        const validator = this.formControl.validator({} as AbstractControl);
         if (validator && validator.required) {
             return true;
         }
