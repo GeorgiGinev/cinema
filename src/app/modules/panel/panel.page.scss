@@ -9,6 +9,10 @@
 
     .panel-main-container {
         width: 100%;
+
+        ::ng-deep .page-container {
+            height: calc(100% - 56px);
+        }
     }
 
     @media (min-width: 992px) {

@@ -41,6 +41,8 @@ import { InitDirective } from './directives/init/init.directive';
 import { CinemaLocationService } from './resources/cinema-location/cinema-location.service';
 import { InputComponent } from './components/form/input/input.component';
 import { TextareaComponent } from './components/form/textarea/textarea.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsComponent } from './components/form/google-maps/google-maps.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { TextareaComponent } from './components/form/textarea/textarea.component
     DateFormatsPipe,
     InitDirective,
     InputComponent,
-    TextareaComponent
+    TextareaComponent,
+    GoogleMapsComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,7 @@ import { TextareaComponent } from './components/form/textarea/textarea.component
     IonicModule,
     RouterModule,
     ReactiveFormsModule,
+    GoogleMapsModule,
     NgxPaginationModule
   ],
   providers: [
@@ -121,6 +125,7 @@ import { TextareaComponent } from './components/form/textarea/textarea.component
     TitleComponent,
     InputComponent,
     TextareaComponent,
+    GoogleMapsComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

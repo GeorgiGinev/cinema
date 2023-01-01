@@ -1,0 +1,20 @@
+:host {
+    ::ng-deep ion-item {
+        --padding-start: 0;
+        --border-color: transparent;
+    }
+
+    .google-maps-container {
+        height: 400px;
+        overflow: hidden;
+
+        ::ng-deep google-map {
+            width: 100%;
+
+            .map-container {
+                width: 100% !important;
+                height: 100% !important;
+            }
+        }
+    }
+}
