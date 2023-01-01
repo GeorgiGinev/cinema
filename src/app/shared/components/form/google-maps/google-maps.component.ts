@@ -43,6 +43,10 @@ export class GoogleMapsComponent extends BaseInput implements OnInit {
   ngOnInit() {
     super.onInit();
 
+    if(this.formControl?.value) {
+      this.markerPosition = this.formControl.value;
+    }
+
     this.apiLoaded = this.httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=' + this.env.googlemaps_key, 'callback')
       .pipe(
         map(() => true),
