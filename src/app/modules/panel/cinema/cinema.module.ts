@@ -9,7 +9,7 @@ import { ListComponent } from './list/list.component';
 @NgModule({
   imports: [
     CinemaPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [ListComponent, FormComponent]
 })

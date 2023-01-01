@@ -46,8 +46,6 @@ export class TextareaComponent extends BaseInput implements OnInit {
    */
   public onControlChange(event: any) {
     this.currentLength = event.detail.value.length;
-    this.formControl.updateValueAndValidity();
-    console.log(this.formControl);
   }
 
   /**
@@ -56,7 +54,6 @@ export class TextareaComponent extends BaseInput implements OnInit {
    */
   private getMaxLength() {
     const validator = this.formControl.validator({} as AbstractControl);
-    console.log('validator : ', this.formControl);
     if (validator && validator.required) {
       return true;
     }

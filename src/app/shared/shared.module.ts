@@ -41,6 +41,7 @@ import { InitDirective } from './directives/init/init.directive';
 import { CinemaLocationService } from './resources/cinema-location/cinema-location.service';
 import { InputComponent } from './components/form/input/input.component';
 import { TextareaComponent } from './components/form/textarea/textarea.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [

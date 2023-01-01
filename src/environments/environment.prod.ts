@@ -11,5 +11,6 @@ export const environment = {
   },
   api: {
     url: 'http://localhost:8000/api'
-  }
+  },
+  googlemaps_key: 'AIzaSyAiUqcMURc9aUsY16LHOkQ_OlTH5aKaV10'
 };
