@@ -1,5 +1,10 @@
-<ion-item>
-  <ion-label>Location</ion-label>
+<ion-item *ngIf="label">
+  <ion-label>
+    {{label}}
+    <ng-container *ngIf="isRequired">
+      <ion-text color="danger">*</ion-text>
+    </ng-container>
+  </ion-label>
 </ion-item>
 <div class="google-maps-container">
   <google-map [options]="options" (mapDrag)="onMapDrag()" #googleMap>

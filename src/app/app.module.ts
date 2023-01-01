@@ -15,7 +15,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
-import { SharedModule } from './shared/shared.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './shared/services/http-interceptor/http-interceptor.service';

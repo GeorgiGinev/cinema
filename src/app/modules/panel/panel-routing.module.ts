@@ -24,15 +24,11 @@ const routes: Routes = [
         path: 'cinemas',
         loadChildren: () => import('./cinema/cinema.module').then(m => m.CinemaPageModule)
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+      },
     ]
-  },
-  {
-    path: 'cinema',
-    loadChildren: () => import('./cinema/cinema.module').then( m => m.CinemaPageModule)
-  },
-  {
-    path: 'movie',
-    loadChildren: () => import('./movie/movie.module').then( m => m.MoviePageModule)
   },
 ];
 

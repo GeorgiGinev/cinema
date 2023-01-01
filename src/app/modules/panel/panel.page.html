@@ -54,9 +54,14 @@
           {{pageName}}
         </ion-title>
         <div slot="end" class="header-end-container">
+          <ci-icon-button [shape]="shapeEnum.circle" [size]="sizesEnum.medium" color="primary" [routerLink]="'/panel/profile'">
+            <ci-icon [name]="iconsEnum.user" [size]="sizesEnum.large"></ci-icon>
+          </ci-icon-button>
+        </div>
+        <div slot="end" class="header-end-container">
           <ci-dropdown [navItems]="navItems">
             <ci-icon-button [shape]="shapeEnum.circle" [size]="sizesEnum.medium" color="secondary">
-              <ci-icon [name]="iconsEnum.more" [size]="sizesEnum.large" slot="icon-only"></ci-icon>
+              <ci-icon [name]="iconsEnum.more" [size]="sizesEnum.large"></ci-icon>
             </ci-icon-button>
           </ci-dropdown>
         </div>

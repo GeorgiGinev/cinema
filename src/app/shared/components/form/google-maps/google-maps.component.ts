@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -12,8 +12,17 @@ import { BaseInput } from '../base-input';
   selector: 'ci-google-maps',
   templateUrl: './google-maps.component.html',
   styleUrls: ['./google-maps.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: GoogleMapsComponent
+    }
+  ]
 })
 export class GoogleMapsComponent extends BaseInput implements OnInit {
+  @Input() label: string;
+  
   @ViewChild('googleMap') googleMap: google.maps.Map;
 
   public apiLoaded: Observable<boolean>;
