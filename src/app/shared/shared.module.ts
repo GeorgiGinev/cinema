@@ -23,7 +23,6 @@ import { DropdownComponent } from './components/boxes/dropdown/dropdown.componen
 import { DropdownService } from './components/boxes/dropdown/dropdown.service';
 import { SubtitleComponent } from './components/typography/subtitle/subtitle.component';
 import { AvatarComponent } from './components/boxes/avatar/avatar.component';
-import { PanelPageService } from './services/panel-page/panel-page.service';
 import { AlertService } from './services/alert/alert.service';
 import { CardComponent } from './components/boxes/card/card.component';
 import { MovieService } from './resources/movies/movie.service';
@@ -40,6 +39,7 @@ import { DayjsService } from './services/dayjs/dayjs.service';
 import { DateFormatsPipe } from './pipes/date-formats/date-formats.pipe';
 import { InitDirective } from './directives/init/init.directive';
 import { CinemaLocationService } from './resources/cinema-location/cinema-location.service';
+import { InputComponent } from './components/form/input/input.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { CinemaLocationService } from './resources/cinema-location/cinema-locati
     PaginationComponent,
     TitleComponent,
     DateFormatsPipe,
-    InitDirective
+    InitDirective,
+    InputComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +84,6 @@ import { CinemaLocationService } from './resources/cinema-location/cinema-locati
     CinemaService,
     PageContainerService,
     DropdownService,
-    PanelPageService,
     AlertService,
     BreadcrumbsService,
     MovieSlotService,
@@ -117,6 +117,7 @@ import { CinemaLocationService } from './resources/cinema-location/cinema-locati
     BreadcrumbsComponent,
     PaginationComponent,
     TitleComponent,
+    InputComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

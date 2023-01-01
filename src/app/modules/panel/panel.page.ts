@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { filter, pairwise } from 'rxjs/operators';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { NavigationItem } from 'src/app/shared/interfaces/navigation-item';
 import { PanelPageHeaderInterface } from 'src/app/shared/interfaces/panel-page-header';
@@ -9,7 +10,7 @@ import { User, UserService } from 'src/app/shared/resources/user/user.service';
 import { SessionService } from 'src/app/shared/services/session/session.service';
 import { Shapes } from 'src/app/shared/types/shapes';
 import { Sizes } from 'src/app/shared/types/sizes';
-import { PanelPageService } from '../../shared/services/panel-page/panel-page.service';
+import { PanelPageService } from './panel-page.service';
 
 @UntilDestroy()
 @Component({
@@ -31,31 +32,31 @@ export class PanelPage implements OnInit {
   public navigationItems: NavigationItem[] = [
     {
       label: 'Pages',
-      action: () => {},
+      action: () => { },
       children: [
         {
           label: 'Dashboard',
           icon: this.iconsEnum.dashboard,
           routerLink: '/panel/dashboard',
-          action: () => {}
+          action: () => { }
         },
         {
           label: 'Cinemas',
           icon: this.iconsEnum.dashboard,
           routerLink: '/panel/cinemas',
-          action: () => {}
+          action: () => { }
         },
         {
           label: 'Movies',
           icon: this.iconsEnum.dashboard,
           routerLink: '/panel/movies',
-          action: () => {}
+          action: () => { }
         }
       ]
     },
     {
       label: 'Support',
-      action: () => {},
+      action: () => { },
       children: [
         {
           label: 'Logout',
@@ -67,12 +68,12 @@ export class PanelPage implements OnInit {
       ]
     }
   ];
-  
+
   public navItems: SelectItem[] = [
     {
       label: 'Profile',
       disabled: true,
-      action: () => {},
+      action: () => { },
       value: 'profile'
     },
     {
@@ -94,6 +95,9 @@ export class PanelPage implements OnInit {
     }
   ]
 
+  public currentUrl: string;
+  public previousUrl: string;
+
   constructor(
     private panelPageService: PanelPageService,
     private userService: UserService,
@@ -110,12 +114,24 @@ export class PanelPage implements OnInit {
      */
     this.panelPageService.headerObservable.subscribe((data: PanelPageHeaderInterface) => {
       this.pageName = data.title;
-      if(data.icon) {
+      if (data.icon) {
         this.pageNameIcon = data.icon;
       }
 
+      console.log('update page panel');
       this.changeDetectorRef.detectChanges();
     });
+
+    this.router.events
+      .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
+      .subscribe((events: RoutesRecognized[]) => {
+        this.previousUrl = events[0].urlAfterRedirects;
+        this.currentUrl = events[1].urlAfterRedirects;
+      });
+  }
+
+  public getPreviousUrl() {
+    return this.previousUrl;
   }
 
   /**

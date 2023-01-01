@@ -27,7 +27,11 @@ export class PanelPageService {
 
   constructor() { }
 
-  public updateHeader(title: string, icon: IonIcons) {
-    this.headerObservable.next({title, icon});
+  public updateHeader(title: string, icon: IonIcons | null = null) {
+    if(icon) {
+      this.headerObservable.next({title, icon});
+    } else {
+      this.headerObservable.next({title});
+    }
   }
 }

@@ -7,5 +7,6 @@ export enum IonIcons {
     more = 'ellipsis-vertical',
     user = 'person',
     forward = 'arrow-forward',
-    circle_forward = 'arrow-forward-circle-outline'
+    circle_forward = 'arrow-forward-circle-outline',
+    add = 'add-outline'
 }
