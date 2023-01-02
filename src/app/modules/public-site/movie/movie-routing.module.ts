@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FormComponent } from './form/form.component';
 import { ListComponent } from './list/list.component';
 import { ViewComponent } from './view/view.component';
 
@@ -10,7 +11,11 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: ViewComponent
+    component: ViewComponent,
+  },
+  {
+    path: 'form/:id',
+    component: FormComponent
   }
 ];
 

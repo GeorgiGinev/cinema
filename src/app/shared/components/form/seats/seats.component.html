@@ -1,0 +1,37 @@
+<div class="seats-main-label">
+  <ion-item>
+    <ion-label>
+      Add seats
+      <ng-container *ngIf="isRequired">
+        <ion-text color="danger">
+          *
+        </ion-text>
+      </ng-container>
+    </ion-label>
+  </ion-item>
+</div>
+<div class="form-container" [formGroup]="insideFormGroup">
+  <ci-input [type]="inputTypes.number" label="Type..." formControlName="rowSeats"></ci-input>
+  <div>
+    <ci-button color="secondary" (click)="addRow()">
+      <ci-icon [name]="iconsEnum.add"></ci-icon>
+      Add row
+    </ci-button>
+  </div>
+</div>
+
+<div class="ion-margin-vertical seats-container">
+  <ng-container *ngFor="let row of [].constructor(seatsLength); let i = index">
+    <div class="row-seats-container">
+      {{i+1}}
+      <ng-container *ngFor="let seat of [].constructor(seats[i+1])">
+        <span class="seat"></span>
+      </ng-container>
+      <div class="remove-button-container">
+        <ci-icon-button color="light" (click)="removeRow(i+1)">
+          <ci-icon [name]="iconsEnum.remove" [size]="sizes.medium"></ci-icon>
+        </ci-icon-button>
+      </div>
+    </div>
+  </ng-container>
+</div>

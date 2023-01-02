@@ -50,7 +50,7 @@
                   dateFormatsEnum.date}})
                 </ion-text><br>
                 <ng-container *ngFor="let slot of date.slots">
-                  <ion-chip color="primary" [routerLink]="'/movie/'+movie.id" [queryParams]="{slotId: slot.id}">
+                  <ion-chip color="primary" [routerLink]="'/movie/form/'+movie.id" [queryParams]="{slotId: slot.id}">
                     {{slot.data.date | dateFormats: dateFormatsEnum.time}}
                     <ci-icon [name]="iconsEnum.forward" [size]="sizesEnum.small"></ci-icon>
                   </ion-chip>

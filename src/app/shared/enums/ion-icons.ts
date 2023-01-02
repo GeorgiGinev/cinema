@@ -8,5 +8,6 @@ export enum IonIcons {
     user = 'person',
     forward = 'arrow-forward',
     circle_forward = 'arrow-forward-circle-outline',
-    add = 'add-outline'
+    add = 'add-outline',
+    remove = 'close-outline'
 }

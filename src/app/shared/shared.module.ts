@@ -43,6 +43,7 @@ import { InputComponent } from './components/form/input/input.component';
 import { TextareaComponent } from './components/form/textarea/textarea.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapsComponent } from './components/form/google-maps/google-maps.component';
+import { SeatsComponent } from './components/form/seats/seats.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { GoogleMapsComponent } from './components/form/google-maps/google-maps.c
     InitDirective,
     InputComponent,
     TextareaComponent,
-    GoogleMapsComponent
+    GoogleMapsComponent,
+    SeatsComponent
   ],
   imports: [
     CommonModule,
@@ -126,6 +128,7 @@ import { GoogleMapsComponent } from './components/form/google-maps/google-maps.c
     InputComponent,
     TextareaComponent,
     GoogleMapsComponent,
+    SeatsComponent,
     //Pipes
     DateFormatsPipe,
     //Directives
