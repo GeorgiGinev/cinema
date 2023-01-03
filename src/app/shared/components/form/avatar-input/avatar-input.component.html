@@ -1,3 +1,10 @@
-<input type="file" (change)="onChangeEventListener($event)" />
-<ci-avatar [img]="imagePath" [size]="sizesEnum.large"></ci-avatar>
-<ion-ripple-effect></ion-ripple-effect>
+<div class="avatar-input-container ion-activatable">
+    <input type="file" (change)="onChangeEventListener($event)" />
+    <ci-avatar [img]="imagePath" [size]="sizesEnum.large"></ci-avatar>
+    <ion-ripple-effect></ion-ripple-effect>
+</div>
+<div class="remove-button-container" *ngIf="imagePath">
+    <ci-icon-button [size]="sizesEnum.small" color="danger" (click)="removeImage()">
+        <ci-icon [name]="iconsEnum.remove"></ci-icon>
+    </ci-icon-button>
+</div>

@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { BaseInput } from '../base-input';
@@ -21,10 +21,7 @@ import { BaseInput } from '../base-input';
 export class AvatarInputComponent extends BaseInput implements OnInit {
   public imagePath: string;
   public sizesEnum = Sizes;
-
-  @HostBinding('class.ion-activatable') get activatable() {
-    return true;
-  }
+  public iconsEnum = IonIcons;
 
   constructor(
     protected controlContainer: ControlContainer,
@@ -39,6 +36,19 @@ export class AvatarInputComponent extends BaseInput implements OnInit {
     this.imagePath = this.formControl.value;
   }
 
+  /**
+   * Remove image from form control
+   */
+  public removeImage() {
+    this.imagePath = undefined;
+    this.formControl.patchValue(null);
+  }
+
+  /**
+   * Convert file to base64
+   * @param event 
+   * @returns 
+   */
   public onChangeEventListener(event: any) {
     const files = event.target.files;
     if (files.length === 0)
