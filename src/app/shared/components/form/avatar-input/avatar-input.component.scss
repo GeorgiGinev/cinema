@@ -1,0 +1,24 @@
+:host {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+        
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    ci-avatar{
+        margin: 0;
+    }
+}

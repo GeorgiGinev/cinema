@@ -1,13 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Edit profile</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="close()">
-        <ci-icon [size]="sizes.large" [name]="iconsEnum.remove"></ci-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding">
-  
-</ion-content>
+<ci-modal-container title="Edit profile">
+  <ci-modal-content>
+    <form [formGroup]="formGroup">
+      <div class="avatar-wrapper ion-margin-vertical">
+        <ci-avatar-input formControlName="avatar"></ci-avatar-input>
+      </div>
+    </form>
+  </ci-modal-content>
+  <ci-modal-footer>
+    <ci-button (click)="save()">Save</ci-button>
+  </ci-modal-footer>
+</ci-modal-container>

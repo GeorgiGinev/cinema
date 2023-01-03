@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ci-icon [size]="sizes.large" [name]="iconsEnum.remove"></ci-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="modal-container">
+  <ng-content select="ci-modal-content"></ng-content>
+</ion-content>
+<ion-footer>
+  <ng-content select="ci-modal-footer"></ng-content>
+</ion-footer>

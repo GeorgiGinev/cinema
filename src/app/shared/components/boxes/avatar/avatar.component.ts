@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Sizes } from 'src/app/shared/types/sizes';
 
 @Component({
@@ -8,7 +9,7 @@ import { Sizes } from 'src/app/shared/types/sizes';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarComponent {
-  @Input() img: string;
+  @Input() img: string | SafeResourceUrl;
   @Input() clickable: boolean;
   @Input() size: Sizes = Sizes.default;
 

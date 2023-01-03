@@ -27,7 +27,7 @@
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
         <div class="logged-in-container">
-          <ci-avatar [size]="sizes.default" [clickable]="true" (click)="openProfile()"></ci-avatar>
+          <ci-avatar [size]="sizes.small" [clickable]="true" (click)="openProfile()"></ci-avatar>
           <ci-button [routerLink]="['/panel/dashboard']" [size]="sizes.small" color="dark" [shape]="shapes.round">
             <ion-icon slot="start" [name]="icons.dashboard"></ion-icon>
             Dashboard

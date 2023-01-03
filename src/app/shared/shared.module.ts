@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from './components/boxes/button/button.component';
-import { HeaderComponent } from './components/page-container/header/header.component';
 import { TabsComponent } from './components/navigation/tabs/tabs.component';
 import { MenuComponent } from './components/navigation/menu/menu.component';
 import { NavigationService } from './services/navigation/navigation.service';
@@ -13,10 +12,7 @@ import { AuthService } from './services/auth/auth.service';
 import { ToastService } from './services/toast/toast.service';
 import { UserService } from './resources/user/user.service';
 import { PageTitleComponent } from './components/typography/page-title/page-title.component';
-import { ContentComponent } from './components/page-container/content/content.component';
 import { RouterModule } from '@angular/router';
-import { PageContainerComponent } from './components/page-container/page-container.component';
-import { PageContainerService } from './services/page-container/page-container.service';
 import { IconComponent } from './components/boxes/icon/icon.component';
 import { IconButtonComponent } from './components/boxes/icon-button/icon-button.component';
 import { DropdownComponent } from './components/boxes/dropdown/dropdown.component';
@@ -45,15 +41,17 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapsComponent } from './components/form/google-maps/google-maps.component';
 import { SeatsComponent } from './components/form/seats/seats.component';
 import { ModalService } from './services/modal/modal.service';
+import { ModalContainerComponent } from './components/modal-container/modal-container.component';
+import { AvatarInputComponent } from './components/form/avatar-input/avatar-input.component';
+import { ModalFooterComponent } from './components/modal-container/modal-footer/modal-footer.component';
+import { ModalContentComponent } from './components/modal-container/modal-content/modal-content.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
-    HeaderComponent,
     TabsComponent,
     MenuComponent,
     PageTitleComponent,
-    ContentComponent,
     IconComponent,
     IconButtonComponent,
     DropdownComponent,
@@ -70,7 +68,11 @@ import { ModalService } from './services/modal/modal.service';
     InputComponent,
     TextareaComponent,
     GoogleMapsComponent,
-    SeatsComponent
+    SeatsComponent,
+    ModalContainerComponent,
+    AvatarInputComponent,
+    ModalFooterComponent,
+    ModalContentComponent,
   ],
   imports: [
     CommonModule,
@@ -90,7 +92,6 @@ import { ModalService } from './services/modal/modal.service';
     UserService,
     MovieService,
     CinemaService,
-    PageContainerService,
     DropdownService,
     AlertService,
     BreadcrumbsService,
@@ -109,11 +110,9 @@ import { ModalService } from './services/modal/modal.service';
     NgxPaginationModule,
     //Components
     ButtonComponent,
-    HeaderComponent,
     TabsComponent,
     MenuComponent,
     PageTitleComponent,
-    ContentComponent,
     IconComponent,
     IconButtonComponent,
     DropdownComponent,
@@ -129,6 +128,10 @@ import { ModalService } from './services/modal/modal.service';
     TextareaComponent,
     GoogleMapsComponent,
     SeatsComponent,
+    ModalContainerComponent,
+    AvatarInputComponent,
+    ModalFooterComponent,
+    ModalContentComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

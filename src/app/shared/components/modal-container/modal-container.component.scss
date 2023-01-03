@@ -1,0 +1,7 @@
+:host {
+    height: 100%;
+
+    ::ng-deep .modal-container {
+        height: calc(100% - 103px);
+    }
+}

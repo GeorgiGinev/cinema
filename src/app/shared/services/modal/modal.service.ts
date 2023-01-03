@@ -9,7 +9,6 @@ export class ModalService {
   constructor(private modalController: ModalController) { }
 
   public async openModal(component: any): Promise<any> {
-    console.log('openModal');
     const modal = await this.modalController.create({
       component,
       cssClass: 'primary-modal-container'
@@ -19,11 +18,13 @@ export class ModalService {
 
     modal.present();
 
-    return modal.onDidDismiss();
+    return modal.onDidDismiss().then(() => {
+      this.modals.pop();
+    }, () => {});
   }
 
   public closeModal(): Promise<any> {
-    const modal = this.modals.pop();
+    const modal = this.modals[this.modals.length-1];
 
     return modal.dismiss();
   }

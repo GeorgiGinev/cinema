@@ -20,7 +20,7 @@ import { BaseInput } from '../base-input';
       useExisting: GoogleMapsComponent
     }
   ]
-})
+}) 
 export class GoogleMapsComponent extends BaseInput implements OnInit {
   @Input() label: string;
   @Input() draggable: boolean = true;
