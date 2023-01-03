@@ -1,7 +1,7 @@
 <ion-split-pane contentId="main">
   <ion-menu class="panel-nav-container" contentId="main">
     <div class="avatar-container">
-      <ci-avatar [clickable]="true"></ci-avatar>
+      <ci-avatar [clickable]="true" (click)="openProfile()"></ci-avatar>
       <ion-chip>
         <ion-text color="primary"><i>Hello,</i> {{user?.data.name}}</ion-text>
         <br>
@@ -54,9 +54,7 @@
           {{pageName}}
         </ion-title>
         <div slot="end" class="header-end-container">
-          <ci-icon-button [shape]="shapeEnum.circle" [size]="sizesEnum.medium" color="primary" [routerLink]="'/panel/profile'">
-            <ci-icon [name]="iconsEnum.user" [size]="sizesEnum.large"></ci-icon>
-          </ci-icon-button>
+          <ci-avatar [size]="sizesEnum.default" [clickable]="true" (click)="openProfile()"></ci-avatar>
         </div>
         <div slot="end" class="header-end-container">
           <ci-dropdown [navItems]="navItems">

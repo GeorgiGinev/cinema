@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Sizes } from 'src/app/shared/types/sizes';
 
 @Component({
   selector: 'ci-avatar',
@@ -9,6 +10,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class AvatarComponent {
   @Input() img: string;
   @Input() clickable: boolean;
+  @Input() size: Sizes = Sizes.default;
 
   constructor() { }
 }

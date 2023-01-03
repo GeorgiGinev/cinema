@@ -44,6 +44,7 @@ import { TextareaComponent } from './components/form/textarea/textarea.component
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GoogleMapsComponent } from './components/form/google-maps/google-maps.component';
 import { SeatsComponent } from './components/form/seats/seats.component';
+import { ModalService } from './services/modal/modal.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,6 @@ import { SeatsComponent } from './components/form/seats/seats.component';
     MenuComponent,
     PageTitleComponent,
     ContentComponent,
-    PageContainerComponent,
     IconComponent,
     IconButtonComponent,
     DropdownComponent,
@@ -97,6 +97,7 @@ import { SeatsComponent } from './components/form/seats/seats.component';
     MovieSlotService,
     DayjsService,
     CinemaLocationService,
+    ModalService,
   ],
   exports: [
     //Modules
@@ -113,7 +114,6 @@ import { SeatsComponent } from './components/form/seats/seats.component';
     MenuComponent,
     PageTitleComponent,
     ContentComponent,
-    PageContainerComponent,
     IconComponent,
     IconButtonComponent,
     DropdownComponent,

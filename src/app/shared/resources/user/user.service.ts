@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert/alert.service';
 import { JsonCollection } from '../collection/collection';
 import { Cinema } from '../cinema/cinema.service';
+import { ModalService } from '../../services/modal/modal.service';
+import { ProfileComponent } from 'src/app/modules/auth/profile/profile.component';
 
 interface UserInterface {
   name: string;
@@ -37,8 +39,15 @@ export class UserService {
     private toastService: ToastService,
     private sessionService: SessionService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private modalService: ModalService
   ) { }
+
+  public openForm(): Promise<void> {
+    return this.modalService.openModal(ProfileComponent).then(() => {
+      console.log('user service modal opened');
+    }, () => {});
+  }
 
   /**
    * Create user

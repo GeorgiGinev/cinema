@@ -131,6 +131,15 @@ export class PanelPage implements OnInit {
       });
   }
 
+  /**
+   * Open user profile form
+   */
+  public openProfile() {
+    this.userService.openForm().then(() => {
+      
+    }, () => {})
+  }
+
   public getPreviousUrl() {
     return this.previousUrl;
   }

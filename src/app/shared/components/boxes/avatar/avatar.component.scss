@@ -1,13 +1,35 @@
+$sizes: (
+    "small",
+    27.3px),
+    ("default", 32px),
+    ("medium", 36px),
+    ("large", 42px
+);
+
 :host {
     display: inline-block;
-    
+    margin: 4px 2px;
+
     .avatar-container {
         position: relative;
         border-radius: 50%;
         overflow: hidden;
-        
+
         &.ion-activatable {
             cursor: pointer;
+        }
+    }
+
+    @each $type,
+    $size in $sizes {
+        &[ng-reflect-size="#{$type}"] {
+
+            .avatar-wrapper {
+                ::ng-deep ion-avatar {
+                    height: $size;
+                    width: $size;
+                }
+            }
         }
     }
 }

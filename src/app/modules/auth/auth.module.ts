@@ -6,9 +6,10 @@ import { AuthPage } from './auth.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [SharedModule, AuthPageRoutingModule],
-  declarations: [AuthPage, LoginComponent, RegisterComponent],
+  declarations: [AuthPage, LoginComponent, RegisterComponent, ProfileComponent],
 })
 export class AuthPageModule {}

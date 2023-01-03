@@ -26,14 +26,17 @@
         </ci-button>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
-        <ci-button [routerLink]="['/panel/dashboard']" [size]="sizes.small" color="dark" [shape]="shapes.round">
-          <ion-icon slot="start" [name]="icons.dashboard"></ion-icon>
-          Dashboard
-        </ci-button>
-        <ci-button [promise]="logoutPromise" (click)="logout()" [size]="sizes.small" [shape]="shapes.round">
-          <ion-icon slot="start" [name]="icons.logout"></ion-icon>
-          Sign Out
-        </ci-button>
+        <div class="logged-in-container">
+          <ci-avatar [size]="sizes.default" [clickable]="true" (click)="openProfile()"></ci-avatar>
+          <ci-button [routerLink]="['/panel/dashboard']" [size]="sizes.small" color="dark" [shape]="shapes.round">
+            <ion-icon slot="start" [name]="icons.dashboard"></ion-icon>
+            Dashboard
+          </ci-button>
+          <ci-button [promise]="logoutPromise" (click)="logout()" [size]="sizes.small" [shape]="shapes.round">
+            <ion-icon slot="start" [name]="icons.logout"></ion-icon>
+            Sign Out
+          </ci-button>
+        </div>
       </ng-container>
     </div>
   </ion-toolbar>
