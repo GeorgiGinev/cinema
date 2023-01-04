@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Cinema } from 'src/app/shared/resources/cinema/cinema.service';
+import { FormService } from 'src/app/shared/services/form/form.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import { PanelPageService } from '../../panel-page.service';
 
@@ -19,6 +22,9 @@ export class FormComponent implements OnInit {
   constructor(
     private panelService: PanelPageService,
     private formBuilder: FormBuilder,
+    private formService: FormService,
+    private toastService: ToastService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -31,8 +37,17 @@ export class FormComponent implements OnInit {
     }
   }
 
+  /**
+   * Create the cinema
+   */
   public create() {
-    console.log('create cinema : ', this.formGroup);
+    this.formService.isValid(this.formGroup).then(() => {
+      this.toastService.success({
+        header: 'The cinema was successfully created',
+      });
+
+      this.router.navigate(['/panel/cinemas']);
+    }, () => {})
   }
 
   /**
