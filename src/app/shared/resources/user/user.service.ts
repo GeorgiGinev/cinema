@@ -89,7 +89,6 @@ export class UserService {
   public logout(): Promise<any> {
     const user = this.sessionService.user;
 
-    console.log('logout service');
     return this.alertService.create('Are you sure?', 'Are you sure you want to logout?', [
       {
         text: 'Yes',

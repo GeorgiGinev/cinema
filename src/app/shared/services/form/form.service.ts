@@ -28,7 +28,7 @@ export class FormService {
       const ctrl = formGroup.get(key);
       ctrl.markAsTouched({ onlySelf: true });
 
-      if(!ctrl.valid) {
+      if(!ctrl.valid && ctrl.status !== 'DISABLED') {
         valid = false;
       }
     });

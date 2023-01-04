@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { User } from 'src/app/shared/resources/user/user.service';
+import { AlertService } from 'src/app/shared/services/alert/alert.service';
+import { FormService } from 'src/app/shared/services/form/form.service';
 import { ModalService } from 'src/app/shared/services/modal/modal.service';
 import { SessionService } from 'src/app/shared/services/session/session.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -21,14 +24,17 @@ export class ProfileComponent implements OnInit {
   public formGroup: FormGroup;
 
   public user: User = this.sessionService.user;
-  
+
   constructor(
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private formService: FormService,
+    private toastService: ToastService,
+    private alertService: AlertService
   ) {
     this.createForm();
-   }
+  }
 
   ngOnInit() {
     this.formGroup.get('name').patchValue(this.user.data.name);
@@ -36,14 +42,34 @@ export class ProfileComponent implements OnInit {
   }
 
   public goToChangePassword() {
-    this.modalService.openModal(ChangePasswordComponent).then(() => {}, () => {});
+    this.modalService.openModal(ChangePasswordComponent).then(() => { }, () => { });
   }
 
   /**
    * Update data
    */
   public save() {
-    console.log('save profile : ', this.formGroup.value);
+    this.formService.isValid(this.formGroup).then(() => {
+      this.alertService.create('Are you sure?', 'Are you sure you want to change user`s data?', [
+        {
+          text: 'Yes',
+          role: 'confirm',
+          handler: () => {
+            Promise.resolve().then(() => {
+              this.toastService.success({
+                header: 'Successfully changed user`s data!'
+              });
+
+              this.modalService.closeModal();
+            }, () => { })
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel'
+        }
+      ]);
+    }, () => { })
   }
 
   private createForm() {
