@@ -46,6 +46,7 @@ import { AvatarInputComponent } from './components/form/avatar-input/avatar-inpu
 import { ModalFooterComponent } from './components/modal-container/modal-footer/modal-footer.component';
 import { ModalContentComponent } from './components/modal-container/modal-content/modal-content.component';
 import { CardTitleComponent } from './components/typography/card-title/card-title.component';
+import { FormService } from './services/form/form.service';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { CardTitleComponent } from './components/typography/card-title/card-titl
     DayjsService,
     CinemaLocationService,
     ModalService,
+    FormService,
   ],
   exports: [
     //Modules
