@@ -47,6 +47,8 @@ import { ModalFooterComponent } from './components/modal-container/modal-footer/
 import { ModalContentComponent } from './components/modal-container/modal-content/modal-content.component';
 import { CardTitleComponent } from './components/typography/card-title/card-title.component';
 import { FormService } from './services/form/form.service';
+import { SearchComponent } from './components/form/search/search.component';
+import { NotFoundComponent } from './components/boxes/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { FormService } from './services/form/form.service';
     ModalFooterComponent,
     ModalContentComponent,
     CardTitleComponent,
+    SearchComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -137,6 +141,8 @@ import { FormService } from './services/form/form.service';
     ModalFooterComponent,
     ModalContentComponent,
     CardTitleComponent,
+    SearchComponent,
+    NotFoundComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

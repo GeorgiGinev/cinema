@@ -1,6 +1,27 @@
-<div class="ion-text-right">
-  <ci-button color="secondary" [routerLink]="'/panel/cinemas/form'">
-    <ci-icon [name]="iconsEnum.add"></ci-icon>
-    Add cinema
-  </ci-button>
+<div class="cinema-header-container">
+  <div [formGroup]="formGroup">
+    <ci-search formControlName="keywords"></ci-search>
+  </div>
+  <div>
+    <ci-button color="secondary" [routerLink]="'/panel/cinemas/form'">
+      <ci-icon [name]="iconsEnum.add"></ci-icon>
+      Add cinema
+    </ci-button>
+  </div>
 </div>
+
+<ng-container *ngIf="!loadData">
+  <div class="ion-margin-vertical">
+    <ci-not-found [data]="data"></ci-not-found>
+  </div>
+</ng-container>
+<ng-container *ngIf="loadData">
+  <ion-list>
+    <ion-item class="ion-margin-vertical" *ngFor="let row of [].constructor(10); let i = index">
+      <div class="skeleton-container">
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 14px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 10px"></ion-skeleton-text>
+      </div>
+    </ion-item>
+  </ion-list>
+</ng-container>
