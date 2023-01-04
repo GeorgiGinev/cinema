@@ -45,6 +45,7 @@ import { ModalContainerComponent } from './components/modal-container/modal-cont
 import { AvatarInputComponent } from './components/form/avatar-input/avatar-input.component';
 import { ModalFooterComponent } from './components/modal-container/modal-footer/modal-footer.component';
 import { ModalContentComponent } from './components/modal-container/modal-content/modal-content.component';
+import { CardTitleComponent } from './components/typography/card-title/card-title.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ModalContentComponent } from './components/modal-container/modal-conten
     AvatarInputComponent,
     ModalFooterComponent,
     ModalContentComponent,
+    CardTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -132,6 +134,7 @@ import { ModalContentComponent } from './components/modal-container/modal-conten
     AvatarInputComponent,
     ModalFooterComponent,
     ModalContentComponent,
+    CardTitleComponent,
     //Pipes
     DateFormatsPipe,
     //Directives

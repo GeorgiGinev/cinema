@@ -19,6 +19,7 @@ export class InputComponent extends BaseInput implements OnInit {
   @Input() placeholder: string; 
   @Input() label: string;
   @Input() type: InputTypes = InputTypes.text;
+  @Input() disabled: boolean = false;
   
   constructor(
     protected controlContainer: ControlContainer

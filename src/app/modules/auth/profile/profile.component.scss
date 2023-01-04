@@ -4,4 +4,20 @@
         align-items: center;
         justify-content: center;
     }
+
+    .card-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        user-select: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .primary-container {
+            flex-grow: 1;
+        }
+    }
 }

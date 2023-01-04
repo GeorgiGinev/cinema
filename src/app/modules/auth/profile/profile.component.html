@@ -1,11 +1,36 @@
 <ci-modal-container title="Edit profile">
   <ci-modal-content>
     <form [formGroup]="formGroup">
-      <div class="avatar-wrapper ion-margin-vertical">
+      <div class="avatar-wrapper">
         <ci-avatar-input formControlName="avatar"></ci-avatar-input>
       </div>
-      <ci-input formControlName="name" label="Name"></ci-input>
+      <div class="ion-margin-vertical">
+        <ci-input formControlName="name" label="Name"></ci-input>
+      </div>
+      <div class="ion-margin-vertical">
+        <ci-input formControlName="email" label="Email" [type]="inputTypes.email"></ci-input>
+      </div>
     </form>
+    <ci-card class="ion-no-margin ion-no-padding" (click)="goToChangePassword()">
+      <div class="card-container ion-activatable">
+        <div class="ion-padding primary-container">
+          <ci-card-title>
+            <ion-text color="primary">
+              Change password
+            </ion-text>
+          </ci-card-title><br>
+          <ci-subtitle>
+            <ion-text color="secondary">
+              Click here to change your password.
+            </ion-text>
+          </ci-subtitle>
+        </div>
+        <div class="ion-padding forward-container">
+          <ci-icon [name]="iconsEnum.forward" [size]="sizes.medium"></ci-icon>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ci-card>
   </ci-modal-content>
   <ci-modal-footer>
     <ci-button (click)="save()">Save</ci-button>
