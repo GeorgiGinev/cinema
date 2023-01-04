@@ -109,6 +109,9 @@ export class PanelPage implements OnInit {
   ngOnInit(): void {
     this.user = this.sessionService.user;
 
+    this.currentUrl = this.router.url;
+    this.generatePrevRoutes(this.currentUrl);
+
     /**
      * Create subscriber to listen if panel header information is updated
      */
@@ -123,12 +126,25 @@ export class PanelPage implements OnInit {
       this.changeDetectorRef.detectChanges();
     });
 
-    this.router.events
-      .pipe(filter((event: any) => event instanceof RoutesRecognized), pairwise())
-      .subscribe((events: RoutesRecognized[]) => {
-        this.previousUrl = events[0].urlAfterRedirects;
-        this.currentUrl = events[1].urlAfterRedirects;
-      });
+    this.router.events.subscribe((data: any) => {
+      this.generatePrevRoutes(this.router.url);
+    })
+  }
+
+  /**
+   * Generate prev routes
+   */
+  private generatePrevRoutes(route: string) {
+    const routes = route.split('/');
+    if(routes.length > 3) {
+      this.previousUrl = '';
+      for(let i = 1; i < routes.length - 1; i++) {
+        this.previousUrl += '/' + routes[i];
+      }
+
+    } else {
+      this.previousUrl = null;
+    }
   }
 
   /**
@@ -136,12 +152,8 @@ export class PanelPage implements OnInit {
    */
   public openProfile() {
     this.userService.openForm().then(() => {
-      
-    }, () => {})
-  }
 
-  public getPreviousUrl() {
-    return this.previousUrl;
+    }, () => { })
   }
 
   /**

@@ -40,7 +40,6 @@ export class BaseInput implements ControlValueAccessor {
             return false;
         }
 
-        console.log('this.formControl : ', this.formControl);
         try {
             const validator = this.formControl.validator({} as AbstractControl);
             if (validator && validator.required) {

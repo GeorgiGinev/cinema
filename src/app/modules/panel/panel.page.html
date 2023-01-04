@@ -40,8 +40,8 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ng-container *ngIf="getPreviousUrl()">
-            <ci-button [routerLink]="getPreviousUrl()">
+          <ng-container *ngIf="previousUrl">
+            <ci-button [routerLink]="previousUrl">
               Prev
             </ci-button>
           </ng-container>
