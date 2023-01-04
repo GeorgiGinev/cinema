@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { MoviePage } from './movie.page';
+import { FormComponent } from './form/form.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MoviePage
+    component: ListComponent
+  },
+  {
+    path: 'form',
+    component: FormComponent
   }
 ];
 

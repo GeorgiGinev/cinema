@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FormComponent } from './form/form.component';
+import { ListComponent } from './list/list.component';
 
 import { MoviePageRoutingModule } from './movie-routing.module';
 
-import { MoviePage } from './movie.page';
-
 @NgModule({
   imports: [
-    MoviePageRoutingModule
+    MoviePageRoutingModule,
+    SharedModule
   ],
-  declarations: [MoviePage]
+  declarations: [ListComponent, FormComponent]
 })
 export class MoviePageModule {}
