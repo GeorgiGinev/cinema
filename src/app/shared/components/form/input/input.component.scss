@@ -3,8 +3,24 @@
     padding: 4px;
     display: block;
     border-radius: 4px;
+    position: relative;
 
     ::ng-deep ion-item {
         --background: transparent;
+    }
+
+    &[ng-reflect-type="password"] {
+        ::ng-deep ion-input {
+            --padding-end: 10px;
+        }
+    }
+
+    .trigger-password-container {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        z-index: 1;
+        cursor: pointer;
     }
 }

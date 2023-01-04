@@ -5,5 +5,15 @@
       <ion-text color="danger">*</ion-text>
     </ng-container>
   </ion-label>
-  <ion-input [type]="type" [formControlName]="formControlName" [placeholder]="placeholder"></ion-input>
+  <ion-input [type]="visibleType" [formControlName]="formControlName" [placeholder]="placeholder"></ion-input>
 </ion-item>
+<ng-container *ngIf="type === inputTypes.password">
+  <div class="trigger-password-container" (click)="passwordVisisble()">
+    <ng-container *ngIf="visibleType === inputTypes.password">
+      <ci-icon [size]="sizes.medium" [name]="iconsEnum.show"></ci-icon>
+    </ng-container>
+    <ng-container *ngIf="visibleType === inputTypes.text">
+      <ci-icon [size]="sizes.medium" [name]="iconsEnum.hide"></ci-icon>
+    </ng-container>
+  </div>
+</ng-container>

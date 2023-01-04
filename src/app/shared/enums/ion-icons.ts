@@ -9,5 +9,7 @@ export enum IonIcons {
     forward = 'arrow-forward',
     circle_forward = 'arrow-forward-circle-outline',
     add = 'add-outline',
-    remove = 'close-outline'
+    remove = 'close-outline',
+    show = 'eye-outline',
+    hide = 'eye-off-outline' 
 }
