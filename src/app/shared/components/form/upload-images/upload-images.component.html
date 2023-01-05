@@ -1,0 +1,47 @@
+<div class="images-main-label">
+  <ion-item>
+    <div>
+      <ion-label>{{label}}</ion-label>
+      <ci-subtitle *ngIf="!multiple">
+        <ion-text color="danger">Only one image is allowed!</ion-text>
+      </ci-subtitle>
+    </div>
+  </ion-item>
+</div>
+
+<div class="upload-images-container ion-activatable">
+  <div class="no-images-container">
+    <div class="no-images">
+      <ci-icon [name]="iconsEnum.image"></ci-icon>
+    </div>
+    <div class="no-images-title">
+      Click here to upload image/s!
+    </div>
+  </div>
+
+  <form [formGroup]="uploadImagesForm">
+    <ng-container *ngIf="multiple">
+      <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)" multiple>
+    </ng-container>
+    <ng-container *ngIf="!multiple">
+      <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)">
+    </ng-container>
+  </form>
+  <ion-ripple-effect></ion-ripple-effect>
+</div>
+
+<ng-container *ngIf="imagePaths.length > 0">
+  <div class="uploaded-image-container">
+    <ng-container *ngFor="let image of imagePaths; let i = index">
+      <div class="uploaded-image">
+        <img [src]="image" alt="Uploaded image" />
+
+        <div class="remove-button-container">
+          <ci-icon-button [size]="sizes.small" color="danger" (click)="removeImage(i)">
+            <ci-icon [name]="iconsEnum.remove"></ci-icon>
+          </ci-icon-button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

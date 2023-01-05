@@ -58,6 +58,8 @@ export class FormComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null, [Validators.maxLength(this.descriptionLength)]],
       address: [null, [Validators.required]],
+      backgroundImages: [null],
+      logo: [null],
       cinemaSize: [null, [Validators.required]],
       location: [null, [Validators.required]]
     })

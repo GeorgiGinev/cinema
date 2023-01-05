@@ -1,0 +1,87 @@
+:host {
+    .images-main-label {
+        ::ng-deep ion-item {
+            --padding-start: 0;
+            --border-color: transparent;
+        }
+    }
+
+    .upload-images-container {
+        position: relative;
+        padding: 16px 12px;
+        border: 6px solid rgba(var(--ion-color-primary-rgb), .1);
+        border-radius: 8px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: background-color 200ms ease;
+
+        .no-images-container {
+            text-align: center;
+
+            .no-images {
+                ci-icon {
+                    font-size: 64px;
+                    color: rgba(var(--ion-color-primary-rgb), .2);
+                }
+            }
+
+            .no-images-title {
+                color: rgba(var(--ion-color-primary-rgb), .2);
+                font-weight: bold;
+            }
+        }
+
+        input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(var(--ion-color-primary-rgb), .05);
+        }
+    }
+
+    .uploaded-image-container {
+        margin-top: 12px;
+
+        .uploaded-image {
+            width: 70px;
+            height: 85px;
+            border: 2px solid rgba(var(--ion-color-primary-rgb), .2);
+            border-radius: 4px;
+            padding: 1px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            margin: 0 8px;
+            position: relative;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+            
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .remove-button-container {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+            }
+        }
+    }
+}

@@ -11,5 +11,6 @@ export enum IonIcons {
     add = 'add-outline',
     remove = 'close-outline',
     show = 'eye-outline',
-    hide = 'eye-off-outline' 
+    hide = 'eye-off-outline',
+    image = 'images-outline'
 }

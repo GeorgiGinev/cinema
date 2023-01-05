@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div class="ion-margin-vertical seats-container">
+<div class="ion-margin-vertical seats-container" *ngIf="seatsLength">
   <ng-container *ngFor="let row of [].constructor(seatsLength); let i = index">
     <div class="row-seats-container">
       {{i+1}}

@@ -50,6 +50,7 @@ import { FormService } from './services/form/form.service';
 import { SearchComponent } from './components/form/search/search.component';
 import { NotFoundComponent } from './components/boxes/not-found/not-found.component';
 import { WidgetComponent } from './components/boxes/widget/widget.component';
+import { UploadImagesComponent } from './components/form/upload-images/upload-images.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { WidgetComponent } from './components/boxes/widget/widget.component';
     SearchComponent,
     NotFoundComponent,
     WidgetComponent,
+    UploadImagesComponent,
   ],
   imports: [
     CommonModule,
@@ -146,6 +148,7 @@ import { WidgetComponent } from './components/boxes/widget/widget.component';
     SearchComponent,
     NotFoundComponent,
     WidgetComponent,
+    UploadImagesComponent,
     //Pipes
     DateFormatsPipe,
     //Directives
