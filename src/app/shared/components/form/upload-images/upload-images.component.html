@@ -19,14 +19,12 @@
     </div>
   </div>
 
-  <form [formGroup]="uploadImagesForm">
-    <ng-container *ngIf="multiple">
-      <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)" multiple>
-    </ng-container>
-    <ng-container *ngIf="!multiple">
-      <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)">
-    </ng-container>
-  </form>
+  <ng-container *ngIf="multiple">
+    <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)" multiple>
+  </ng-container>
+  <ng-container *ngIf="!multiple">
+    <input type="file" accept="image/x-png,image/gif,image/jpeg" (change)="changeEvent($event)">
+  </ng-container>
   <ion-ripple-effect></ion-ripple-effect>
 </div>
 

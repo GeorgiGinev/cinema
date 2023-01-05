@@ -47,8 +47,7 @@ export class FormComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
       description: [null, [Validators.maxLength(200)]],
-      image: [null],
-      background_image: [null]
+      logo: [null]
     });
   }
 }

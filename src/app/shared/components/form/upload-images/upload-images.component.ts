@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlContainer, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { BaseInput } from '../base-input';
@@ -35,11 +35,8 @@ export class UploadImagesComponent extends BaseInput implements OnInit {
     protected controlContainer: ControlContainer,
     private toastService: ToastService,
     private changeDetectorRef: ChangeDetectorRef,
-    private formBuilder: FormBuilder
   ) {
     super(controlContainer);
-
-    this.createForm();
   }
 
   ngOnInit() {
@@ -101,11 +98,5 @@ export class UploadImagesComponent extends BaseInput implements OnInit {
     }
 
     event.target.value = '';
-  }
-
-  private createForm() {
-    this.uploadImagesForm = this.formBuilder.group({
-      images: [null]
-    });
   }
 }
