@@ -3,6 +3,8 @@ import { LoginResponse } from '../../interfaces/login-response';
 import { User } from '../../resources/user/user.service';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../toast/toast.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SessionService {
@@ -24,7 +26,9 @@ export class SessionService {
   private _token: string;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private toastService: ToastService,
+    private router: Router
   ) { }
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
@@ -53,9 +57,11 @@ export class SessionService {
     await this.getToken();
 
     if (this.token) {
-      await this.loadUser();
-
-      return Promise.resolve(true);
+      return this.loadUser().then(() => {
+        return Promise.resolve(true);
+      }, () => {
+        return Promise.reject(false);
+      });
     }
 
     return Promise.reject(false);
@@ -67,7 +73,13 @@ export class SessionService {
       this.user.data = user;
 
       console.log('debug session load : ', this.user)
-    }, () => { })
+    }, async () => { 
+      this.toastService.error({
+        header: 'There was a problem connecting to the server. Please try again in a moment.'
+      });
+      await this.clearSession();
+      this.router.navigate(['/']);
+    })
   }
 
   public async getToken(): Promise<string> {
