@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginResponse } from 'src/app/shared/interfaces/login-response';
 import { PageContainerService } from 'src/app/shared/services/page-container/page-container.service';
+import { InputTypes } from 'src/app/shared/types/inputs';
 import {UserService} from '../../../shared/resources/user/user.service';
 
 @Component({
@@ -13,6 +14,7 @@ import {UserService} from '../../../shared/resources/user/user.service';
 export class LoginComponent implements OnInit {
   public formGroup: FormGroup;
   public promise: Promise<any>;
+  public inputTypes = InputTypes;
 
   constructor(
     private formBuilder: FormBuilder,

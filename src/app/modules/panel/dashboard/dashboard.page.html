@@ -1,8 +1,28 @@
 <div class="dashboard-container">
     <ci-widget>
-        <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"></canvas>
+        <div class="widget-content">
+            <div class="ion-text-center">
+                <ci-card-title>
+                    Bookings in the last 7 days
+                </ci-card-title>
+            </div>
+            <div class="canva-container">
+                <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
+                </canvas>
+            </div>
+        </div>
     </ci-widget>
     <ci-widget>
-        asdasd
+        <div class="widget-content">
+            <div class="ion-text-center">
+                <ci-card-title>
+                    Booked movies in the last 7 days
+                </ci-card-title>
+            </div>
+            <div class="canva-container">
+                <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
+                </canvas>
+            </div>
+        </div>
     </ci-widget>
 </div>

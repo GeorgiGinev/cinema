@@ -3,14 +3,17 @@
         <ion-col size="12" size-md="4" offset-md="4">
             <form [formGroup]="formGroup">
                 <ion-list>
-                    <ion-item>
+                    <ci-input label="Enter email" formControlName="email" [type]="inputTypes.email"></ci-input>
+                    <!-- <ion-item>
                         <ion-label position="stacked">Enter email</ion-label>
                         <ion-input placeholder="Enter email" type="email" formControlName="email"></ion-input>
-                    </ion-item>
-                    <ion-item>
+                    </ion-item> -->
+                    <ci-input label="Enter password" formControlName="password" [type]="inputTypes.password"></ci-input>
+
+                    <!-- <ion-item>
                         <ion-label position="stacked">Enter password</ion-label>
                         <ion-input placeholder="Enter password" type="password" formControlName="password"></ion-input>
-                    </ion-item>
+                    </ion-item> -->
                 </ion-list>
 
                 <div class="ion-text-center ion-margin-top">

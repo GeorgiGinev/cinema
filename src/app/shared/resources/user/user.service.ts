@@ -83,7 +83,11 @@ export class UserService {
         this.sessionService.createSession(data, user);
 
         return data;
-      }, () => { });
+      }, () => {
+        this.toastService.error({
+          header: 'There was a problem connecting to the server. Please try again in a moment.'
+        })
+       });
   }
 
   public logout(): Promise<any> {
