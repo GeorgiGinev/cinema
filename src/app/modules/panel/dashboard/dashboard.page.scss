@@ -1,0 +1,23 @@
+:host {
+    display: block;
+
+    .dashboard-container {
+        display: grid;
+        column-gap: 12px;
+        row-gap: 12px;
+        justify-content: center;
+        grid-template-columns: 280px;
+
+        @media (min-width: 885px) {
+            grid-template-columns: 280px 280px;
+        }
+
+        @media (min-width: 1176px) {
+            grid-template-columns: 280px 280px 280px;
+        }
+
+        @media (min-width: 1468px) {
+            grid-template-columns: 280px 280px 280px 280px;
+        }
+    }
+}

@@ -49,6 +49,7 @@ import { CardTitleComponent } from './components/typography/card-title/card-titl
 import { FormService } from './services/form/form.service';
 import { SearchComponent } from './components/form/search/search.component';
 import { NotFoundComponent } from './components/boxes/not-found/not-found.component';
+import { WidgetComponent } from './components/boxes/widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { NotFoundComponent } from './components/boxes/not-found/not-found.compon
     ModalContentComponent,
     CardTitleComponent,
     SearchComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    WidgetComponent,
   ],
   imports: [
     CommonModule,
@@ -143,6 +145,7 @@ import { NotFoundComponent } from './components/boxes/not-found/not-found.compon
     CardTitleComponent,
     SearchComponent,
     NotFoundComponent,
+    WidgetComponent,
     //Pipes
     DateFormatsPipe,
     //Directives
