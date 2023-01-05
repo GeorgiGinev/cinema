@@ -1,9 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { Movie } from 'src/app/shared/resources/movies/movie.service';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { JsonResource } from 'src/app/shared/resources/resource/resource';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -16,8 +20,15 @@ export class ListComponent implements OnInit {
     items_per_page: 2,
     current_page: 1
   });
+  public formGroup: FormGroup;
+  public loadData: boolean = false;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    this.createForm();
+  }
 
   ngOnInit() {
     const movie = new Movie();
@@ -76,4 +87,25 @@ export class ListComponent implements OnInit {
     this.movies.push(cloneDeep(movie));
   }
 
+  private createForm() {
+    this.formGroup = this.formBuilder.group({
+      keywords: [null]
+    });
+
+    this.createControlChangeListener();
+  }
+
+  /**
+ * Add searchbar control change listener
+ */
+  private createControlChangeListener() {
+    this.formGroup.get('keywords').valueChanges.pipe(debounceTime(500), untilDestroyed(this)).subscribe(() => {
+      this.loadData = true;
+      this.changeDetectorRef.markForCheck();
+      setTimeout(() => {
+        this.loadData = false;
+        this.changeDetectorRef.markForCheck();
+      }, 2000)
+    });
+  }
 }
