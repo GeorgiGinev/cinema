@@ -12,7 +12,8 @@ interface CinemaInterface {
   location?: {
     lat: number,
     long: number
-  }
+  },
+  capacity: any
 }
 
 
@@ -26,6 +27,7 @@ export class Cinema extends JsonResource {
       lat: 0,
       long: 0
     },
+    capacity: {}
   };
 
   public relationships = {

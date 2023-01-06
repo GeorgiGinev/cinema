@@ -5,6 +5,12 @@
     border-radius: 4px;
     position: relative;
 
+    ::ng-deep ion-list {
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: transparent;
+    }
+
     ::ng-deep ion-item {
         --background: transparent;
     }

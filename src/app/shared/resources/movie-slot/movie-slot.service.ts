@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Cinema } from '../cinema/cinema.service';
+import { Movie } from '../movies/movie.service';
 import { JsonResource } from '../resource/resource';
 
 interface MovieSlotInterface {
-  movieId: string,
   date: string
 }
 
 export class MovieSlot extends JsonResource {
   public data: MovieSlotInterface = {
-    movieId: '',
     date: ''
   };
 
-  public relationships = {};
+  public relationships = {
+    movie: new Movie(),
+    cinema: new Cinema()
+  };
 }
 
 @Injectable()

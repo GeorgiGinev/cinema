@@ -1,26 +1,30 @@
 <ion-grid>
     <ion-row>
-        <ion-col size="12" size-md="4" offset-md="4">
+        <ion-col size="12" sizeMd="4" offsetMd="4">
             <form [formGroup]="formGroup">
                 <ion-list>
-                    <ci-input label="Enter email" formControlName="email" [type]="inputTypes.email"></ci-input>
-                    <!-- <ion-item>
-                        <ion-label position="stacked">Enter email</ion-label>
-                        <ion-input placeholder="Enter email" type="email" formControlName="email"></ion-input>
-                    </ion-item> -->
-                    <ci-input label="Enter password" formControlName="password" [type]="inputTypes.password"></ci-input>
-
-                    <!-- <ion-item>
-                        <ion-label position="stacked">Enter password</ion-label>
-                        <ion-input placeholder="Enter password" type="password" formControlName="password"></ion-input>
-                    </ion-item> -->
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="12">
+                                <ci-input label="Enter email" formControlName="email" [type]="inputTypes.email"></ci-input>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="12">
+                                <ci-input label="Enter password" formControlName="password" [type]="inputTypes.password"></ci-input>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="12">
+                                <div class="ion-text-center">
+                                    <ci-button color="primary" (click)="signIn()" [promise]="promise">
+                                        Login
+                                    </ci-button>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
                 </ion-list>
-
-                <div class="ion-text-center ion-margin-top">
-                    <ci-button color="primary" (click)="signIn()" [promise]="promise">
-                        Login
-                    </ci-button>
-                </div>
             </form>
         </ion-col>
     </ion-row>

@@ -3,10 +3,12 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4" offset="2">
-          <ci-input label="Name" formControlName="name"></ci-input>
-          <div class="ion-margin-vertical">
+          <ion-list>
+            <ci-input label="Name" formControlName="name"></ci-input>
+          </ion-list>
+          <ion-list>
             <ci-input label="Address" formControlName="address"></ci-input>
-          </div>
+          </ion-list>
         </ion-col>
         <ion-col size="4">
           <ci-textarea [maxLength]="descriptionLength" [rows]="5" label="Description" formControlName="description">

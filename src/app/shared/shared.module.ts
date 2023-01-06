@@ -51,6 +51,7 @@ import { SearchComponent } from './components/form/search/search.component';
 import { NotFoundComponent } from './components/boxes/not-found/not-found.component';
 import { WidgetComponent } from './components/boxes/widget/widget.component';
 import { UploadImagesComponent } from './components/form/upload-images/upload-images.component';
+import { BookingService } from './resources/bookings/booking.service';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,7 @@ import { UploadImagesComponent } from './components/form/upload-images/upload-im
     RouterModule,
     ReactiveFormsModule,
     GoogleMapsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     NavigationService,
@@ -111,6 +112,7 @@ import { UploadImagesComponent } from './components/form/upload-images/upload-im
     CinemaLocationService,
     ModalService,
     FormService,
+    BookingService
   ],
   exports: [
     //Modules

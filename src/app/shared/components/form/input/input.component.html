@@ -1,12 +1,14 @@
-<ion-item [formGroup]="formGroup">
-  <ion-label position="floating">
-    {{label}}
-    <ng-container *ngIf="isRequired">
-      <ion-text color="danger">*</ion-text>
-    </ng-container>
-  </ion-label>
-  <ion-input [type]="visibleType" [formControlName]="formControlName" [placeholder]="placeholder"></ion-input>
-</ion-item>
+<ion-list>
+  <ion-item [formGroup]="formGroup">
+    <ion-label position="floating">
+      {{label}}
+      <ng-container *ngIf="isRequired">
+        <ion-text color="danger">*</ion-text>
+      </ng-container>
+    </ion-label>
+    <ion-input [type]="visibleType" [formControlName]="formControlName" [placeholder]="placeholder"></ion-input>
+  </ion-item>
+</ion-list>
 <ng-container *ngIf="type === inputTypes.password">
   <div class="trigger-password-container" (click)="passwordVisisble()">
     <ng-container *ngIf="visibleType === inputTypes.password">
