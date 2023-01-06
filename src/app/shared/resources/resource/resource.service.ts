@@ -62,10 +62,11 @@ export class JsonResourceService<JsonResource> {
   ) { }
 
   /**
-   * Get with filters
-   * @param filters 
+   * Get all resources
+   * @param filters filters
+   * @returns 
    */
-  public get(filters: {} | null = null): Observable<JsonCollection<JsonResource>> {
+  public all(filters: {} | null = null): Observable<JsonCollection<JsonResource>> {
     let filt = '';
     if(filters) {
       filt = '?';
@@ -79,5 +80,18 @@ export class JsonResourceService<JsonResource> {
     }
 
     return this.httpClient.get('/' + this.resource + filt) as Observable<JsonCollection<JsonResource>>;
+  }
+
+  /**
+   * Get with filters
+   * @param filters 
+   */
+  public get(id: string | null = null): Observable<JsonResource> {
+    let filt = '';
+    if(id) {
+      filt = '?id='+id;
+    }
+
+    return this.httpClient.get('/' + this.resource + filt) as Observable<JsonResource>;
   }
 }
