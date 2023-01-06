@@ -3,10 +3,10 @@
     <div class="avatar-container">
       <ci-avatar [clickable]="true" (click)="openProfile()"></ci-avatar>
       <ion-chip>
-        <ion-text color="primary"><i>Hello,</i> {{user?.data.name}}</ion-text>
+        <ion-text color="primary"><i>Hello,</i> {{user?.attributes.name}}</ion-text>
         <br>
         <ci-subtitle>
-          <ion-text color="secondary">{{user?.data.email}}</ion-text>
+          <ion-text color="secondary">{{user?.attributes.email}}</ion-text>
         </ci-subtitle>
       </ion-chip>
     </div>

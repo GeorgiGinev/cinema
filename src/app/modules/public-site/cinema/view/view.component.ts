@@ -143,7 +143,7 @@ export class ViewComponent implements OnInit {
 
       const movieDatesIndex = this.dates.length - 1;
       movie.relationships.slots.data.forEach((slot: MovieSlot) => {
-        const slotDate: string = this.dayJsService.dayJs(slot.data.date).format(this.dateFormatsEnum.date_back);
+        const slotDate: string = this.dayJsService.dayJs(slot.attributes.date).format(this.dateFormatsEnum.date_back);
         /**
          * Check if date exists
          */

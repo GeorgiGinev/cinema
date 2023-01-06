@@ -1,17 +1,17 @@
 <div class="outside-swiper-container">
   <swiper [slidesPerView]="1" [config]="swiperConfig">
-    <ng-container *ngFor="let slider of cinema.data.images">
+    <ng-container *ngFor="let slider of cinema.attributes.images">
       <ng-template swiperSlide>
         <div class="slide-container" [ngStyle]="{'background-image': 'url('+slider+')'}"></div>
       </ng-template>
     </ng-container>
   </swiper>
   <div class="swiper-cinema-logo-container">
-    <ng-container *ngIf="cinema.data.logo">
-      <ci-avatar [img]="cinema.data.logo"></ci-avatar>
+    <ng-container *ngIf="cinema.attributes.logo">
+      <ci-avatar [img]="cinema.attributes.logo"></ci-avatar>
     </ng-container>
     <div class="cinema-title">
-      {{cinema.data.name}}
+      {{cinema.attributes.name}}
     </div>
   </div>
 </div>
@@ -24,21 +24,21 @@
       <ion-grid>
         <ion-row>
           <ion-col size="3">
-            <img [src]="movie.data.image" alt="Movie" />
+            <img [src]="movie.attributes.image" alt="Movie" />
           </ion-col>
           <ion-col size="9">
             <div [routerLink]="'/movie/'+movie.id" class="movie-title-route">
               <ci-title>
                 <ion-text color="primary">
-                  {{movie.data.name}}
+                  {{movie.attributes.name}}
                 </ion-text>
               </ci-title>
             </div>
-            <ng-container *ngIf="movie.data.description">
+            <ng-container *ngIf="movie.attributes.description">
               <div>
                 <ci-subtitle>
                   <ion-text color="secondary">
-                    {{movie.data.description}}
+                    {{movie.attributes.description}}
                   </ion-text>
                 </ci-subtitle>
               </div>
@@ -51,7 +51,7 @@
                 </ion-text><br>
                 <ng-container *ngFor="let slot of date.slots">
                   <ion-chip color="primary" [routerLink]="'/movie/form/'+movie.id" [queryParams]="{slotId: slot.id}">
-                    {{slot.data.date | dateFormats: dateFormatsEnum.time}}
+                    {{slot.attributes.date | dateFormats: dateFormatsEnum.time}}
                     <ci-icon [name]="iconsEnum.forward" [size]="sizesEnum.small"></ci-icon>
                   </ion-chip>
                 </ng-container>

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime } from 'rxjs/operators';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
+import { Cinema, CinemaService } from 'src/app/shared/resources/cinema/cinema.service';
+import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { PanelPageService } from '../../panel-page.service';
 
 @UntilDestroy()
@@ -21,13 +23,21 @@ export class ListComponent implements OnInit {
   constructor(
     private panelPageService: PanelPageService,
     private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private cinemaService: CinemaService
   ) { 
     this.createForm();
   }
 
   ngOnInit() {
-    this.panelPageService.updateHeader('Your cinemas')
+    this.panelPageService.updateHeader('Your cinemas');
+    this.getCinemasCollection();
+  }
+
+  private getCinemasCollection () {
+    this.cinemaService.get().subscribe((data: JsonCollection<Cinema>) => {
+      console.log('cinema');
+    });
   }
 
   /**

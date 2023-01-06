@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Cinema } from '../cinema/cinema.service';
 import { Movie } from '../movies/movie.service';
-import { JsonResource } from '../resource/resource';
+import { JsonResource } from '../resource/resource.service';
 
 interface MovieSlotInterface {
   date: string
 }
 
 export class MovieSlot extends JsonResource {
-  public data: MovieSlotInterface = {
+  public attributes: MovieSlotInterface = {
     date: ''
   };
 

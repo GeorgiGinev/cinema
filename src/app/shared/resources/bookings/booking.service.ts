@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cinema } from '../cinema/cinema.service';
 import { MovieSlot } from '../movie-slot/movie-slot.service';
 import { Movie } from '../movies/movie.service';
-import { JsonResource } from '../resource/resource';
+import { JsonResource } from '../resource/resource.service';
 import { User } from '../user/user.service';
 
 interface BookingInterface {
@@ -11,7 +11,7 @@ interface BookingInterface {
 
 
 export class Booking extends JsonResource {
-  public data: BookingInterface = {
+  public attributes: BookingInterface = {
     booked_at: '',
   };
 

@@ -13,7 +13,7 @@ interface MovieInterface {
 
 
 export class Movie extends JsonResource {
-  public attributes: MovieInterface = {
+  public data: MovieInterface = {
     name: '',
     description: '',
     release_date: '',

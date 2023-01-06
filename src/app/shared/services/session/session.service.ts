@@ -70,7 +70,7 @@ export class SessionService {
   public loadUser(): Promise<any> {
     return this.httpClient.get('/user').toPromise().then((user: any) => {
       this.user = new User();
-      this.user.data = user;
+      this.user.attributes = user;
 
       console.log('debug session load : ', this.user)
     }, async () => { 

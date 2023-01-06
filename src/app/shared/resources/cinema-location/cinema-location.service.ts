@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JsonResource } from '../resource/resource';
+import { JsonResource } from '../resource/resource.service';
 
 interface CinemaLocationInterface {
   address: string,
@@ -8,7 +8,7 @@ interface CinemaLocationInterface {
 }
 
 export class CinemaLocation extends JsonResource {
-  public data: CinemaLocationInterface = {
+  public attributes: CinemaLocationInterface = {
     address: '',
     latitude: 0,
     longitude: 0

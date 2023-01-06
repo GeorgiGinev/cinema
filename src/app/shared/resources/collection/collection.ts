@@ -1,4 +1,4 @@
-import { JsonResource } from "../resource/resource";
+import { JsonResource } from "../resource/resource.service";
 
 export interface JsonCollectionPaginationInterface {
   total_items: number,

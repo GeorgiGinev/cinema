@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { Movie } from 'src/app/shared/resources/movies/movie.service';
 import * as cloneDeep from 'lodash/cloneDeep';
-import { JsonResource } from 'src/app/shared/resources/resource/resource';
+import { JsonResource } from 'src/app/shared/resources/resource/resource.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
