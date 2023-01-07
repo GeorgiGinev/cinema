@@ -10,7 +10,8 @@ interface CinemaInterface {
   description: string;
   images: string[];
   logo: string;
-  capacity: any
+  capacity: any,
+  deleted_at: string
 }
 
 
@@ -20,7 +21,8 @@ export class Cinema extends JsonResource {
     description: '',
     logo: '',
     images: [],
-    capacity: {}
+    capacity: {},
+    deleted_at: ''
   };
 
   public relationships = {

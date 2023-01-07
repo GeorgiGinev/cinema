@@ -11,6 +11,7 @@ interface MovieInterface {
   release_date?: string;
   image: string;
   background_image?: string,
+  deleted_at: string
 }
 
 
@@ -21,6 +22,7 @@ export class Movie extends JsonResource {
     release_date: '',
     image: '',
     background_image: '',
+    deleted_at: ''
   };
 
   public relationships = {

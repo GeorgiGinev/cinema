@@ -6,13 +6,15 @@ import { JsonResource } from '../resource/resource.service';
 import { User } from '../user/user.service';
 
 interface BookingInterface {
-  booked_at: string
+  booked_at: string,
+  deleted_at: string,
 }
 
 
 export class Booking extends JsonResource {
   public attributes: BookingInterface = {
     booked_at: '',
+    deleted_at: ''
   };
 
   public relationships = {
