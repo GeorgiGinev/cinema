@@ -46,7 +46,7 @@ export class UserService extends JsonResourceService<User>{
   ) { 
     super(httpClient);
 
-    this.createPath = '/register';
+    this.createPath = '/register/';
   }
 
   public openForm(): Promise<void> {

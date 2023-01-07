@@ -27,13 +27,11 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     if(!this.sessionService.token) {
       headers = req.headers.set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .set('Access-Control-Allow-Origin', '*');
+      .set('Accept', 'application/json');
     } else {
       headers = req.headers.set('Content-Type', 'application/json')
       .set('Authorization', this.sessionService.token)
-      .set('Accept', 'application/json')
-      .set('Access-Control-Allow-Origin', '*') ;
+      .set('Accept', 'application/json');
     }
     
     req = req.clone({
