@@ -1,16 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Subscriber } from "rxjs";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { JsonCollection } from "../collection/collection";
 
-interface JsonResourceInterface {
-  attributes: any,
-  relationships: any,
-  id: string
-}
-
-export class JsonResource implements JsonResourceInterface {
+export class JsonResource {
   public attributes: any = {};
   public relationships: any = {};
   public id: string = '';
@@ -24,7 +18,7 @@ export class JsonResource implements JsonResourceInterface {
     Object.keys(passedData).forEach((passedKey: string) => {
       const foundAttribute = Boolean(Object.keys(this.attributes).find((key: string) => key === passedKey));
 
-      if(!foundAttribute) {
+      if (!foundAttribute) {
         return;
       }
 
@@ -40,26 +34,56 @@ export class JsonResource implements JsonResourceInterface {
   public addRelationship(resource: JsonResource, relationship: string) {
     const relation: any = Object.keys(this.relationships).find((key: string) => key === relationship);
 
-    if(relation && (this.relationships[relation] instanceof JsonCollection)) {
+    if (relation && (this.relationships[relation] instanceof JsonCollection)) {
       this.relationships[relation].data.push(resource);
       return;
     }
 
-    if(relation && (this.relationships[relation] instanceof JsonResource)) {
+    if (relation && (this.relationships[relation] instanceof JsonResource)) {
       this.relationships[relation] = resource;
       return;
     }
   }
 }
 
-@Injectable()
-export class JsonResourceService<JsonResource> {
+@Injectable({
+  providedIn: 'root'
+})
+export abstract class JsonResourceService<JsonResource> {
   public env = environment;
-  public resource: string = 'resource';
+  public abstract resource: string;
+
+  public createPath: string;
+  public updatePath: string;
+  public getPath: string;
 
   constructor(
     protected httpClient: HttpClient
   ) { }
+
+  /**
+   * Save a resource
+   * @param resource 
+   * @returns 
+   */
+  public save(resource: JsonResource): Promise<any> {
+    if (!this.createPath) {
+      if (resource['id']) {
+        this.createPath = '/' + this.resource + '/update/' + resource['id'];
+      } else {
+        this.createPath = '/' + this.resource + '/create';
+      }
+    }
+
+    Object.keys(resource['relationships']).forEach((key: string) => {
+      if(!resource['relationships'][key] || resource['relationships'][key]?.data?.length === 0) {
+        delete resource['relationships'][key];
+      }
+    });
+
+    return this.httpClient.post(this.createPath, JSON.stringify(resource)).toPromise();
+  }
+
 
   /**
    * Get all resources
@@ -68,12 +92,12 @@ export class JsonResourceService<JsonResource> {
    */
   public all(filters: {} | null = null): Observable<JsonCollection<JsonResource>> {
     let filt = '';
-    if(filters) {
+    if (filters) {
       filt = '?';
 
       Object.keys(filters).forEach((key: string, index: number) => {
-        filt += key + '=' +filters[key];
-        if(index < Object.keys(filters).length - 1) {
+        filt += key + '=' + filters[key];
+        if (index < Object.keys(filters).length - 1) {
           filt += ';'
         }
       });
@@ -88,8 +112,8 @@ export class JsonResourceService<JsonResource> {
    */
   public get(id: string | null = null): Observable<JsonResource> {
     let filt = '';
-    if(id) {
-      filt = '?id='+id;
+    if (id) {
+      filt = '?id=' + id;
     }
 
     return this.httpClient.get('/' + this.resource + filt) as Observable<JsonResource>;

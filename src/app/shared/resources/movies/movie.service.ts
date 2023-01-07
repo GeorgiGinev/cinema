@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Cinema } from '../cinema/cinema.service';
 import { JsonCollection } from '../collection/collection';
 import { MovieSlot } from '../movie-slot/movie-slot.service';
-import { JsonResource } from '../resource/resource.service';
+import { JsonResource, JsonResourceService } from '../resource/resource.service';
 
 interface MovieInterface {
   name: string;
@@ -27,6 +29,12 @@ export class Movie extends JsonResource {
 }
 
 @Injectable()
-export class MovieService {
-  constructor() { }
+export class MovieService extends JsonResourceService<Movie> {
+  public resource: string = 'movies';
+
+  constructor(
+    protected httpClient: HttpClient
+  ) { 
+    super(httpClient);
+  }
 }

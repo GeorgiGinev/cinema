@@ -1,0 +1,18 @@
+<ion-list>
+  <ion-item>
+    <ion-label>
+      {{label}}
+      <ng-container *ngIf="isRequired">
+        <ion-text color="danger">
+          *
+        </ion-text>
+      </ng-container>
+    </ion-label>
+    <ion-select [placeholder]="placeholder" [compareWith]="compareFn" [(ngModel)]="selectedValue" (ionChange)="onChangeEvent($event)" [multiple]="multiple">
+      <ng-container *ngFor="let option of options; let i = index">
+        <!-- <option [ngValue]="getOptionValue(option, i)">{{getOptionLabel(option, i)}}</option> -->
+        <ion-select-option [value]="getOptionValue(option, i)">{{getOptionLabel(option, i)}}</ion-select-option>
+      </ng-container>
+    </ion-select>
+  </ion-item>
+</ion-list>

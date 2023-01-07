@@ -1,0 +1,11 @@
+<div [formGroup]="formGroup">
+    <ci-select 
+    [label]="label"
+    [multiple]="multiple" 
+    [placeholder]="placeholder" 
+    [formControlName]="formControlName" 
+    [options]="collection.data"
+    [optionLabel]="getOptionLabel"
+    [optionValue]="getOptionValue"
+    ></ci-select>
+</div>

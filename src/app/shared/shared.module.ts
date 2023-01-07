@@ -52,6 +52,9 @@ import { NotFoundComponent } from './components/boxes/not-found/not-found.compon
 import { WidgetComponent } from './components/boxes/widget/widget.component';
 import { UploadImagesComponent } from './components/form/upload-images/upload-images.component';
 import { BookingService } from './resources/bookings/booking.service';
+import { SelectComponent } from './components/form/select/select.component';
+import { SelectCinemaComponent } from './components/form/select/select-cinema/select-cinema.component';
+import { PricePipe } from './pipes/price/price.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +88,9 @@ import { BookingService } from './resources/bookings/booking.service';
     NotFoundComponent,
     WidgetComponent,
     UploadImagesComponent,
+    SelectComponent,
+    SelectCinemaComponent,
+    PricePipe,
   ],
   imports: [
     CommonModule,
@@ -151,8 +157,11 @@ import { BookingService } from './resources/bookings/booking.service';
     NotFoundComponent,
     WidgetComponent,
     UploadImagesComponent,
+    SelectComponent,
+    SelectCinemaComponent,
     //Pipes
     DateFormatsPipe,
+    PricePipe,
     //Directives
     InitDirective
   ],

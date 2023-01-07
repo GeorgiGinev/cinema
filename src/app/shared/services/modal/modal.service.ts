@@ -8,24 +8,35 @@ export class ModalService {
   private modals: HTMLIonModalElement[] = [];
   constructor(private modalController: ModalController) { }
 
-  public async openModal(component: any): Promise<any> {
+  public async openModal(component: any, data: {} | null = null): Promise<any> {
     const modal = await this.modalController.create({
       component,
-      cssClass: 'primary-modal-container'
+      componentProps: data,
+      cssClass: 'primary-modal-container',
     });
 
     this.modals.push(modal);
 
     modal.present();
 
-    return modal.onDidDismiss().then(() => {
+    return modal.onDidDismiss().then((data: any) => {
       this.modals.pop();
+
+      if(data.role === 'backdrop' || data.role === 'close') {
+        return Promise.reject(); 
+      }
+
+      return data.data;
     }, () => {});
   }
 
-  public closeModal(): Promise<any> {
+  public closeModal(data: any | null = null, closeOnly: boolean = false): Promise<any> {
     const modal = this.modals[this.modals.length-1];
 
-    return modal.dismiss();
+    if(closeOnly) {
+      return modal.dismiss(data, 'close');
+    } else {
+      return modal.dismiss(data);
+    }
   }
 }

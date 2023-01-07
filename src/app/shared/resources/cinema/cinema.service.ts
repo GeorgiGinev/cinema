@@ -10,10 +10,6 @@ interface CinemaInterface {
   description: string;
   images: string[];
   logo: string;
-  location?: {
-    lat: number,
-    long: number
-  },
   capacity: any
 }
 
@@ -24,10 +20,6 @@ export class Cinema extends JsonResource {
     description: '',
     logo: '',
     images: [],
-    location: {
-      lat: 0,
-      long: 0
-    },
     capacity: {}
   };
 

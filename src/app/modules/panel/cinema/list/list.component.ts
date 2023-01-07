@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
   }
 
   private getCinemasCollection () {
-    this.cinemaService.all().subscribe((data: JsonCollection<Cinema>) => {
+    this.cinemaService.all().pipe(untilDestroyed(this)).subscribe((data: JsonCollection<Cinema>) => {
       console.log('cinema');
     });
   }

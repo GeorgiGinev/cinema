@@ -72,7 +72,6 @@ export class SessionService {
       this.user = new User();
       this.user.attributes = user;
 
-      console.log('debug session load : ', this.user)
     }, async () => { 
       this.toastService.error({
         header: 'There was a problem connecting to the server. Please try again in a moment.'

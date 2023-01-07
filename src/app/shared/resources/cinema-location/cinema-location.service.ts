@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JsonResource } from '../resource/resource.service';
+import { JsonResource, JsonResourceService } from '../resource/resource.service';
 
 interface CinemaLocationInterface {
   address: string,
@@ -18,6 +19,12 @@ export class CinemaLocation extends JsonResource {
 }
 
 @Injectable()
-export class CinemaLocationService {
-  constructor() { }
+export class CinemaLocationService extends JsonResourceService<CinemaLocation>{
+  public resource: string = 'cinema-location';
+
+  constructor(
+    protected httpClient: HttpClient
+  ) { 
+    super(httpClient);
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JsonResource } from '../resource/resource.service';
+import { JsonResource, JsonResourceService } from '../resource/resource.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from '../../services/toast/toast.service';
 import { SessionService } from '../../services/session/session.service';
@@ -33,19 +33,25 @@ export class User extends JsonResource {
 }
 
 @Injectable()
-export class UserService {
+export class UserService extends JsonResourceService<User>{
+  public resource: string = 'users';
+
   constructor(
-    private httpClient: HttpClient,
+    protected httpClient: HttpClient,
     private toastService: ToastService,
     private sessionService: SessionService,
     private router: Router,
     private alertService: AlertService,
     private modalService: ModalService
-  ) { }
+  ) { 
+    super(httpClient);
+
+    this.createPath = '/register';
+  }
 
   public openForm(): Promise<void> {
     return this.modalService.openModal(ProfileComponent).then(() => {
-      console.log('user service modal opened');
+      
     }, () => {});
   }
 
@@ -56,12 +62,11 @@ export class UserService {
     const user = new User();
     user.fillAttributes(data);
 
-    return this.httpClient.post('/register', JSON.stringify(user.attributes))
-      .toPromise().then((response: any) => {
-        this.toastService.success({
-          message: 'The account was created successfully'
-        });
-      }, () => { });
+    return this.save(user).then(() => {
+      this.toastService.success({
+        message: 'The account was created successfully'
+      });
+    }, () => {});
   }
 
   /**
@@ -79,6 +84,9 @@ export class UserService {
           message: 'You were logged.'
         });
 
+        this.sessionService.user = new User();
+        this.sessionService.user.fillAttributes(data.user);
+        
         console.log('http client login : ', data);
         this.sessionService.createSession(data, user);
 

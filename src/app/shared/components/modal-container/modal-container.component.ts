@@ -21,6 +21,6 @@ export class ModalContainerComponent implements OnInit {
   ngOnInit() {}
 
   public close() {
-    this.modalService.closeModal();
+    this.modalService.closeModal(null, true);
   }
 }

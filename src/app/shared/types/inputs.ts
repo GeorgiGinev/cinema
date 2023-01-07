@@ -2,5 +2,6 @@ export enum InputTypes {
     number = 'number',
     email = 'email',
     text = 'text',
-    password = 'password'
+    password = 'password',
+    currency = 'currency'
 }

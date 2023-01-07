@@ -63,7 +63,7 @@ export class SeatsComponent extends BaseInput implements OnInit {
    * Add row with number of seats in the object
    */
   public addRow() {
-    if (this.insideFormGroup.valid) {
+    if (this.insideFormGroup.valid && this.insideFormGroup.get('rowSeats').value > 0) {
       this.seatsLength = Object.keys(this.seats).length + 1;
 
       this.seats[this.seatsLength] = Number(this.insideFormGroup.get('rowSeats').value);

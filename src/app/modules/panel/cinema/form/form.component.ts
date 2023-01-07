@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Cinema } from 'src/app/shared/resources/cinema/cinema.service';
+import { CinemaLocation } from 'src/app/shared/resources/cinema-location/cinema-location.service';
+import { Cinema, CinemaService } from 'src/app/shared/resources/cinema/cinema.service';
 import { FormService } from 'src/app/shared/services/form/form.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import { PanelPageService } from '../../panel-page.service';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'app-form',
@@ -24,7 +26,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formService: FormService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private cinemaService: CinemaService
   ) {
     this.createForm();
   }
@@ -46,7 +49,17 @@ export class FormComponent implements OnInit {
         header: 'The cinema was successfully created',
       });
 
-      this.router.navigate(['/panel/cinemas']);
+      const cinema = new Cinema();
+      cinema.fillAttributes(this.formGroup.value);
+
+      const cinemaLocation = new CinemaLocation();
+      cinemaLocation.fillAttributes(this.formGroup.value);
+      cinemaLocation.attributes.latitude = this.formGroup.value.location.lat;
+      cinemaLocation.attributes.longitude = this.formGroup.value.location.lng;
+
+      cinema.addRelationship(cinemaLocation, 'cinemaLocation');
+
+      this.cinemaService.save(cinema);
     }, () => {})
   }
 
@@ -58,9 +71,9 @@ export class FormComponent implements OnInit {
       name: [null, [Validators.required]],
       description: [null, [Validators.maxLength(this.descriptionLength)]],
       address: [null, [Validators.required]],
-      backgroundImages: [null],
+      images: [null],
       logo: [null],
-      cinemaSize: [null, [Validators.required]],
+      capacity: [null, [Validators.required]],
       location: [null, [Validators.required]]
     })
   }
