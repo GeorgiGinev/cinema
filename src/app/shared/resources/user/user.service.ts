@@ -59,6 +59,7 @@ export class UserService extends JsonResourceService<User>{
    * Create user
    */
   public create(data: any): Promise<any> {
+    console.log('data : ', data);
     const user = new User();
     user.fillAttributes(data);
 
