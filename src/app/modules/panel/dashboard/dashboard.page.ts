@@ -93,7 +93,6 @@ export class DashboardPage implements OnInit {
     while(currentDay.isAfter(weekAgo)) {
       this.barChartData.labels.push(currentDay.format(DateFormatsEnum.date));
       
-      console.log('startOfWeek : ', currentDay);
       currentDay = currentDay.subtract(1, 'day');
     }
 

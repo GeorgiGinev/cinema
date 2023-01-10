@@ -13,12 +13,6 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./modules/public-site/public-site.module').then(m => m.PublicSitePageModule)
       },
-      // {
-      //   path: 'intro',
-      //   loadChildren: () =>
-      //     import('./modules/intro/intro.module').then((m) => m.IntroPageModule),
-      //     canActivate: [AuthGuard],
-      // },
       {
         path: 'panel',
         canActivate: [AuthGuard],

@@ -9,13 +9,15 @@ import { JsonCollection } from '../collection/collection';
 import { Cinema } from '../cinema/cinema.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { ProfileComponent } from 'src/app/modules/auth/profile/profile.component';
+import * as cloneDeep from 'lodash/cloneDeep';
+import { LoginResponse } from '../../interfaces/login-response';
 
-interface UserInterface {
+export interface UserInterface {
   name: string;
   email: string;
   password: string;
   password_confirmation: string;
-  relationships: any;
+  avatar: ''
 }
 
 export class User extends JsonResource {
@@ -24,7 +26,7 @@ export class User extends JsonResource {
     email: '',
     password: '',
     password_confirmation: '',
-    relationships: {}
+    avatar: '',
   };
 
   public relationships = {
@@ -45,21 +47,33 @@ export class UserService extends JsonResourceService<User>{
     private modalService: ModalService
   ) { 
     super(httpClient);
-
-    this.createPath = '/register/';
   }
 
   public openForm(): Promise<void> {
     return this.modalService.openModal(ProfileComponent).then(() => {
-      
+
     }, () => {});
+  }
+
+  /**
+   * Update user
+   * @param user resource 
+   * @returns 
+   */
+  public update(user: User) {
+    this.createPath = '/'+this.resource+'/update';
+
+    return this.save(user).finally(() => {
+      this.createPath = '';
+    });
   }
 
   /**
    * Create user
    */
   public create(data: any): Promise<any> {
-    console.log('data : ', data);
+    this.createPath = '/register';
+
     const user = new User();
     user.fillAttributes(data);
 
@@ -67,7 +81,9 @@ export class UserService extends JsonResourceService<User>{
       this.toastService.success({
         message: 'The account was created successfully'
       });
-    }, () => {});
+    }, () => {}).finally(() => {
+      this.createPath = '';
+    });
   }
 
   /**
@@ -80,7 +96,7 @@ export class UserService extends JsonResourceService<User>{
     user.fillAttributes(data);
 
     return this.httpClient.post('/login', JSON.stringify(user.attributes))
-      .toPromise().then((data: any) => {
+      .toPromise().then((data: LoginResponse) => {
         this.toastService.success({
           message: 'You were logged.'
         });
@@ -88,10 +104,9 @@ export class UserService extends JsonResourceService<User>{
         this.sessionService.user = new User();
         this.sessionService.user.fillAttributes(data.user);
         
-        console.log('http client login : ', data);
         this.sessionService.createSession(data, user);
 
-        return data;
+        return Promise.resolve(data);
       }, () => {
         this.toastService.error({
           header: 'There was a problem connecting to the server. Please try again in a moment.'
@@ -109,7 +124,7 @@ export class UserService extends JsonResourceService<User>{
         handler: () => {
           return this.httpClient.post('/logout', JSON.stringify(user))
             .toPromise().then(async (data: any) => {
-              this.router.navigate(['/home']);
+              this.router.navigate(['/home']).then(() => {}, () => {});
 
               await this.sessionService.clearSession();
 

@@ -33,6 +33,6 @@
     </ci-card>
   </ci-modal-content>
   <ci-modal-footer>
-    <ci-button (click)="save()">Save</ci-button>
+    <ci-button [promise]="savePromise" (click)="save()">Save</ci-button>
   </ci-modal-footer>
 </ci-modal-container>

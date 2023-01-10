@@ -26,6 +26,6 @@ export class IntroPage {
    * Route to login page
    */
   private goToLogin() {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/login']).then(() => {}, () => {});
   }
 }

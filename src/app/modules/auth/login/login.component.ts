@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginResponse } from 'src/app/shared/interfaces/login-response';
 import { FormService } from 'src/app/shared/services/form/form.service';
 import { PageContainerService } from 'src/app/shared/services/page-container/page-container.service';
+import { SessionService } from 'src/app/shared/services/session/session.service';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import {UserService} from '../../../shared/resources/user/user.service';
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private pageContainerService: PageContainerService,
     private router: Router,
-    private formService: FormService
+    private formService: FormService,
+    private sessionService: SessionService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class LoginComponent implements OnInit {
   public signIn() {
     this.formService.isValid(this.formGroup).then(() => {
       this.promise = this.userService.login(this.formGroup.value).then((data: LoginResponse) => {
-        this.router.navigate(['/panel/dashboard']);
+        this.sessionService.user.fillAttributes(data.user);
+        this.router.navigate(['/panel']).then(() => {}, () => {});
       }, () => {});
     }, () => {})
   }

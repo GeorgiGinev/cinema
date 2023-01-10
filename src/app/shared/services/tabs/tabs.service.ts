@@ -20,7 +20,7 @@ export class TabsService {
       label: 'Home',
       icon: 'home-outline',
       action: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => {}, () => {});
       },
     },
     {
@@ -36,14 +36,14 @@ export class TabsService {
       label: 'Sign In',
       icon: 'log-in-outline',
       action: () => {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth/login']).then(() => {}, () => {});
       },
     },
     {
       label: 'Sign Up',
       icon: 'download-outline',
       action: () => {
-        this.router.navigate(['/auth/register']);
+        this.router.navigate(['/auth/register']).then(() => {}, () => {});
       },
     },
     {

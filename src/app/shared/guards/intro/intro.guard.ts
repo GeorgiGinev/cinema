@@ -16,7 +16,7 @@ export class IntroGuard implements CanActivate {
     const isComplete = await this.storage.get(StorageKeysEnum.SkipIntro);
 
     if(!isComplete) {
-      this.router.navigate(['/intro']);
+      this.router.navigate(['/intro']).then(() => {}, () => {});
     }
 
     return isComplete;

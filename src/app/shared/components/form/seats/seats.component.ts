@@ -46,7 +46,6 @@ export class SeatsComponent extends BaseInput implements OnInit {
     const newSeats = {};
     Object.keys(this.seats).forEach((key: string) => {
       if (Number(key) !== index) {
-        console.log('Object.keys(newSeats).length : ', Object.keys(newSeats).length)
         const newSeatsLength = Object.keys(newSeats).length + 1;
 
         newSeats[newSeatsLength] = this.seats[key];

@@ -28,8 +28,10 @@ export class SessionService {
   constructor(
     private httpClient: HttpClient,
     private toastService: ToastService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) { 
+    console.log('session service init')
+  }
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
@@ -77,7 +79,7 @@ export class SessionService {
         header: 'There was a problem connecting to the server. Please try again in a moment.'
       });
       await this.clearSession();
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then(() => {}, () => {});
     })
   }
 

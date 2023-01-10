@@ -19,7 +19,7 @@ export class GuestGuard implements CanActivate {
       if (!this.sessionService.user) {
         await this.sessionService.loadSession();
       }
-      this.router.navigate(['/dashboard'], { replaceUrl: true });
+      this.router.navigate(['/dashboard'], { replaceUrl: true }).then(() => {}, () => {});
       return false;
     }
 

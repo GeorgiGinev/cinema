@@ -30,7 +30,6 @@ export class ButtonComponent implements OnChanges {
      * Check if promise is given and show loading effect
      */
     if(this.promise) {
-      console.log('promise change');
       this.showLoadingEffect = true;
 
       this.promise.then(() => {

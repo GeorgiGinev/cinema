@@ -7,6 +7,5 @@ export class InitDirective {
   @Input() ciInit: () => void;
 
   constructor(private elementRef: ElementRef) {
-    console.log('elementRef');
   }
 }

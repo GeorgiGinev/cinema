@@ -16,8 +16,7 @@ import { PanelPageService } from './panel-page.service';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.page.html',
-  styleUrls: ['./panel.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./panel.page.scss']
 })
 export class PanelPage implements OnInit {
   public pageName: string;
@@ -80,7 +79,7 @@ export class PanelPage implements OnInit {
       label: 'To website',
       disabled: false,
       action: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => {}, () => {});
       },
       value: 'website'
     },
@@ -104,11 +103,11 @@ export class PanelPage implements OnInit {
     private router: Router,
     private sessionService: SessionService,
     private changeDetectorRef: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.sessionService.user;
-
+    console.log('panel init : ', this.user);
     this.currentUrl = this.router.url;
     this.generatePrevRoutes(this.currentUrl);
 

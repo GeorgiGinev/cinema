@@ -108,7 +108,7 @@ export class FormComponent implements OnInit {
           header: 'The movie was successfully added',
         });
 
-        this.router.navigate(['/panel/movies']);
+        this.router.navigate(['/panel/movies']).then(() => {}, () => {});
       }, () => {})
     }, () => {})
   }

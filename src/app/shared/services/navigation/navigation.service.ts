@@ -27,7 +27,7 @@ export class NavigationService {
       label: 'Dashboard',
       icon: IonIcons.dashboard,
       action: () => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']).then(() => {}, () => {});
       },
     },
     {
@@ -44,21 +44,21 @@ export class NavigationService {
       label: 'Home',
       icon: IonIcons.home,
       action: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']).then(() => {}, () => {});
       },
     },
     {
       label: 'Sign In',
       icon: IonIcons.login,
       action: () => {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth/login']).then(() => {}, () => {});
       },
     },
     {
       label: 'Sign Up',
       icon: IonIcons.register,
       action: () => {
-        this.router.navigate(['/auth/register']);
+        this.router.navigate(['/auth/register']).then(() => {}, () => {});
       },
     },
   ];
