@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import { PanelPageService } from '../../panel-page.service';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { IonIcons } from 'src/app/shared/enums/ion-icons';
 
 @Component({
   selector: 'app-form',
@@ -34,9 +35,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     if(this.cinema) {
-      this.panelService.updateHeader('Edit cinema');
+      this.panelService.updateHeader('Edit cinema', IonIcons.cinema);
     } else {
-      this.panelService.updateHeader('Add cinema');
+      this.panelService.updateHeader('Add cinema', IonIcons.cinema);
     }
   }
 

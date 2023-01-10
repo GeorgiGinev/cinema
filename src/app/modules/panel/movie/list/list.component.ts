@@ -37,7 +37,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.panelPageService.updateHeader('Movies');
+    this.panelPageService.updateHeader('Movies', IonIcons.movie);
   }
 
   public loadOnlyTrashedData() {

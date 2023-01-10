@@ -41,14 +41,20 @@ export class PanelPage implements OnInit {
         },
         {
           label: 'Cinemas',
-          icon: this.iconsEnum.dashboard,
+          icon: this.iconsEnum.cinema,
           routerLink: '/panel/cinemas',
           action: () => { }
         },
         {
           label: 'Movies',
-          icon: this.iconsEnum.dashboard,
+          icon: this.iconsEnum.movie,
           routerLink: '/panel/movies',
+          action: () => { }
+        },
+        {
+          label: 'Bookings',
+          icon: this.iconsEnum.booking,
+          routerLink: '/panel/bookings',
           action: () => { }
         }
       ]

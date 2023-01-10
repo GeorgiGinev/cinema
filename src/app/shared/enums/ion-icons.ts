@@ -13,5 +13,8 @@ export enum IonIcons {
     show = 'eye-outline',
     hide = 'eye-off-outline',
     image = 'images-outline',
-    trash = 'trash-outline'
+    trash = 'trash-outline',
+    booking = 'calendar-outline',
+    movie = 'laptop-outline',
+    cinema = 'tv-outline'
 }

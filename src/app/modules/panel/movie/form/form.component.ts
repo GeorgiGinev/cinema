@@ -47,9 +47,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     if(this.movie) {
-      this.panelPageService.updateHeader('Edit Movie')
+      this.panelPageService.updateHeader('Edit Movie', IonIcons.movie)
     } else {
-      this.panelPageService.updateHeader('Add Movie')
+      this.panelPageService.updateHeader('Add Movie', IonIcons.movie)
     }
   }
 

@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.panelPageService.updateHeader('Your cinemas');
+    this.panelPageService.updateHeader('Your cinemas', IonIcons.cinema);
     this.getCinemasCollection();
   }
 
