@@ -58,7 +58,6 @@ export class HttpInterceptorService implements HttpInterceptor {
        * Request error
        */
       catchError((error: HttpErrorResponse) => {
-        console.log('HttpErrorResponse : ', error);
         if(error.status === 0) {
           this.toastService.error({
             message: error.statusText
