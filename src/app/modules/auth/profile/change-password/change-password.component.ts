@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/shared/resources/user/user.service';
 import { AlertService } from 'src/app/shared/services/alert/alert.service';
 import { FormService } from 'src/app/shared/services/form/form.service';
 import { ModalService } from 'src/app/shared/services/modal/modal.service';
@@ -17,12 +18,15 @@ export class ChangePasswordComponent {
   public formGroup: FormGroup;
   public inputTypes = InputTypes;
 
+  public changePasswordPromise: Promise<any>;
+
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
     private modalService: ModalService,
     private formService: FormService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) {
     this.createForm();
   }
@@ -34,7 +38,7 @@ export class ChangePasswordComponent {
           text: 'Yes',
           role: 'confirm',
           handler: () => {
-            Promise.resolve().then(() => {
+            this.changePasswordPromise = this.userService.changePassword(this.formGroup.value).then(() => {
               this.toastService.success({
                 header: 'The password was successfully changed!'
               });
@@ -53,9 +57,9 @@ export class ChangePasswordComponent {
 
   private createForm() {
     this.formGroup = this.formBuilder.group({
-      oldPassword: [null, [Validators.required]],
-      newPassword: [null, [Validators.required, Validators.minLength(8)]],
-      repeatNewPassword: [null, [Validators.required, Validators.minLength(8)]]
-    }, { validator: compareSameValues('newPassword', 'repeatNewPassword') })
+      old_password: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      password_confirmation: [null, [Validators.required, Validators.minLength(8)]]
+    }, { validator: compareSameValues('password', 'password_confirmation') })
   }
 }

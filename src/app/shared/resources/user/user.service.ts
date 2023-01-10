@@ -11,6 +11,7 @@ import { ModalService } from '../../services/modal/modal.service';
 import { ProfileComponent } from 'src/app/modules/auth/profile/profile.component';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { LoginResponse } from '../../interfaces/login-response';
+import { PasswordChangeInterface } from '../../interfaces/passwordChange';
 
 export interface UserInterface {
   name: string;
@@ -56,11 +57,23 @@ export class UserService extends JsonResourceService<User>{
   }
 
   /**
+   * Change password
+   * @param data attributes
+   * @returns 
+   */
+  public changePassword(data: PasswordChangeInterface): Promise<any> {
+    return this.httpClient.patch('/' + this.resource + '/change-password', data)
+    .toPromise().then(() => {
+
+    }, () => {})
+  }
+
+  /**
    * Update user
    * @param user resource 
    * @returns 
    */
-  public update(user: User) {
+  public update(user: User): Promise<any> {
     return this.httpClient.post('/' + this.resource + '/update', user)
     .toPromise().finally(() => {
       this.createPath = '';
@@ -105,11 +118,7 @@ export class UserService extends JsonResourceService<User>{
         this.sessionService.createSession(data, user);
 
         return Promise.resolve(data);
-      }, () => {
-        this.toastService.error({
-          header: 'There was a problem connecting to the server. Please try again in a moment.'
-        })
-       });
+      }, () => {});
   }
 
   /**

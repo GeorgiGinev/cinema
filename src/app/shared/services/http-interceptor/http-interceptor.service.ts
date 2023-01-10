@@ -58,6 +58,12 @@ export class HttpInterceptorService implements HttpInterceptor {
        * Request error
        */
       catchError((error: HttpErrorResponse) => {
+        console.log('HttpErrorResponse : ', error);
+        if(error.status === 0) {
+          this.toastService.error({
+            message: error.statusText
+          }).then(() => {}, () => {});
+        }
         if(error.error.errors) {
           this.toastService.error({
             message: error.error.errors[Object.keys(error.error.errors)[0]]

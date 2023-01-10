@@ -32,10 +32,10 @@ export class ButtonComponent implements OnChanges {
     if(this.promise) {
       this.showLoadingEffect = true;
 
-      this.promise.then(() => {
+      this.promise.then(() => {}, () => {}).finally(() => {
         this.showLoadingEffect = false;
         this.changeDetector.markForCheck();
-      }, () => {});
+      });
     }
   }
 }
