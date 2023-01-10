@@ -71,7 +71,7 @@ export abstract class JsonResourceService<JsonResource> {
       if (resource['id']) {
         this.createPath = '/' + this.resource + '/update/' + resource['id'];
       } else {
-        this.createPath = '/' + this.resource + '/create';
+        this.createPath = '/' + this.resource;
       }
     }
 

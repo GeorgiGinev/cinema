@@ -55,6 +55,9 @@ export class GoogleMapsComponent extends BaseInput implements OnInit {
 
   ngOnInit() {
     super.onInit();
+    if(!this.formControl?.value) {
+      this.formControl.patchValue(this.markerPosition);
+    }
 
     if(this.formControl?.value) {
       this.markerPosition = this.formControl.value;

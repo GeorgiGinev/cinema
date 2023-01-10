@@ -52,6 +52,7 @@ export class FormComponent implements OnInit {
 
       const cinema = new Cinema();
       cinema.fillAttributes(this.formGroup.value);
+      cinema.attributes.logo = this.formGroup.value.logo[0];
 
       const cinemaLocation = new CinemaLocation();
       cinemaLocation.fillAttributes(this.formGroup.value);
@@ -70,10 +71,10 @@ export class FormComponent implements OnInit {
   private createForm() {
     this.formGroup = this.formBuilder.group({
       name: [null, [Validators.required]],
-      description: [null, [Validators.maxLength(this.descriptionLength)]],
+      description: [null, [Validators.maxLength(this.descriptionLength), Validators.required]],
       address: [null, [Validators.required]],
-      images: [null],
-      logo: [null],
+      images: [null, [Validators.required]],
+      logo: [null, [Validators.required]],
       capacity: [null, [Validators.required]],
       location: [null, [Validators.required]]
     })
