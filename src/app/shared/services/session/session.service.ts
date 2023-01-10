@@ -5,6 +5,7 @@ import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from '../toast/toast.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class SessionService {
@@ -29,9 +30,7 @@ export class SessionService {
     private httpClient: HttpClient,
     private toastService: ToastService,
     private router: Router,
-  ) { 
-    console.log('session service init')
-  }
+  ) {}
 
   public async createSession(data: LoginResponse, user: User): Promise<boolean> {
     this.user = user;
@@ -70,7 +69,7 @@ export class SessionService {
   }
 
   public loadUser(): Promise<any> {
-    return this.httpClient.get('/user').toPromise().then((user: any) => {
+    return this.httpClient.get('/me').toPromise().then((user: any) => {
       this.user = new User();
       this.user.attributes = user;
 

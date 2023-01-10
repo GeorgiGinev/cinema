@@ -36,7 +36,7 @@ export class User extends JsonResource {
 
 @Injectable()
 export class UserService extends JsonResourceService<User>{
-  public resource: string = 'users';
+  public resource: string = 'me';
 
   constructor(
     protected httpClient: HttpClient,
@@ -61,9 +61,8 @@ export class UserService extends JsonResourceService<User>{
    * @returns 
    */
   public update(user: User) {
-    this.createPath = '/'+this.resource+'/update';
-
-    return this.save(user).finally(() => {
+    return this.httpClient.post('/' + this.resource + '/update', user)
+    .toPromise().finally(() => {
       this.createPath = '';
     });
   }
@@ -72,12 +71,11 @@ export class UserService extends JsonResourceService<User>{
    * Create user
    */
   public create(data: any): Promise<any> {
-    this.createPath = '/register';
-
     const user = new User();
     user.fillAttributes(data);
 
-    return this.save(user).then(() => {
+    return this.httpClient.post('/register', JSON.stringify(user.attributes))
+    .toPromise().then(() => {
       this.toastService.success({
         message: 'The account was created successfully'
       });
@@ -114,6 +112,10 @@ export class UserService extends JsonResourceService<User>{
        });
   }
 
+  /**
+   * Logout from profile
+   * @returns 
+   */
   public logout(): Promise<any> {
     const user = this.sessionService.user;
 
@@ -122,7 +124,7 @@ export class UserService extends JsonResourceService<User>{
         text: 'Yes',
         role: 'confirm',
         handler: () => {
-          return this.httpClient.post('/logout', JSON.stringify(user))
+          return this.httpClient.post('/' + this.resource + '/logout', JSON.stringify(user))
             .toPromise().then(async (data: any) => {
               this.router.navigate(['/home']).then(() => {}, () => {});
 

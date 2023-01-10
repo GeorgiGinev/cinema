@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate {
       /**
        * If session is not loaded, load it
        */
+      console.log('this.sessionService.user : ', this.sessionService.user);
       if (!this.sessionService.user) {
         const loading = await this.loadingCtrl.create({
           message: 'Loading...',
