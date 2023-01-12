@@ -1,0 +1,35 @@
+<div class="seats-main-label">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        {{label}}
+        <ng-container *ngIf="isRequired">
+          <ion-text color="danger">
+            *
+          </ion-text>
+        </ng-container>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+<div>
+  <div class="select-seats-container" #container>
+    <div class="select-seats-wrapper" [ciScrollHorizontalCenter]="container">
+      <div class="projection-container"></div>
+      <ng-container *ngFor="let row of [].constructor(getSeatsRows()); let i = index">
+        <div class="seat-container">
+          {{i+1}}
+          <ng-container *ngFor="let seat of [].constructor(getSeatsInARow(i)); let seatIndex = index">
+            <div>
+              <div class="seat" [class.selected-seat]="isSeatAlreadySelected(i, seatIndex)"
+                [class.booked]="isSeatAlreadyBooked(i, seatIndex)" (click)="selectSeatEvent(i, seatIndex)"></div>
+              <div class="seat-index">
+                {{seatIndex + 1}}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

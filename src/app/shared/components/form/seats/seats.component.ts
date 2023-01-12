@@ -1,10 +1,12 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { InputTypes } from 'src/app/shared/types/inputs';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { BaseInput } from '../base-input';
 
+@UntilDestroy()
 @Component({
   selector: 'ci-seats',
   templateUrl: './seats.component.html',
@@ -40,6 +42,14 @@ export class SeatsComponent extends BaseInput implements OnInit {
 
   ngOnInit() {
     super.onInit();
+
+    /**
+     * Patch given value from form control
+     */
+    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((data: {}) => {
+      this.seats = data;
+      this.seatsLength = Object.keys(this.seats).length;
+    });
   }
 
   public removeRow(index: number) {

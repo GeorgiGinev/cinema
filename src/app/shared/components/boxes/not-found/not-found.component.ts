@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { JsonCollection } from 'src/app/shared/resources/collection/collection';
+import { JsonResource } from 'src/app/shared/resources/resource/resource.service';
 
 @Component({
   selector: 'ci-not-found',
@@ -7,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotFoundComponent implements OnInit {
-  @Input() data: any[];
+  @Input() data: JsonCollection<JsonResource>;
   
   constructor() { }
 

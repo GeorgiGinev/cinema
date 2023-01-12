@@ -16,8 +16,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class ListComponent implements OnInit {
   public movies: JsonCollection<JsonResource> = new JsonCollection({
-    total_items: 6,
-    items_per_page: 2,
+    total: 6,
+    per_page: 2,
     current_page: 1
   });
   public formGroup: FormGroup;

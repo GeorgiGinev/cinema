@@ -7,7 +7,8 @@
     </ion-col>
     <ion-col size="12" sizeLg="6">
       <div class="cinema-header-container">
-        <ci-icon-button [color]="!withTrashed ? 'danger' : 'light'" [size]="sizes.medium" (click)="loadOnlyTrashedData()">
+        <ci-icon-button [color]="!withTrashed ? 'danger' : 'light'" [size]="sizes.medium"
+          (click)="loadOnlyTrashedData()">
           <ci-icon [name]="iconsEnum.trash" [size]="sizes.medium"></ci-icon>
         </ci-icon-button>
         <ci-button color="secondary" [routerLink]="'/panel/cinemas/form'">
@@ -20,9 +21,31 @@
 </ion-grid>
 
 <ng-container *ngIf="!loadData">
-  <div class="ion-margin-vertical">
-    <ci-not-found [data]="data"></ci-not-found>
-  </div>
+  <ci-pagination>
+    <ion-list>
+      <ion-item *ngFor="let cinema of cinemas.data | paginate: { itemsPerPage: cinemas.per_page, currentPage: cinemas.current_page, totalItems: cinemas.total }; let i = index">
+        <div>
+          <ion-text [color]="cinema.attributes.deleted_at ? 'danger' : 'primary'">
+            {{cinema.attributes.name}}
+          </ion-text>
+        </div>
+        <div class="buttons-container" slot="end">
+          <ci-icon-button [routerLink]="'form/' + cinema.id" [size]="sizes.small" color="primary">
+            <ci-icon [name]="iconsEnum.edit" [size]="sizes.default"></ci-icon>
+          </ci-icon-button>
+          <ci-icon-button *ngIf="!cinema.attributes.deleted_at" (click)="deleteCinema(cinema)" [size]="sizes.small" color="primary">
+            <ci-icon [name]="iconsEnum.trash" [size]="sizes.default"></ci-icon>
+          </ci-icon-button>
+          <ci-icon-button *ngIf="cinema.attributes.deleted_at" (click)="restoreCinema(cinema)" [size]="sizes.small" color="primary">
+            <ci-icon [name]="iconsEnum.restore" [size]="sizes.default"></ci-icon>
+          </ci-icon-button>
+        </div>
+      </ion-item>
+    </ion-list>
+    <div class="ion-margin-vertical">
+      <ci-not-found [data]="cinemas"></ci-not-found>
+    </div>
+  </ci-pagination>
 </ng-container>
 <ng-container *ngIf="loadData">
   <ion-list>

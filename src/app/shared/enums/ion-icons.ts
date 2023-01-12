@@ -16,5 +16,7 @@ export enum IonIcons {
     trash = 'trash-outline',
     booking = 'calendar-outline',
     movie = 'laptop-outline',
-    cinema = 'tv-outline'
+    cinema = 'tv-outline',
+    edit = 'create-outline',
+    restore = 'file-tray-full-outline'
 }

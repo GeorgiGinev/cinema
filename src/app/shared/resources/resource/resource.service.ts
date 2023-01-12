@@ -69,7 +69,7 @@ export abstract class JsonResourceService<JsonResource> {
   public save(resource: JsonResource): Promise<any> {
     if (!this.createPath) {
       if (resource['id']) {
-        this.createPath = '/' + this.resource + '/update/' + resource['id'];
+        this.createPath = '/' + this.resource + '/' + resource['id'];
       } else {
         this.createPath = '/' + this.resource;
       }
@@ -81,7 +81,11 @@ export abstract class JsonResourceService<JsonResource> {
       }
     });
 
-    return this.httpClient.post(this.createPath, JSON.stringify(resource)).toPromise();
+    if (resource['id']) {
+      return this.httpClient.put(this.createPath, JSON.stringify(resource)).toPromise();
+    } else {
+      return this.httpClient.post(this.createPath, JSON.stringify(resource)).toPromise();
+    }
   }
 
 
@@ -107,15 +111,26 @@ export abstract class JsonResourceService<JsonResource> {
   }
 
   /**
-   * Get with filters
-   * @param filters 
+   * Get a resource
+   * @param id string 
    */
-  public get(id: string | null = null): Observable<JsonResource> {
-    let filt = '';
-    if (id) {
-      filt = '?id=' + id;
-    }
+  public get(id: string): Observable<JsonResource> {
+    return this.httpClient.get('/' + this.resource + '/' + id) as Observable<JsonResource>;
+  }
 
-    return this.httpClient.get('/' + this.resource + filt) as Observable<JsonResource>;
+  /**
+   * Delete a resource
+   * @param id string
+   */
+  public delete(id: string): Promise<JsonResource> {
+    return this.httpClient.delete('/' + this.resource + '/' + id).toPromise() as Promise<any>;
+  }
+
+  /**
+   * Restore a resource
+   * @param resource 
+   */
+  public restore(id: string): Promise<JsonResource> {
+    return this.httpClient.put('/' + this.resource + '/restore/' + id, {}).toPromise() as Promise<any>;
   }
 }

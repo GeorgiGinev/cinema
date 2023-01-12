@@ -6,7 +6,9 @@ import { BaseInput } from '../base-input';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { Shapes } from 'src/app/shared/types/shapes';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'ci-upload-images',
   templateUrl: './upload-images.component.html',
@@ -43,6 +45,10 @@ export class UploadImagesComponent extends BaseInput implements OnInit {
     super.onInit();
 
     this.imagePaths = [];
+
+    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((data: string[]) => {
+      this.imagePaths = this.formControl.value;
+    });
   }
 
   /**

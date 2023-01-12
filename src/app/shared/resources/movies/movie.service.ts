@@ -10,7 +10,6 @@ interface MovieInterface {
   description: string;
   release_date?: string;
   image: string;
-  background_image?: string,
   deleted_at: string
 }
 
@@ -21,7 +20,6 @@ export class Movie extends JsonResource {
     description: '',
     release_date: '',
     image: '',
-    background_image: '',
     deleted_at: ''
   };
 

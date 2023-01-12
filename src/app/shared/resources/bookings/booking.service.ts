@@ -1,20 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cinema } from '../cinema/cinema.service';
 import { MovieSlot } from '../movie-slot/movie-slot.service';
 import { Movie } from '../movies/movie.service';
-import { JsonResource } from '../resource/resource.service';
+import { JsonResource, JsonResourceService } from '../resource/resource.service';
 import { User } from '../user/user.service';
 
 interface BookingInterface {
   booked_at: string,
   deleted_at: string,
+  seats: any
 }
 
 
 export class Booking extends JsonResource {
   public attributes: BookingInterface = {
     booked_at: '',
-    deleted_at: ''
+    deleted_at: '',
+    seats: {},
   };
 
   public relationships = {
@@ -26,6 +29,10 @@ export class Booking extends JsonResource {
 }
 
 @Injectable()
-export class BookingService {
-  constructor() { }
+export class BookingService extends JsonResourceService<Booking> {
+  public resource: string = 'bookings';
+
+  constructor(protected httpClient: HttpClient) {
+    super(httpClient);
+  }
 }

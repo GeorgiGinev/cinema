@@ -1,0 +1,71 @@
+:host {
+    display: block;
+    user-select: none;
+
+    .select-seats-container {
+        overflow-x: auto;
+        display: flex;
+        position: relative;
+    }
+
+    .projection-container {
+        background-color: var(--ion-color-primary);
+        width: 400px;
+        height: 12px;
+        max-width: 90%;
+        border-radius: 8px;
+        margin: 0 auto 72px auto;
+    }
+
+    .seats-main-label {
+        ::ng-deep ion-item {
+            --padding-start: 0;
+            --border-color: transparent;
+        }
+    }
+
+    .seat-container {
+        width: max-content;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 auto 12px auto;
+
+        .seat {
+            height: 35px;
+            width: 20px;
+            border-radius: 4px;
+            background-color: rgba(var(--ion-color-primary-rgb), .4);
+            cursor: pointer;
+            transition: background-color ease 200ms;
+
+            &.booked {
+                background-color: rgba(var(--ion-color-danger-rgb), .8);
+
+                &:hover {
+                    background-color: rgba(var(--ion-color-danger-rgb), 1);
+                }
+            }
+
+            &.selected-seat {
+                background-color: rgba(var(--ion-color-warning-rgb), .8);
+
+                &:hover {
+                    background-color: rgba(var(--ion-color-warning-rgb), 1);
+                }
+            }
+
+            &:hover {
+                background-color: rgba(var(--ion-color-primary-rgb), .6);
+            }
+        }
+
+        .seat-index {
+            width: 100%;
+            color: rgba(var(--ion-color-primary-rgb), .8);
+            font-size: 10px;
+            text-align: center;
+            margin-top: 4px;
+        }
+    }
+}

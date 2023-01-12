@@ -37,8 +37,25 @@
       </ion-row>
       <ion-row>
         <ion-col size="12" sizeLg="8" offsetLg="2">
-          <div class="ion-text-right" (click)="create()">
-            <ci-button color="primary">Create</ci-button>
+          <div class="ion-text-right">
+            <ng-container *ngIf="cinemaId && !cinema.attributes.deleted_at">
+              <ci-button color="danger" (click)="delete()" [promise]="deletePromise">
+                Delete
+              </ci-button>
+            </ng-container>
+            <ng-container *ngIf="cinemaId && cinema.attributes.deleted_at">
+              <ci-button color="danger" (click)="restore()" [promise]="deletePromise">
+                Restore
+              </ci-button>
+            </ng-container>
+            <ci-button [promise]="savePromise" color="primary" (click)="create()">
+              <ng-container *ngIf="!cinemaId">
+                Create
+              </ng-container>
+              <ng-container *ngIf="cinemaId">
+                Update
+              </ng-container>
+            </ci-button>
           </div>
         </ion-col>
       </ion-row>

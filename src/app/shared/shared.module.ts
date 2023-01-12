@@ -55,6 +55,8 @@ import { BookingService } from './resources/bookings/booking.service';
 import { SelectComponent } from './components/form/select/select.component';
 import { SelectCinemaComponent } from './components/form/select/select-cinema/select-cinema.component';
 import { PricePipe } from './pipes/price/price.pipe';
+import { SelectSeatsComponent } from './components/form/select-seats/select-seats.component';
+import { ScrollHorizontalCenterDirective } from './directives/scroll-horizontal-center/scroll-horizontal-center.directive';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,8 @@ import { PricePipe } from './pipes/price/price.pipe';
     SelectComponent,
     SelectCinemaComponent,
     PricePipe,
+    SelectSeatsComponent,
+    ScrollHorizontalCenterDirective,
   ],
   imports: [
     CommonModule,
@@ -159,11 +163,13 @@ import { PricePipe } from './pipes/price/price.pipe';
     UploadImagesComponent,
     SelectComponent,
     SelectCinemaComponent,
+    SelectSeatsComponent,
     //Pipes
     DateFormatsPipe,
     PricePipe,
     //Directives
-    InitDirective
+    InitDirective,
+    ScrollHorizontalCenterDirective
   ],
 })
 export class SharedModule { }

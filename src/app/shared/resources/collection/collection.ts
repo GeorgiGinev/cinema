@@ -1,26 +1,30 @@
 import { JsonResource } from "../resource/resource.service";
 
 export interface JsonCollectionPaginationInterface {
-  total_items: number,
-  items_per_page: number,
+  total: number,
+  per_page: number,
   current_page: number
 }
 
 export interface JsonCollectionInterface {
   data: JsonResource[];
-  pagination: JsonCollectionPaginationInterface
+  total: number,
+  per_page: number,
+  current_page: number
 }
 
 export class JsonCollection<JsonResource> {
   public data: JsonResource[] = [];
-  public pagination: JsonCollectionPaginationInterface = {
-    total_items: 0,
-    items_per_page: 0,
-    current_page: 0
-  }
+  public total: 0;
+  public per_page: 0;
+  public current_page: 0;
 
   constructor(pagination?: JsonCollectionPaginationInterface) {
-    this.pagination = pagination;
+    if(pagination) {
+      Object.keys(pagination).forEach((key: string) => {
+        this[key] = pagination[key];
+      });
+    }
   }
 
   /**
