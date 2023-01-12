@@ -107,7 +107,9 @@ export abstract class JsonResourceService<JsonResource> {
       });
     }
 
-    return this.httpClient.get('/' + this.resource + filt) as Observable<JsonCollection<JsonResource>>;
+    return this.httpClient.get('/' + this.resource, {
+      params: filters
+    }) as Observable<JsonCollection<JsonResource>>;
   }
 
   /**
