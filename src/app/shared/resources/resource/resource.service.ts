@@ -95,18 +95,6 @@ export abstract class JsonResourceService<JsonResource> {
    * @returns 
    */
   public all(filters: {} | null = null): Observable<JsonCollection<JsonResource>> {
-    let filt = '';
-    if (filters) {
-      filt = '?';
-
-      Object.keys(filters).forEach((key: string, index: number) => {
-        filt += key + '=' + filters[key];
-        if (index < Object.keys(filters).length - 1) {
-          filt += ';'
-        }
-      });
-    }
-
     return this.httpClient.get('/' + this.resource, {
       params: filters
     }) as Observable<JsonCollection<JsonResource>>;
