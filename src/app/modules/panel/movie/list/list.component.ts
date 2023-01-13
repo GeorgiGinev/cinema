@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
   public sizes = Sizes;
 
   public loadData: boolean = false;
-  public data: any[] = [];
+  public data: JsonCollection<Movie> = new JsonCollection<Movie>();
 
   public filters: {} = {};
 
@@ -38,6 +38,28 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.panelPageService.updateHeader('Movies', IonIcons.movie);
+
+    this.getMoviesFromServer();
+  }
+
+  /**
+   * Restore a movie
+   * @param movie resource
+   */
+   public restoreMovie(movie: Movie) { 
+    this.movieService.restoreMovie(movie.id).then(() => {
+      this.getMoviesFromServer();
+    }); 
+  }
+
+  /**
+   * Delete a movie
+   * @param movie resource 
+   */
+  public deleteMovie(movie: Movie) {
+    this.movieService.deleteMovie(movie.id).then(() => {
+      this.getMoviesFromServer();
+    }, () => {});
   }
 
   public loadOnlyTrashedData() {
@@ -48,7 +70,11 @@ export class ListComponent implements OnInit {
 
   public getMoviesFromServer() {
     this.movieService.all(this.getFilters()).pipe(untilDestroyed(this)).subscribe((data: JsonCollection<Movie>) => {
+      this.data = data;
 
+      this.loadData = false;
+
+      this.changeDetectorRef.markForCheck();
     });
   }
 

@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Cinema, CinemaService } from 'src/app/shared/resources/cinema/cinema.service';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { BaseInput } from '../../base-input';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-
+@UntilDestroy()
 @Component({
   selector: 'ci-select-cinema',
   templateUrl: './select-cinema.component.html',
@@ -27,7 +28,8 @@ export class SelectCinemaComponent extends BaseInput implements OnInit {
 
   constructor(
     protected controlContainer: ControlContainer,
-    private cinemaService: CinemaService
+    private cinemaService: CinemaService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { 
     super(controlContainer);
     this.loadCinemas();
@@ -46,15 +48,10 @@ export class SelectCinemaComponent extends BaseInput implements OnInit {
   }
 
   private loadCinemas(){
-    const cinema = new Cinema();
-    cinema.attributes.name = 'Cinema 1';
-    cinema.id = '1';
+    this.cinemaService.all().pipe(untilDestroyed(this)).subscribe((data: JsonCollection<Cinema>) => {
+      this.collection = data;
 
-    this.collection.data.push(cloneDeep(cinema));
-
-    cinema.attributes.name = 'Cinema 2';
-    cinema.id = '2';
-
-    this.collection.data.push(cloneDeep(cinema));
+      this.changeDetectorRef.markForCheck();
+    });
   }
 }

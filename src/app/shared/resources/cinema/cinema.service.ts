@@ -64,7 +64,7 @@ export class CinemaService extends JsonResourceService<Cinema> {
   }
 
   /**
-   * Delete cinemas
+   * Delete the cinema
    * @param id of the resource 
    */
   public deleteCinema(id: string): Promise<any> {

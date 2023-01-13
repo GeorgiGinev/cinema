@@ -1,0 +1,11 @@
+:host {
+    ::ng-deep ion-item {
+        --padding-start: 0;
+        --border-color: transparent;
+    }
+
+    ::ng-deep ion-datetime {
+        width: 100%;
+        max-width: unset;
+    }
+}

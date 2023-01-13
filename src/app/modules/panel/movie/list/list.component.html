@@ -3,7 +3,7 @@
     <ion-col size="12" sizeLg="6">
       <div [formGroup]="formGroup">
         <ci-search formControlName="keywords"></ci-search>
-      </div>
+      </div> 
     </ion-col>
     <ion-col size="12" sizeLg="6">
       <div class="movie-header-container">
@@ -20,6 +20,26 @@
 </ion-grid>
 
 <ng-container *ngIf="!loadData">
+  <ion-list>
+    <ion-item *ngFor="let movie of data.data | paginate: { itemsPerPage: data.per_page, currentPage: data.current_page, totalItems: data.total }; let i = index">
+      <div>
+        <ion-text [color]="movie.attributes.deleted_at ? 'danger' : 'primary'">
+          {{movie.attributes.name}}
+        </ion-text>
+      </div>
+      <div class="buttons-container" slot="end">
+        <ci-icon-button [routerLink]="'form/' + movie.id" [size]="sizes.default" color="primary">
+          <ci-icon [name]="iconsEnum.edit" [size]="sizes.medium"></ci-icon>
+        </ci-icon-button>
+        <ci-icon-button *ngIf="!movie.attributes.deleted_at" (click)="deleteMovie(movie)" [size]="sizes.default" color="primary">
+          <ci-icon [name]="iconsEnum.trash" [size]="sizes.medium"></ci-icon>
+        </ci-icon-button>
+        <ci-icon-button *ngIf="movie.attributes.deleted_at" (click)="restoreMovie(movie)" [size]="sizes.default" color="primary">
+          <ci-icon [name]="iconsEnum.restore" [size]="sizes.medium"></ci-icon>
+        </ci-icon-button>
+      </div>
+    </ion-item>
+  </ion-list>
   <div class="ion-margin-vertical">
     <ci-not-found [data]="data"></ci-not-found>
   </div>

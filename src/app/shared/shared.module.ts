@@ -57,6 +57,7 @@ import { SelectCinemaComponent } from './components/form/select/select-cinema/se
 import { PricePipe } from './pipes/price/price.pipe';
 import { SelectSeatsComponent } from './components/form/select-seats/select-seats.component';
 import { ScrollHorizontalCenterDirective } from './directives/scroll-horizontal-center/scroll-horizontal-center.directive';
+import { DatetimeComponent } from './components/form/datetime/datetime.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { ScrollHorizontalCenterDirective } from './directives/scroll-horizontal-
     PricePipe,
     SelectSeatsComponent,
     ScrollHorizontalCenterDirective,
+    DatetimeComponent
   ],
   imports: [
     CommonModule,
@@ -164,6 +166,7 @@ import { ScrollHorizontalCenterDirective } from './directives/scroll-horizontal-
     SelectComponent,
     SelectCinemaComponent,
     SelectSeatsComponent,
+    DatetimeComponent,
     //Pipes
     DateFormatsPipe,
     PricePipe,

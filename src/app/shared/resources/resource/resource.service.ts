@@ -44,6 +44,12 @@ export class JsonResource {
       return;
     }
   }
+
+  public clearRelationship(relationship: string) {
+    if(this.relationships[relationship]) {
+      delete this.relationships[relationship];
+    }
+  }
 }
 
 @Injectable({
@@ -80,6 +86,10 @@ export abstract class JsonResourceService<JsonResource> {
         delete resource['relationships'][key];
       }
     });
+
+    if(resource['attributes']['deleted_at']) {
+      delete resource['attributes']['deleted_at'];
+    }
 
     if (resource['id']) {
       return this.httpClient.put(this.createPath, JSON.stringify(resource)).toPromise();

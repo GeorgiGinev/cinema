@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JsonResource } from 'src/app/shared/resources/resource/resource.service';
 import { BaseInput } from '../base-input';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @UntilDestroy()
 @Component({
@@ -22,14 +23,22 @@ export class SelectComponent extends BaseInput implements OnInit {
   @Input() label: string;
   @Input() multiple: boolean = false;
 
-  @Input() options: any[];
+  @Input() get options(): any[] {
+    return this._options;
+  } set options(data: any[]) {
+    this._options = data;
+    this.selectedValue = cloneDeep(this.selectedValue);
+  }
+
   @Input() optionValue: (option: any, index: number) => any;
   @Input() optionLabel: (option: any, index: number) => any;
 
   public selectedValue: any;
-  
+  private _options: any[];
+
   constructor(
-    protected controlContainer: ControlContainer
+    protected controlContainer: ControlContainer,
+    private changeDetectorRef: ChangeDetectorRef
   ) { 
     super(controlContainer);
   }

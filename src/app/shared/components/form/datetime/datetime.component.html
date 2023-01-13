@@ -1,0 +1,18 @@
+<ion-item>
+  <ion-label>
+    {{label}}
+    <ng-container *ngIf="isRequired">
+      <ion-text color="danger">
+        *
+      </ion-text>
+    </ng-container>
+  </ion-label>
+</ion-item>
+<div class="ion-text-center">
+  <ng-container *ngIf="!onlyDate">
+    <ion-datetime mode="ios" [(ngModel)]="date" (ngModelChange)="onChangeEvent()"></ion-datetime>
+  </ng-container>
+  <ng-container *ngIf="onlyDate">
+    <ion-datetime presentation="date" mode="ios" [(ngModel)]="date" (ngModelChange)="onChangeEvent()"></ion-datetime>
+  </ng-container>
+</div>

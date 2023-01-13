@@ -30,14 +30,14 @@
           </ion-text>
         </div>
         <div class="buttons-container" slot="end">
-          <ci-icon-button [routerLink]="'form/' + cinema.id" [size]="sizes.small" color="primary">
-            <ci-icon [name]="iconsEnum.edit" [size]="sizes.default"></ci-icon>
+          <ci-icon-button [routerLink]="'form/' + cinema.id" [size]="sizes.default" color="primary">
+            <ci-icon [name]="iconsEnum.edit" [size]="sizes.medium"></ci-icon>
           </ci-icon-button>
-          <ci-icon-button *ngIf="!cinema.attributes.deleted_at" (click)="deleteCinema(cinema)" [size]="sizes.small" color="primary">
-            <ci-icon [name]="iconsEnum.trash" [size]="sizes.default"></ci-icon>
+          <ci-icon-button *ngIf="!cinema.attributes.deleted_at" (click)="deleteCinema(cinema)" [size]="sizes.default" color="primary">
+            <ci-icon [name]="iconsEnum.trash" [size]="sizes.medium"></ci-icon>
           </ci-icon-button>
-          <ci-icon-button *ngIf="cinema.attributes.deleted_at" (click)="restoreCinema(cinema)" [size]="sizes.small" color="primary">
-            <ci-icon [name]="iconsEnum.restore" [size]="sizes.default"></ci-icon>
+          <ci-icon-button *ngIf="cinema.attributes.deleted_at" (click)="restoreCinema(cinema)" [size]="sizes.default" color="primary">
+            <ci-icon [name]="iconsEnum.restore" [size]="sizes.medium"></ci-icon>
           </ci-icon-button>
         </div>
       </ion-item>
