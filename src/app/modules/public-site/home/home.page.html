@@ -19,13 +19,20 @@
   </div>
 </div>
 <div class="ion-margin-vertical">
-  <ci-page-title [underline]="true">Most watched movies</ci-page-title>
+  <ci-page-title [underline]="true">Recently added movies</ci-page-title>
 </div>
 <ion-grid>
   <ion-row>
-    <ion-col size="4" *ngFor="let movie of topMovies">
-      <ci-movie [movie]="movie"></ci-movie>
-    </ion-col>
+    <ng-container *ngIf="topMovies.data.length >= 6">
+      <ion-col size="4" *ngFor="let index of [].constructor(6); let i = index">
+        <ci-movie [movie]="topMovies.data[i]"></ci-movie>
+      </ion-col>
+    </ng-container>
+    <ng-container *ngIf="topMovies.data.length < 6">
+      <ion-col size="4" *ngFor="let movie of topMovies.data">
+        <ci-movie [movie]="movie"></ci-movie>
+      </ion-col>
+    </ng-container>
   </ion-row>
   <ion-row>
     <ion-col size="2" offset="5">
@@ -40,7 +47,7 @@
 </div>
 <ion-grid>
   <ion-row>
-    <ion-col size="4" *ngFor="let cinema of topCinemas">
+    <ion-col size="4" *ngFor="let cinema of topCinemas.data">
       <ci-cinema [cinema]="cinema"></ci-cinema>
     </ion-col>
   </ion-row>

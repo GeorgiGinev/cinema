@@ -13,7 +13,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col size="4"
-                    *ngFor="let movie of movies.data | paginate: { itemsPerPage: movies.per_page, currentPage: movies.current_page, totalItems: movies.total }">
+                    *ngFor="let movie of topMovies.data | paginate: { itemsPerPage: topMovies.per_page, currentPage: topMovies.current_page, totalItems: topMovies.total }">
                     <ci-movie [movie]="movie"></ci-movie>
                 </ion-col>
             </ion-row>

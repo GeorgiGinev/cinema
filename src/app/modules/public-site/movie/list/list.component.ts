@@ -6,6 +6,7 @@ import { JsonResource } from 'src/app/shared/resources/resource/resource.service
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { HttpClient } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
@@ -15,76 +16,23 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent implements OnInit {
-  public movies: JsonCollection<JsonResource> = new JsonCollection({
-    total: 6,
-    per_page: 2,
-    current_page: 1
-  });
+  public topMovies: JsonCollection<Movie> = new JsonCollection<Movie>();
+
   public formGroup: FormGroup;
-  public loadData: boolean = false;
+  public loadData: boolean = true;
+
+  public filters: {} = {};
 
   constructor(
     private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private httpClient: HttpClient
   ) {
     this.createForm();
   }
 
   ngOnInit() {
-    const movie = new Movie();
-    movie.fillAttributes({
-      name: 'Аватар:Природата на водата 3D HFR',
-      description: 'Повече от десет години след събитията в Аватар Джейк Съли (Сам Уортингтън) живее щастливо заедно с Нейтири (Зоуи Салдана) и техните деца. Когато стара заплаха се завръща на Пандора, двамата са принудени да напуснат дома си и да се отправят към различни региони на изобилстващата от жи',
-      image: 'https://wallpapercave.com/wp/wp5212080.jpg',
-      background_image: 'https://assets-prd.ignimgs.com/2021/12/14/avatar-2-concept-art-1639522729106.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
-
-    movie.fillAttributes({
-      name: 'Брутална нощ',
-      description: '',
-      image: 'https://m.media-amazon.com/images/M/MV5BYzg2NWNhOWItYjA3Yi00MzhhLTg4ZmItYzM3ZTIwN2U0ZGQ5XkEyXkFqcGdeQXVyMzEyMDQzNzY@._V1_FMjpg_UX1000_.jpg',
-      background_image: 'https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/11/David-Harbour-as-Santa-Claus-on-the-Dolby-Cinemas-Violent-Night-Poster.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
-
-    movie.fillAttributes({
-      name: 'Аватар:Природата на водата 3D HFR',
-      description: 'Повече от десет години след събитията в Аватар Джейк Съли (Сам Уортингтън) живее щастливо заедно с Нейтири (Зоуи Салдана) и техните деца. Когато стара заплаха се завръща на Пандора, двамата са принудени да напуснат дома си и да се отправят към различни региони на изобилстващата от жи',
-      image: 'https://wallpapercave.com/wp/wp5212080.jpg',
-      background_image: 'https://assets-prd.ignimgs.com/2021/12/14/avatar-2-concept-art-1639522729106.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
-
-    movie.fillAttributes({
-      name: 'Брутална нощ',
-      description: '',
-      image: 'https://m.media-amazon.com/images/M/MV5BYzg2NWNhOWItYjA3Yi00MzhhLTg4ZmItYzM3ZTIwN2U0ZGQ5XkEyXkFqcGdeQXVyMzEyMDQzNzY@._V1_FMjpg_UX1000_.jpg',
-      background_image: 'https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/11/David-Harbour-as-Santa-Claus-on-the-Dolby-Cinemas-Violent-Night-Poster.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
-
-    movie.fillAttributes({
-      name: 'Аватар:Природата на водата 3D HFR',
-      description: 'Повече от десет години след събитията в Аватар Джейк Съли (Сам Уортингтън) живее щастливо заедно с Нейтири (Зоуи Салдана) и техните деца. Когато стара заплаха се завръща на Пандора, двамата са принудени да напуснат дома си и да се отправят към различни региони на изобилстващата от жи',
-      image: 'https://wallpapercave.com/wp/wp5212080.jpg',
-      background_image: 'https://assets-prd.ignimgs.com/2021/12/14/avatar-2-concept-art-1639522729106.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
-
-    movie.fillAttributes({
-      name: 'Брутална нощ',
-      description: '',
-      image: 'https://m.media-amazon.com/images/M/MV5BYzg2NWNhOWItYjA3Yi00MzhhLTg4ZmItYzM3ZTIwN2U0ZGQ5XkEyXkFqcGdeQXVyMzEyMDQzNzY@._V1_FMjpg_UX1000_.jpg',
-      background_image: 'https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/11/David-Harbour-as-Santa-Claus-on-the-Dolby-Cinemas-Violent-Night-Poster.jpg'
-    });
-
-    this.movies.push(cloneDeep(movie));
+    this.loadMovies();
   }
 
   private createForm() {
@@ -101,11 +49,32 @@ export class ListComponent implements OnInit {
   private createControlChangeListener() {
     this.formGroup.get('keywords').valueChanges.pipe(debounceTime(500), untilDestroyed(this)).subscribe(() => {
       this.loadData = true;
+      this.loadMovies();
       this.changeDetectorRef.markForCheck();
       setTimeout(() => {
         this.loadData = false;
         this.changeDetectorRef.markForCheck();
       }, 2000)
     });
+  }
+
+  private loadMovies() {
+    this.httpClient.get('/allMovies', {
+      params: this.getFilters()
+    }).pipe(untilDestroyed(this)).subscribe((movies: JsonCollection<Movie>) => {
+      this.topMovies = movies;
+      this.loadData = false;
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
+  private getFilters(): {} {
+    const filters: {} = {};
+
+    if (this.formGroup.get('keywords').value) {
+      filters['keywords'] = this.formGroup.get('keywords').value;
+    }
+
+    return filters;
   }
 }

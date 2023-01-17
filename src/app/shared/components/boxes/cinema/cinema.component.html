@@ -1,11 +1,11 @@
 <ng-container *ngIf="cinema">
   <ci-card class="cinema-container">
     <ion-card-header>
-      <div class="cinema-thumbnail" [ngStyle]="{'background-image': 'url('+cinema.attributes.images[0]+')'}">
+      <div class="cinema-thumbnail" [ngStyle]="{'background-image': 'url('+cinema.attributes.logo+')'}">
       </div>
       <ion-card-title>{{cinema.attributes.name}}</ion-card-title>
     </ion-card-header>
-    <div class="forward-container" [routerLink]="'/cinema/2'">
+    <div class="forward-container" [routerLink]="'/cinema/' + cinema.id">
       <div class="ion-text-center">
         <ci-icon [size]="sizes.large" [name]="iconsEnum.circle_forward"></ci-icon>
         <div>Go to the cinema</div>

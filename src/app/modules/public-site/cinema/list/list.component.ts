@@ -6,6 +6,7 @@ import { JsonResource } from 'src/app/shared/resources/resource/resource.service
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { HttpClient } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
@@ -14,46 +15,23 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  public topCinemas: JsonCollection<JsonResource> = new JsonCollection({
-    total: 6,
-    per_page: 2,
-    current_page: 1
-  });
+  public topCinemas: JsonCollection<Cinema> = new JsonCollection<Cinema>();
+
   public formGroup: FormGroup;
-  public loadData: boolean = false;
+  public loadData: boolean = true;
+
+  public filters: {} = {};
 
   constructor(
     private formBuilder: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private httpClient: HttpClient
   ) { 
     this.createForm();
   }
 
   ngOnInit() {
-    const cinema = new Cinema();
-    cinema.fillAttributes({
-      name: 'Кино Арена',
-      description: 'Кино арена в София Ринг мол',
-      images: [
-        'https://i.ytimg.com/vi/eja0GqlWfRo/maxresdefault.jpg',
-        'https://www.kinoarena.com/uploads/media/stenik_cinemas/0001/06/49b953b373b169e9871b314a93fe90753fc4e227.jpeg',
-        'https://p2.novo5.com/k/i/kino-arena-zapad-224-1140x0.jpg'
-      ]
-    });
-
-    this.topCinemas.data.push(cloneDeep(cinema));
-
-    cinema.fillAttributes({
-      name: 'Cinemacity',
-      description: 'Cinemacity в София, мол Парадайс',
-      images: [
-        'http://www.visitplovdiv.com//sites/default/files/freetime/%D0%A1%D0%B8%D0%BD%D0%B5%D0%BC%D0%B0%20%D1%81%D0%B8%D1%82%D0%B8_0.jpg',
-        'https://media-cdn.tripadvisor.com/media/photo-s/0f/26/df/ef/cinema-city-in-iulius.jpg',
-        'http://avatti.eu/poze/80-CCSV4.jpg'
-      ]
-    });
-
-    this.topCinemas.data.push(cloneDeep(cinema));
+    this.loadCinemas();
   }
 
   private createForm() {
@@ -70,11 +48,32 @@ export class ListComponent implements OnInit {
   private createControlChangeListener() {
     this.formGroup.get('keywords').valueChanges.pipe(debounceTime(500), untilDestroyed(this)).subscribe(() => {
       this.loadData = true;
+      this.loadCinemas();
       this.changeDetectorRef.markForCheck();
       setTimeout(() => {
         this.loadData = false;
         this.changeDetectorRef.markForCheck();
       }, 2000)
     });
+  }
+
+  private loadCinemas() {
+    this.httpClient.get('/allCinemas', {
+      params: this.getFilters()
+    }).pipe(untilDestroyed(this)).subscribe((cinemas: JsonCollection<Cinema>) => {
+      this.topCinemas = cinemas;
+      this.loadData = false;
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
+  private getFilters(): {} {
+    const filters: {} = {};
+
+    if (this.formGroup.get('keywords').value) {
+      filters['keywords'] = this.formGroup.get('keywords').value;
+    }
+
+    return filters;
   }
 }

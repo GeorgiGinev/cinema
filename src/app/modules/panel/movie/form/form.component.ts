@@ -52,6 +52,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.movie : ', this.movie);
     this.movieId = (this.activatedRoute.snapshot.params as any).id;
     if (this.movieId) {
       this.panelPageService.updateHeader('Edit Movie', IonIcons.movie);
@@ -107,6 +108,7 @@ export class FormComponent implements OnInit {
     this.modalService.openModal(MovieSlotFormComponent, {
       slot: this.slots.data[index]
     }).then((slot: MovieSlot | null | undefined) => {
+      console.log('edited slot : ', slot);
       if (!slot) {
         this.removeSlotFromCollection(index);
         return;
@@ -122,6 +124,7 @@ export class FormComponent implements OnInit {
   public addMovieSlot() {
     this.modalService.openModal(MovieSlotFormComponent).then((slot: MovieSlot) => {
       this.slots.data.push(slot);
+      console.log('his.slots : ', this.slots);
       this.changeDetectorRef.markForCheck();
     }, () => { })
   }
@@ -138,11 +141,11 @@ export class FormComponent implements OnInit {
       })
 
       this.savePromise = this.movieService.save(this.movie).then(() => {
-        // this.toastService.success({
-        //   header: 'The movie was successfully added',
-        // });
+        this.toastService.success({
+          header: this.movieId ? 'The movie was successfully created' : 'The movie was successfully added',
+        });
 
-        // this.router.navigate(['/panel/movies']).then(() => {}, () => {});
+        this.router.navigate(['/panel/movies']).then(() => {}, () => {});
       }, () => { })
     }, () => { })
   }
@@ -154,8 +157,12 @@ export class FormComponent implements OnInit {
     this.movieService.get(this.movieId).pipe(untilDestroyed(this)).subscribe((movie: Movie) => {
       this.movie.fillAttributes(movie.attributes);
       this.movie.id = movie.id;
-      this.movie.relationships = movie.relationships;
+      //this.movie.relationships = movie.relationships;
 
+      if(movie.relationships.slots) {
+        this.slots = movie.relationships.slots;
+      }
+      
       this.formGroup.patchValue(movie.attributes);
       this.formGroup.get('logo').patchValue([movie.attributes.image]);
     });

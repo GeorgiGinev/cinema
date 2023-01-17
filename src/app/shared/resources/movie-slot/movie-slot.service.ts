@@ -42,6 +42,9 @@ export class MovieSlotService extends JsonResourceService<MovieSlot> {
       {
         text: 'Cancel',
         role: 'cancel',
+        handler: () => {
+          return Promise.reject();
+        }
       },
     ])
   }

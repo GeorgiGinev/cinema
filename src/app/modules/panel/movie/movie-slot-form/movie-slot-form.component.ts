@@ -48,6 +48,10 @@ export class MovieSlotFormComponent implements OnInit {
   public save() {
     this.formService.isValid(this.formGroup).then(() => {
       const movieSlot = new MovieSlot();
+      if(this.slot?.id) {
+        movieSlot.id = this.slot.id;
+      }
+      
       movieSlot.fillAttributes(this.formGroup.value);
 
       movieSlot.addRelationship(this.formGroup.get('cinema').value, 'cinema');
@@ -73,7 +77,7 @@ export class MovieSlotFormComponent implements OnInit {
    */
   private patchValuesFromObject() {
     if(this.slot) {
-      this.formGroup.get('date').patchValue(this.slot.attributes.date);
+      this.formGroup.patchValue(this.slot.attributes);
       this.formGroup.get('cinema').patchValue(this.slot.relationships.cinema);
 
       this.changeDetectorRef.markForCheck();

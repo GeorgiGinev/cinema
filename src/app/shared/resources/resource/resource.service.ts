@@ -33,21 +33,28 @@ export class JsonResource {
    */
   public addRelationship(resource: JsonResource, relationship: string) {
     const relation: any = Object.keys(this.relationships).find((key: string) => key === relationship);
-
-    if (relation && (this.relationships[relation] instanceof JsonCollection)) {
+    if (relation && (this.relationships[relationship] instanceof JsonCollection)) {
+      console.log('collection');
       this.relationships[relation].data.push(resource);
       return;
     }
 
-    if (relation && (this.relationships[relation] instanceof JsonResource)) {
+    if (relation && (this.relationships[relationship] instanceof JsonResource)) {
       this.relationships[relation] = resource;
       return;
     }
   }
 
   public clearRelationship(relationship: string) {
-    if(this.relationships[relationship]) {
-      delete this.relationships[relationship];
+    const relation: any = Object.keys(this.relationships).find((key: string) => key === relationship);
+    if (relation && (this.relationships[relationship] instanceof JsonCollection)) {
+      this.relationships[relation] = new JsonCollection();
+      return;
+    }
+
+    if (relation && (this.relationships[relationship] instanceof JsonResource)) {
+      this.relationships[relation] = new JsonResource();
+      return;
     }
   }
 }

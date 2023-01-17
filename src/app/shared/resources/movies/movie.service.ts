@@ -25,7 +25,8 @@ export class Movie extends JsonResource {
   };
 
   public relationships = {
-    slots: new JsonCollection<MovieSlot>()
+    slots: new JsonCollection<MovieSlot>(),
+    cinema: new Cinema()
   }
 }
 

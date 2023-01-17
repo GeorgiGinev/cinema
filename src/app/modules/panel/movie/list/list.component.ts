@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   public formGroup: FormGroup;
   public sizes = Sizes;
 
-  public loadData: boolean = false;
+  public loadData: boolean = true;
   public data: JsonCollection<Movie> = new JsonCollection<Movie>();
 
   public filters: {} = {};
@@ -69,7 +69,7 @@ export class ListComponent implements OnInit {
   }
 
   public getMoviesFromServer() {
-    this.movieService.all(this.getFilters()).pipe(untilDestroyed(this)).subscribe((data: JsonCollection<Movie>) => {
+    return this.movieService.all(this.getFilters()).pipe(untilDestroyed(this)).subscribe((data: JsonCollection<Movie>) => {
       this.data = data;
 
       this.loadData = false;

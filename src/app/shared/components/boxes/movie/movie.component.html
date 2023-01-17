@@ -8,8 +8,8 @@
     </ion-card-header>
   
     <ion-card-content class="ion-text-right">
-      <ci-button color="tertiary" [size]="buttonSizes.small" [routerLink]="'/cinema/2'">
-        In cinema CinemaCity
+      <ci-button color="tertiary" [size]="buttonSizes.small" [routerLink]="'/cinema/'+movie.relationships.cinema.id">
+        In cinema {{movie.relationships.cinema.attributes.name}}
         <ci-icon class="ion-horizontal-padding" slot="end" [name]="iconsEnum.forward"></ci-icon>
       </ci-button>
     </ion-card-content>
