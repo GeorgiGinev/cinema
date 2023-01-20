@@ -2,9 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ChangePasswordComponent } from 'src/app/modules/auth/profile/change-password/change-password.component';
 import { Booking, BookingService } from 'src/app/shared/resources/bookings/booking.service';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { MovieSlot, MovieSlotService } from 'src/app/shared/resources/movie-slot/movie-slot.service';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @UntilDestroy()
 @Component({
@@ -101,16 +103,19 @@ export class FormComponent implements OnInit {
   private loadBooking() {
     this.bookingService.getBooking(this.cinemaId, this.slotId).then((bookings: JsonCollection<Booking>) => {
       bookings.data.forEach((booking: Booking) => {
-        if(!this.bookedSeats) {
+        if(!this.bookedSeats || this.bookedSeats?.length === 0) {
           this.bookedSeats = booking.attributes.places;
         } else {
           (booking.attributes.places as []).forEach((place: number[], index: number) => {
+            if(!this.bookedSeats[index]) {
+              this.bookedSeats[index] = [];
+            }
+
             this.bookedSeats[index] = this.bookedSeats[index].concat(place);
           })
         }
       });
 
-      console.log('this.bookedSeats : ', this.bookedSeats);
       this.changeDetectorRef.markForCheck();
     }, () => {})
   }

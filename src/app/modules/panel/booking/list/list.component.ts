@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
 import { Booking, BookingService } from 'src/app/shared/resources/bookings/booking.service';
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
@@ -16,7 +17,8 @@ export class ListComponent implements OnInit {
   
   constructor(
     private panelPageService: PanelPageService,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,8 +27,16 @@ export class ListComponent implements OnInit {
     this.loadBookings();
   }
 
-  public goToBookingForm(booking: Booking) {
-    
+  /**
+   * Go to booking form
+   * @param booking 
+   */
+   public goToBookingForm(booking: Booking) {
+    this.router.navigate(['/movie/form/' + booking.relationships.cinema.id], {
+      queryParams: {
+        slotId: booking.relationships.movieSlot.id
+      }
+    })
   }
 
   private loadBookings() {
