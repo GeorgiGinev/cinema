@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.formGroup.get('name').patchValue(this.user.attributes.name);
     this.formGroup.get('email').patchValue(this.user.attributes.email);
+    this.formGroup.get('avatar').patchValue(this.user.attributes.avatar);
   }
 
   public goToChangePassword() {

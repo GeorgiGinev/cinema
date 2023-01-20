@@ -113,7 +113,7 @@ export class PanelPage implements OnInit {
 
   ngOnInit(): void {
     this.user = this.sessionService.user;
-    console.log('panel init : ', this.user);
+    
     this.currentUrl = this.router.url;
     this.generatePrevRoutes(this.currentUrl);
 

@@ -10,9 +10,8 @@ import { Sizes } from 'src/app/shared/types/sizes';
   selector: 'app-public-site',
   templateUrl: './public-site.page.html',
   styleUrls: ['./public-site.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublicSitePage {
+export class PublicSitePage implements OnInit {
   public user: User;
   public icons = IonIcons;
   public sizes = Sizes;
@@ -29,6 +28,10 @@ export class PublicSitePage {
     private changeDetector: ChangeDetectorRef,
     private sessionService: SessionService
   ) {}
+
+  ngOnInit(): void {
+    this.user = this.sessionService.user;
+  }
 
   /**
    * Trigger logout method from userService
