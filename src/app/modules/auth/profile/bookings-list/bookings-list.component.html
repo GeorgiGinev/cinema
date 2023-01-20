@@ -1,0 +1,61 @@
+<ci-modal-container title="My bookings">
+  <ci-modal-content>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="12">
+          <div class="booking-header-container">
+            <ci-icon-button [color]="!withTrashed ? 'danger' : 'light'" [size]="sizes.medium"
+              (click)="loadOnlyTrashedData()">
+              <ci-icon [name]="iconsEnum.trash" [size]="sizes.medium"></ci-icon>
+            </ci-icon-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ng-container *ngIf="!loadData">
+      <ion-list>
+        <ion-item *ngFor="let booking of bookings.data; let i = index" class="ion-no-padding">
+          <div class="ion-padding-vertical">
+            <ion-text [color]="booking.attributes.deleted_at ? 'danger' : 'primary'">
+              Movie name: <span (click)="goToBookingForm(booking)" class="movie-name-wrapper">
+                {{booking.relationships.movie.attributes.name}}
+              </span>
+            </ion-text><br>
+            <ng-container *ngFor="let row of booking.attributes.places; let rowIndex = index">
+              <ion-text color="primary" *ngIf="row.length > 0">
+                <ci-subtitle>
+                  Row: {{rowIndex+1}}, and Seat:
+                  <ng-container *ngFor="let seat of row; let seatIndex = index">
+                    {{seat + 1}}
+                    <ng-container *ngIf="seatIndex < row.length-1">, </ng-container>
+                  </ng-container>
+                  <br>
+                </ci-subtitle>
+              </ion-text>
+            </ng-container>
+          </div>
+          <div class="buttons-container" slot="end">
+            <ci-icon-button *ngIf="!booking.attributes.deleted_at" (click)="deleteBooking(booking)"
+              [size]="sizes.default" color="primary">
+              <ci-icon [name]="iconsEnum.trash" [size]="sizes.medium"></ci-icon>
+            </ci-icon-button>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div class="ion-margin-vertical">
+        <ci-not-found [data]="bookings"></ci-not-found>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loadData">
+      <ion-list>
+        <ion-item class="ion-margin-vertical ion-no-padding" *ngFor="let row of [].constructor(10); let i = index">
+          <div class="skeleton-container">
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 14px;"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 10px"></ion-skeleton-text>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </ci-modal-content>
+</ci-modal-container>

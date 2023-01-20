@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DateFormatsEnum } from 'src/app/shared/enums/date-formats';
 import { IonIcons } from 'src/app/shared/enums/ion-icons';
-import { Cinema } from 'src/app/shared/resources/cinema/cinema.service';
-import { MovieSlot } from 'src/app/shared/resources/movie-slot/movie-slot.service';
+import { Cinema, CinemaService } from 'src/app/shared/resources/cinema/cinema.service';
+import { MovieSlot, MovieSlotInterface } from 'src/app/shared/resources/movie-slot/movie-slot.service';
 import { Movie } from 'src/app/shared/resources/movies/movie.service';
 import { DayjsService } from 'src/app/shared/services/dayjs/dayjs.service';
 import { Sizes } from 'src/app/shared/types/sizes';
@@ -18,6 +20,7 @@ interface DayOfWeekSlots {
   slots: MovieSlot[]
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -37,97 +40,32 @@ export class ViewComponent implements OnInit {
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
+
+  public movies: Movie[] = [];
+
   public dateFormatsEnum = DateFormatsEnum;
   public dates: {
     movieId: string,
     data: DayOfWeekSlots[]
   }[] = [];
 
-  public times: string[] = [
-    '2022-11-26 10:15',
-    '2022-11-26 13:15',
-    '2022-11-26 17:15',
-    '2022-11-26 20:15',
-
-    '2022-11-27 10:15',
-    '2022-11-27 13:15',
-    '2022-11-27 17:15',
-    '2022-11-27 20:15',
-
-    '2022-11-28 10:15',
-    '2022-11-28 13:15',
-    '2022-11-28 17:15',
-    '2022-11-28 20:15',
-
-    '2022-11-29 10:15',
-    '2022-11-29 13:15',
-    '2022-11-29 17:15',
-    '2022-11-29 20:15',
-
-    '2022-11-30 10:15',
-    '2022-11-30 13:15',
-    '2022-11-30 17:15',
-    '2022-11-30 20:15',
-
-    '2022-12-1 10:15',
-    '2022-12-1 13:15',
-    '2022-12-1 17:15',
-    '2022-12-1 20:15',
-
-    '2022-12-2 10:15',
-    '2022-12-2 13:15',
-    '2022-12-2 17:15',
-    '2022-12-2 20:15',
-  ]
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private dayJsService: DayjsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cinemaService: CinemaService,
+    private httpClient: HttpClient,
+    private changeDetectorRef: ChangeDetectorRef
   ) { 
     this.createForm();
   }
 
   ngOnInit() {
     this.cinemaId = (this.activatedRoute.snapshot.params as any).cinemaId;
-
-    this.cinema.fillAttributes({
-      name: 'Кино Арена',
-      description: 'Кино арена в София Ринг мол',
-      images: [
-        'https://i.ytimg.com/vi/eja0GqlWfRo/maxresdefault.jpg',
-        'https://www.kinoarena.com/uploads/media/stenik_cinemas/0001/06/49b953b373b169e9871b314a93fe90753fc4e227.jpeg',
-        'https://p2.novo5.com/k/i/kino-arena-zapad-224-1140x0.jpg'
-      ],
-      logo: 'https://www.slaskibiznes.pl/images/galbig3/news/7177/283968859-10160338829937884-6422710364360940698-n_63087ace238b14_50008829.jpg.jpg'
-    });
-
-    const movie = new Movie();
-    movie.fillAttributes({
-      name: 'Брутална нощ',
-      description: 'Кино арена в София Ринг мол',
-      image: 'https://m.media-amazon.com/images/M/MV5BYzg2NWNhOWItYjA3Yi00MzhhLTg4ZmItYzM3ZTIwN2U0ZGQ5XkEyXkFqcGdeQXVyMzEyMDQzNzY@._V1_FMjpg_UX1000_.jpg',
-      background_image: 'https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/11/David-Harbour-as-Santa-Claus-on-the-Dolby-Cinemas-Violent-Night-Poster.jpg'
-    });
-    movie.id = '2';
-
-    for (let i = 0; i < this.times.length; i++) {
-      const slot = new MovieSlot();
-      slot.fillAttributes({
-        movieId: '2',
-        date: this.dayJsService.dayJs(this.times[i]).format(this.dateFormatsEnum.date_time_back)
-      });
-
-      slot.id = i+1 + '';
-
-      movie.addRelationship(slot, 'slots');
-    }
-    this.cinema.addRelationship(movie, 'movies');
-
-    this.sortSlots();
+    this.loadCinema();
   }
 
-  public getDatesByMovieId(movieId: string): DayOfWeekSlots[] {
+  public getDatesByMovieId(movieId: number | string): DayOfWeekSlots[] {
     return this.dates.find((date: any) => date.movieId === movieId)?.data;
   }
 
@@ -135,7 +73,7 @@ export class ViewComponent implements OnInit {
    * Sort dates 
    */
   public sortSlots() {
-    this.cinema.relationships.movies.data.forEach((movie: Movie) => {
+    this.movies.forEach((movie: Movie) => {
       this.dates.push({
         movieId: movie.id,
         data: []
@@ -167,5 +105,38 @@ export class ViewComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       map: [null]
     });
+  }
+
+  private loadCinema() {
+    this.httpClient.get('/cinema/' + this.cinemaId).pipe(untilDestroyed(this)).subscribe((cinema: Cinema) => {
+      this.cinema = cinema;
+      this.filterMovies();
+
+      this.sortSlots();
+
+      console.log('this.movies , ', this.movies);
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
+  /**
+   * Filter movies from slots
+   */
+  private filterMovies() {
+    this.cinema.relationships.slots.data.forEach((slot: MovieSlot) => {
+      const movieIndex: number = this.movies.findIndex((movie: Movie) => Number(movie.id) === Number((slot as any).attributes.movie_id));
+
+      if(movieIndex >= 0) {
+        this.movies[movieIndex].addRelationship(slot, 'slots');
+        return;
+      } 
+
+      const movie = new Movie();
+      movie.id = slot.relationships.movie.id;
+      movie.attributes = slot.relationships.movie.attributes;
+      movie.addRelationship(slot, 'slots');
+
+      this.movies.push(movie);
+    })
   }
 }

@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Booking, BookingService } from 'src/app/shared/resources/bookings/booking.service';
+import { JsonCollection } from 'src/app/shared/resources/collection/collection';
+import { MovieSlot, MovieSlotService } from 'src/app/shared/resources/movie-slot/movie-slot.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -8,32 +14,104 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   public formGroup: FormGroup;
+  public cinemaId: string;
+  public slotId: string;
 
-  public fakeSeats: {} = {
-    1: 12,
-    2: 23,
-    3: 100,
-    4: 12
-  }
+  public slot: MovieSlot = new MovieSlot();
 
-  public fakeBookedSeats: number[][] = [
-    [1, 2, 6],
-    [3],
-    [4],
-    [5]
-  ]
+  public booking: Booking = new Booking();
+
+  public price: number = 0;
+
+  public bookedSeats: number[][];
+
+  public bookNowPromise: Promise<any>;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bookingService: BookingService,
+    private activatedRoute: ActivatedRoute,
+    private movieSlotService: MovieSlotService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
   ) { 
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cinemaId = (this.activatedRoute.snapshot.params as any).cinemaId;
+    this.slotId = this.activatedRoute.snapshot.queryParams.slotId;
 
+    this.loadSlot();
+    this.loadBooking();
+  }
+
+  public createBooking() {
+    const booking = new Booking();
+    booking.attributes.places = this.formGroup.get('places').value;
+    booking.attributes.places.forEach((booking: number[]) => {
+      if(!booking) {
+        booking = [];
+      }
+    });
+    
+    booking.addRelationship(this.slot, 'slot');
+    
+    this.bookNowPromise = this.bookingService.createBooking(this.cinemaId, this.slotId, booking).then(() => {
+      this.router.navigate(['/cinema/' + this.cinemaId]);
+    }, () => {})
+  }
+
+  /**
+   * Create form
+   */
   private createForm() {
     this.formGroup = this.formBuilder.group({
-      seats: [null, [Validators.required]]
+      places: [null, [Validators.required]]
+    });
+
+    this.seatsChangeListener();
+  }
+
+  /**
+   * Load slot from server
+   */
+  public loadSlot() {
+    this.movieSlotService.get(this.slotId).pipe(untilDestroyed(this)).subscribe((slot: MovieSlot) => {
+      this.slot = slot;
+
+      console.log('this.slot?.relationships?.cinema?.attributes?.capacity', this.slot)
+      this.changeDetectorRef.markForCheck();
     })
+  }
+
+  public seatsChangeListener() {
+    this.formGroup.get('places').valueChanges.subscribe((data: []) => {
+      let counter: number = 0;
+      data.forEach((row: []) => {
+        row.forEach(() => {
+          counter++;
+        })
+      })
+
+      this.price = counter * this.slot.attributes.price;
+    });
+  }
+
+  private loadBooking() {
+    this.bookingService.getBooking(this.cinemaId, this.slotId).then((bookings: JsonCollection<Booking>) => {
+      bookings.data.forEach((booking: Booking) => {
+        if(!this.bookedSeats) {
+          this.bookedSeats = booking.attributes.places;
+        } else {
+          (booking.attributes.places as []).forEach((place: number[], index: number) => {
+            this.bookedSeats[index] = this.bookedSeats[index].concat(place);
+          })
+        }
+      });
+
+      console.log('this.bookedSeats : ', this.bookedSeats);
+      this.changeDetectorRef.markForCheck();
+    }, () => {})
   }
 }

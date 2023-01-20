@@ -1,0 +1,25 @@
+:host {
+    .booking-header-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        column-gap: 12px;
+    }
+
+    .skeleton-container {
+        width: 100%;   
+    }
+
+    .buttons-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .movie-name-wrapper {
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}

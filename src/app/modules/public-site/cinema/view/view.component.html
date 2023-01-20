@@ -18,16 +18,16 @@
 <div class="ion-margin-vertical">
   <ci-page-title [underline]="true">Movies</ci-page-title>
 </div>
-<ng-container *ngFor="let movie of cinema.relationships.movies.data">
+<ng-container *ngFor="let movie of movies; let i = index">
   <ci-card>
     <ion-card-content class="ion-no-padding">
       <ion-grid>
         <ion-row>
           <ion-col size="3">
-            <img [src]="movie.attributes.image" alt="Movie" />
+            <div class="movie-thumbnail" [ngStyle]="{'background-image': 'url('+movie.attributes.image+')'}"></div>
           </ion-col>
           <ion-col size="9">
-            <div [routerLink]="'/movie/'+movie.id" class="movie-title-route">
+            <div class="movie-title-route">
               <ci-title>
                 <ion-text color="primary">
                   {{movie.attributes.name}}
@@ -50,7 +50,7 @@
                   dateFormatsEnum.date}})
                 </ion-text><br>
                 <ng-container *ngFor="let slot of date.slots">
-                  <ion-chip color="primary" [routerLink]="'/movie/form/'+movie.id" [queryParams]="{slotId: slot.id}">
+                  <ion-chip color="primary" [routerLink]="'/movie/form/'+cinemaId" [queryParams]="{slotId: slot.id}">
                     {{slot.attributes.date | dateFormats: dateFormatsEnum.time}}
                     <ci-icon [name]="iconsEnum.forward" [size]="sizesEnum.small"></ci-icon>
                   </ion-chip>
@@ -70,8 +70,5 @@
 </div>
 
 <div [formGroup]="formGroup">
-  <ci-google-maps
-    [draggable]="false"
-    formControlName="map"
-  ></ci-google-maps>
+  <ci-google-maps [draggable]="false" formControlName="map"></ci-google-maps>
 </div>

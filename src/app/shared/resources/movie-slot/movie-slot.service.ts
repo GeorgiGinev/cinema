@@ -5,15 +5,15 @@ import { Cinema } from '../cinema/cinema.service';
 import { Movie } from '../movies/movie.service';
 import { JsonResource, JsonResourceService } from '../resource/resource.service';
 
-interface MovieSlotInterface {
+export interface MovieSlotInterface {
   date: string,
-  price: number
+  price: number,
 }
 
 export class MovieSlot extends JsonResource {
   public attributes: MovieSlotInterface = {
     date: '',
-    price: 0
+    price: 0,
   };
 
   public relationships = {
@@ -24,7 +24,7 @@ export class MovieSlot extends JsonResource {
 
 @Injectable()
 export class MovieSlotService extends JsonResourceService<MovieSlot> {
-  public resource: string = 'movie-slot';
+  public resource: string = 'slots';
 
   constructor(
     protected httpClient: HttpClient,

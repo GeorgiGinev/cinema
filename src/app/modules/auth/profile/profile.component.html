@@ -31,6 +31,26 @@
         <ion-ripple-effect></ion-ripple-effect>
       </div>
     </ci-card>
+    <ci-card class="ion-no-margin ion-no-padding" (click)="goToMyBookingsList()">
+      <div class="card-container ion-activatable">
+        <div class="ion-padding primary-container">
+          <ci-card-title>
+            <ion-text color="primary">
+              Check my bookings
+            </ion-text>
+          </ci-card-title><br>
+          <ci-subtitle>
+            <ion-text color="secondary">
+              Click here to check your bookings.
+            </ion-text>
+          </ci-subtitle>
+        </div>
+        <div class="ion-padding forward-container">
+          <ci-icon [name]="iconsEnum.forward" [size]="sizes.medium"></ci-icon>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ci-card>
   </ci-modal-content>
   <ci-modal-footer>
     <ci-button [promise]="savePromise" (click)="save()">Save</ci-button>

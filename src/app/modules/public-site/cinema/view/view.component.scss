@@ -1,12 +1,18 @@
 $avatarVerticalPosition: 50px;
 
 :host {
-    .movie-title-route {
-        &:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
+    .movie-thumbnail {
+        width: 220px;
+        max-width: 220px;
+        height: 280px;
+        max-height: 280px;
+        background-color: rgba(var(--ion-color-primary-rgb), .2);
+        border-radius: 8px;
+        background-size: cover;
+        background-position: center;
+        margin: auto;
     }
+    
     .outside-swiper-container {
         padding-bottom: $avatarVerticalPosition;
         position: relative;

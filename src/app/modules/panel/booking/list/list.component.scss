@@ -1,0 +1,12 @@
+:host {
+    .skeleton-container {
+        width: 100%;   
+    }
+
+    .movie-name-wrapper {
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BaseInput } from '../base-input';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'ci-select-seats',
@@ -17,7 +18,7 @@ import { BaseInput } from '../base-input';
 export class SelectSeatsComponent extends BaseInput implements OnInit {
   @Input() label: string;
   @Input() seats: {};
-  @Input() bookedSeats: number[][];
+  @Input() bookedSeats: number[][] = [[]];
 
   constructor(
     protected controlContainer: ControlContainer
@@ -61,13 +62,15 @@ export class SelectSeatsComponent extends BaseInput implements OnInit {
       return;
     }
 
-    const row = rowIndex + 1;
     const seat = seatIndex + 1;
 
     let booking: number[][] | null | undefined = this.formControl.value;
 
     if (!booking) {
       booking = new Array(Object.keys(this.seats).length);
+      for(let i = 0; i < booking.length; i++) {
+        booking[i] = [];
+      }
     }
 
     if(!booking[rowIndex]) {
@@ -108,6 +111,10 @@ export class SelectSeatsComponent extends BaseInput implements OnInit {
    * @param seatIndex number of the seat
    */
   public isSeatAlreadyBooked(rowIndex: number, seatIndex: number): boolean {
+    if(!this.bookedSeats) {
+      return false;
+    }
+    
     const row = rowIndex + 1;
     const seat = seatIndex + 1;
 

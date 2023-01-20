@@ -1,3 +1,21 @@
+<div class="ion-margin-top">
+  <ci-card-title>
+    <ion-text color="primary">
+      Price for a ticket: {{slot.attributes.price | price}}
+    </ion-text>
+  </ci-card-title>
+</div>
 <form [formGroup]="formGroup">
-  <ci-select-seats [bookedSeats]="fakeBookedSeats" [seats]="fakeSeats" label="Please select one or more seats" formControlName="seats"></ci-select-seats>
+  <ng-container *ngIf="slot.id">
+    <ci-select-seats [bookedSeats]="bookedSeats" [seats]="slot?.relationships?.cinema?.attributes?.capacity" label="Please select one or more seats"
+      formControlName="places"></ci-select-seats>
+  </ng-container>
+  <div class="information-wrapper ion-margin-vertical ion-text-right">
+    <ion-text color="primary">
+      Price: {{price | price}}
+    </ion-text>
+    <ci-button (click)="createBooking()" [promise]="bookNowPromise">
+      Book now
+    </ci-button>
+  </div>
 </form>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AlertService } from '../../services/alert/alert.service';
 import { CinemaLocation } from '../cinema-location/cinema-location.service';
 import { JsonCollection } from '../collection/collection';
+import { MovieSlot } from '../movie-slot/movie-slot.service';
 import { Movie } from '../movies/movie.service';
 import { JsonResource, JsonResourceService } from '../resource/resource.service';
 
@@ -28,7 +29,8 @@ export class Cinema extends JsonResource {
 
   public relationships = {
     movies: new JsonCollection<Movie>(),
-    cinemaLocation: new CinemaLocation()
+    cinemaLocation: new CinemaLocation(),
+    slots: new JsonCollection<MovieSlot>()
   }
 }
 

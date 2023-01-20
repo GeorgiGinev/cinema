@@ -39,4 +39,13 @@ export class ModalService {
       return modal.dismiss(data);
     }
   }
+
+  /**
+   * Close all modals
+   */
+  public closeAll() {
+    this.modals.forEach((modal: HTMLIonModalElement) => {
+      modal.dismiss();
+    })
+  }
 }

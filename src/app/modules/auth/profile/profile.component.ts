@@ -11,6 +11,7 @@ import { InputTypes } from 'src/app/shared/types/inputs';
 import { Sizes } from 'src/app/shared/types/sizes';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { BookingsListComponent } from './bookings-list/bookings-list.component';
 
 
 @Component({
@@ -48,6 +49,10 @@ export class ProfileComponent implements OnInit {
 
   public goToChangePassword() {
     this.modalService.openModal(ChangePasswordComponent).then(() => { }, () => { });
+  }
+
+  public goToMyBookingsList() {
+    this.modalService.openModal(BookingsListComponent).then(() => {}, () => {})
   }
 
   /**

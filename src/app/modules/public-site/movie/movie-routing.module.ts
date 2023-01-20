@@ -14,7 +14,7 @@ const routes: Routes = [
     component: ViewComponent,
   },
   {
-    path: 'form/:id',
+    path: 'form/:cinemaId',
     component: FormComponent
   }
 ];

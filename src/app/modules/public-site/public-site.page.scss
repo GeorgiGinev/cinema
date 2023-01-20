@@ -8,7 +8,7 @@
 
     .content-container {
         min-height: calc(100% - 56px);
-        padding: 0 calc((100% - var(--content-max-width)) / 2) 0 calc((100% - var(--content-max-width)) / 2);
+        padding: 0 calc(((100% - var(--content-max-width)) / 2)) 0 calc(((100% - var(--content-max-width)) / 2));
         display: flex;
         flex-direction: column;
         align-items: stretch;
