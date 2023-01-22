@@ -7,6 +7,8 @@ import { Booking, BookingService } from 'src/app/shared/resources/bookings/booki
 import { JsonCollection } from 'src/app/shared/resources/collection/collection';
 import { MovieSlot, MovieSlotService } from 'src/app/shared/resources/movie-slot/movie-slot.service';
 import * as cloneDeep from 'lodash/cloneDeep';
+import { SessionService } from 'src/app/shared/services/session/session.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 
 @UntilDestroy()
 @Component({
@@ -35,7 +37,9 @@ export class FormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private movieSlotService: MovieSlotService,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService,
+    private toastService: ToastService
   ) { 
     this.createForm();
   }
@@ -49,6 +53,12 @@ export class FormComponent implements OnInit {
   }
 
   public createBooking() {
+    if(!this.sessionService.user) {
+      this.toastService.error({
+        header: 'Please sign in into your account before making the booking.'
+      })
+      return;
+    }
     const booking = new Booking();
     booking.attributes.places = this.formGroup.get('places').value;
     booking.attributes.places.forEach((booking: number[]) => {
